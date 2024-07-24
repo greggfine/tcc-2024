@@ -2,7 +2,6 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import websiteStyles from "styles/website.module.scss";
 import Image from "next/image";
-import dataURL from "./dataURL";
 import { motion } from "framer-motion";
 
 const Site = ({ website }) => (
@@ -29,7 +28,6 @@ const Site = ({ website }) => (
               quality={50}
               priority={true}
               placeholder="blur"
-              blurDataURL={dataURL}
               alt={website.altText}
             />
             <Card.Body>

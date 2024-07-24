@@ -4,7 +4,6 @@ import styles from "./blog.module.scss";
 import { getAllPosts } from "helpers/index.tsx";
 import { useState } from "react";
 import Pagination from "components/Pagination.tsx";
-import dataURL from "components/dataURL";
 import { NextSeo } from "next-seo";
 import Search from "components/Search.tsx";
 
@@ -60,7 +59,6 @@ export default function Blog({ posts }) {
                           objectFit="contain"
                           priority
                           placeholder="blur"
-                          blurDataURL={dataURL}
                         />
                       ) : (
                         ""

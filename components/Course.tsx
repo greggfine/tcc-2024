@@ -1,5 +1,4 @@
 import Image from "next/legacy/image";
-import dataURL from "components/dataURL";
 import styles from "styles/courses.module.scss";
 const Course = ({
   imgSrc,
@@ -19,7 +18,6 @@ const Course = ({
         className={styles.courses__img}
         priority={true}
         placeholder="blur"
-        blurDataURL={dataURL}
         alt={imgAlt}
         width={imgWidth}
         height={imgHeight}
