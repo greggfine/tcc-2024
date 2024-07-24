@@ -21,7 +21,6 @@ export default function About() {
           layout="responsive"
           className={styles.about__greggAboutImg}
           quality={70}
-          placeholder="blur"
           alt="Web Developer Gregg Fine working at his computer"
         />
       </motion.div>

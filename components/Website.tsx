@@ -27,7 +27,6 @@ const Site = ({ website }) => (
               className={websiteStyles.Card__cardImg}
               quality={50}
               priority={true}
-              placeholder="blur"
               alt={website.altText}
             />
             <Card.Body>

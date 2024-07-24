@@ -17,7 +17,6 @@ const Course = ({
         src={imgSrc}
         className={styles.courses__img}
         priority={true}
-        placeholder="blur"
         alt={imgAlt}
         width={imgWidth}
         height={imgHeight}

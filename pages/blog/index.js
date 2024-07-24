@@ -58,7 +58,6 @@ export default function Blog({ posts }) {
                           height={275}
                           objectFit="contain"
                           priority
-                          placeholder="blur"
                         />
                       ) : (
                         ""
