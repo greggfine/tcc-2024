@@ -1,0 +1,136 @@
+---
+title: How to Load an Audio File Using Fetch
+date: "October 25, 2022"
+description: Learn how to load an audio file using the Fetch API and the Web Audio API
+thumbnailUrl: "/images/blog/loading-audio-files-with-fetch/loading-audio-files-with-fetch-tutorial.png"
+altText: "Loading an audio file using Fetch - Web Audio API"
+author: "Gregg Fine"
+tags: ["javascript", "web-audio-api"]
+url: "how-to-load-an-audio-file-using-fetch"
+---
+
+## Introduction
+
+In this article, let's learn how to use the [**Fetch API**](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) in JavaScript to bring in an audio file we can work with when using the [**Web Audio API**](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
+
+Once we fetch our audio file, we can process it as a node and do all sorts of cool manipulations.
+For example, we can change its playback speed, apply filters, reverb and more.
+
+## Creating an Audio Context
+
+The first step when working with the **Web Audio API** is to create a new audio context and assign it to a variable.
+
+```js
+const ctx = new AudioContext();
+```
+
+Now we have an <Syntax>AudioContext</Syntax> object on which we can call **Web Audio API** methods.
+
+Next we'll declare a variable and called <Syntax>audio</Syntax>. But we won't assign it just yet.
+
+```js
+const ctx = new AudioContext();
+let audio;
+```
+
+## Fetching an Audio File
+
+Now, let's call <Syntax>fetch</Syntax> and pass it the path of the audio file we want to use.
+In this case, we will point to an mp3 which lives in a folder I've called "sounds".
+
+```js
+const ctx = new AudioContext();
+let audio;
+fetch("./sounds/phantom-cities.mp3");
+```
+
+## Putting the Audio Data Into a Buffer
+
+Since <Syntax>fetch</Syntax> returns a **Promise** object, we can call the <Syntax>then</Syntax> method on it.
+What we're doing is taking data from the mp3 and putting it into a buffer.
+We use the <Syntax>arrayBuffer</Syntax> method here in the body of the function.
+
+```js
+const ctx = new AudioContext();
+let audio;
+fetch("./sounds/phantom-cities.mp3");
+	.then(data => data.arrayBuffer())
+```
+
+The reason for putting the data into a buffer is so we can process it as an audio node without latency.
+(This will also let us apply a wide variety of additional processing to it).
+
+## Decoding the Audio Data
+
+But before we can actually work with the data as an audio node, we'll need to decode the data currently in the buffer.
+
+So we can use the <Syntax>decodeAudioData</Syntax> method and pass in <Syntax>arrayBuffer</Syntax> as its argument.
+
+```js
+const ctx = new AudioContext();
+let audio;
+fetch("./sounds/phantom-cities.mp3");
+	.then(data => data.arrayBuffer())
+	.then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
+```
+
+Finally, we assign that <Syntax>audio</Syntax> variable to the decoded audio.
+
+```js
+const ctx = new AudioContext();
+let audio;
+fetch("./sounds/phantom-cities.mp3");
+	.then(data => data.arrayBuffer())
+	.then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
+	.then(decodedAudio => {
+		audio = decodedAudio;
+	})
+```
+
+And that's the basic process:
+
+- fetch the audio file
+- get it into a buffer
+- decode it in order to work with it as an audio node.
+
+## Playing the Sound
+
+To use this audio, I've declared a function called <Syntax>playback</Syntax>.
+In order to work with the decoded audio, we call <Syntax>createBufferSource</Syntax> on the audio context.
+And we'll assign it to a <Syntax>const</Syntax> called <Syntax>playSound</Syntax>.
+
+```js
+function playback() {
+  const playSound = ctx.createBufferSource();
+}
+```
+
+Now that <Syntax>playSound</Syntax> is a buffer source, we assign our audio variable as its buffer property.
+Then, just as if we're working with the **Web Audio API's** built-in waveforms, we need to connect <Syntax>playSound</Syntax> to audio context's destination and start the sound itself.
+
+```js
+function playback() {
+  const playSound = ctx.createBufferSource();
+  playSound.buffer = audio;
+  playSound.connect(ctx.destination);
+  playSound.start(ctx.currentTime);
+}
+```
+
+Finally I'm simply adding an event listener to a mousedown event and passing in that <Syntax>playback</Syntax> function as the callback.
+
+```js
+window.addEventListener("mousedown", playback);
+```
+
+If you're more of a visual learner, check out the video version of this article:
+
+<YouTube id="3NgVlAscdcA" alt="how to load an audio file using fetch video" imgSrc="/images/blog/loading-audio-files-with-fetch/loading-audio-files-with-fetch-video.jpg" />
+
+<Ad
+  txt="To go further with the Web Audio API, check out Coding for Musicians 101"
+  imgSrc="/images/ads/coding-for-musicians-course.jpg"
+  imgWidth="240"
+  imgHeight="240"
+  href="https://www.macprovideo.com/course/web-audio-explored?afid=LYaI709I1H"
+/>

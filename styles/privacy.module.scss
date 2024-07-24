@@ -1,0 +1,9 @@
+.Privacy {
+  margin: 60px auto;
+  max-width: 90%;
+  font-family: "IBM Plex Sans", sans-serif;
+
+  @media (min-width: 960px) {
+    max-width: 70%;
+  }
+}

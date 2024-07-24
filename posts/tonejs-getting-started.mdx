@@ -1,0 +1,127 @@
+---
+title: Getting Started with Tone.js - Pt.1
+date: March 21, 2023
+description: An introduction and overview of Tone.js
+thumbnailUrl: "/images/blog/tone-js/tone-js-tutorial.jpg"
+altText: "Getting Started with Tone.js"
+author: "Gregg Fine"
+tags: ["web-audio-api", "javascript", "tonejs"]
+url: "tonejs-getting-started"
+---
+
+## Introduction
+
+Are you interested in creating music on the web?
+If so, you need to check out [Tone.js](https://tonejs.github.io/)!
+In this blog post, we'll explore what **Tone.js** is, how to install and import it,
+and get an overview of its features.
+
+## What is Tone.js?
+
+Tone.js is a library built on top of the **Web Audio API**. The [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) is a powerful browser-based audio processing system
+that allows for complex audio manipulation, synthesis, and effects.
+
+The library provides a higher-level abstraction, making it easier to create complex musical structures and patterns.
+This allows programmers to approach coding from a more musical perspective, as Tone.js includes concepts such as note values,
+a DAW-like transport, a built-in arpeggiator, and more. Basically, it simplifies the process of creating music on the web.
+
+## Who created Tone.js?
+
+Tone.js was created by [Yotam Mann](https://yotammann.info/about) in 2014. Mann is a music technologist and interactive audio developer who has worked
+on a variety of projects, including the [Google Creative Lab](https://yotammann.info/musiclab).
+
+He created Tone.js to provide a better way for musicians and artists to work with the Web Audio API.
+
+Since its creation, Tone.js has become one of the more popular libraries for working with the Web Audio API.
+As of this writing, Tone.js has over 12K GitHub stars and 19,000 weekly downloads on NPM.
+
+## What is the Web Audio API?
+
+The [Web Audio API](https://webaudio.github.io/web-audio-api/) is a powerful browser-based audio processing system that allows for complex audio manipulation,
+synthesis, and effects. It provides a way for developers to work with audio in the browser, creating interactive
+and dynamic experiences for users.
+
+The API includes a variety of audio processing nodes, such as oscillators, filters, and effects, which can be
+connected together to create complex audio processing chains.
+
+<Image
+  src="/images/blog/tone-js/web-audio-api-nodes.jpg"
+  width={500}
+  height={247}
+  alt="web audio api node graph"
+/>
+
+<br />
+<br />
+<hr />
+
+## How to install and import Tone.js?
+
+Now, let's talk about how to install Tone.js.
+
+You can grab the link from a **Content Delivery Network (CDN)** or use a package manager like **NPM**.
+
+Check out CDNjs to find the script tag for Tone.js: [cdnjs.com](https://cdnjs.com/libraries/tone)
+
+If you want to install the NPM package, you'll find it here: [tonejs on npm](https://www.npmjs.com/package/tone)
+
+Once you have it installed, you can import it into your project using a script tag or by importing it as a module.
+
+## Feature Overview
+
+Tone.js provides a variety of built-in instruments and effects, including oscillators, filters, envelopes, and more.
+You can also create your own custom instruments and effects by combining these building blocks together.
+
+In addition to its built-in instruments and effects, Tone.js also provides a powerful scheduling system, allowing you to
+create complex rhythms and melodies, loops, patterns, and arpeggiations.
+
+You can schedule events in the future and create patterns that repeat and evolve over time.
+
+Tone.js also supports MIDI input and output, which allows you to connect external MIDI controllers to your browser and use them to control your music.
+This is great for live performances or controlling your music with hardware instruments.
+
+<br />
+
+_Some of the instruments and effects in Tone.js:_
+
+<Image
+  src="/images/blog/tone-js/tonejs-instruments-and-effects.jpg"
+  width={800 / 1.3}
+  height={440 / 1.3}
+  alt="some of the instruments and effects in tone.js"
+/>
+
+## Conclusion
+
+In summary, **Tone.js** is a powerful JavaScript library for creating interactive music in the browser.
+
+It provides a higher-level abstraction for working with the Web Audio API and comes with a variety of built-in instruments, effects, and scheduling tools.
+
+By using Tone.js, developers of all skill levels can quickly and easily create engaging and dynamic audio experiences
+within their web applications.
+
+With its intuitive API, extensive documentation, and modular design, Tone.js offers a flexible and customizable
+framework for building a wide range of audio projects, from interactive musical games to web-based music production software.
+
+As such, Tone.js is an essential tool for any developer looking to incorporate music and audio into their web applications.
+Hopefully, its popularity within the web development community will continue to grow!
+
+---
+
+<br />
+
+If you're more of a visual learner, check out the video version of this article:
+
+<YouTube
+  id="ftGuDvm5zDQ"
+  alt="Tone.js Getting Started"
+  imgSrc="/images/blog/tone-js/tone-js-video.jpg"
+/>
+
+<Ad
+  txt="To take your web development skills to the next level, check out DOM Events and JavaScript"
+  imgSrc="/images/ads/dom-events-and-javascript-course.jpg"
+  imgWidth="240"
+  imgHeight="135"
+  href="https://store.thecodecreative.com/dom-events-and-javascript"
+/>

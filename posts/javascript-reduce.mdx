@@ -1,0 +1,190 @@
+---
+title: JavaScript Reduce
+date: "October 28, 2022"
+description: JavaScript Reduce
+thumbnailUrl: "/images/blog/javascript-reduce/javascript-reduce-tutorial.jpeg"
+altText: "JavaScript Reduce"
+author: "Gregg Fine"
+tags: ["web-development", "javascript"]
+url: "javascript-reduce"
+---
+
+## What is the Reduce method?
+
+Let's try to simplify and understand JavaScript's [**reduce**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) method.
+
+**Reduce** is a method that can be used on arrays to take multiple values and _reduce_ them to a single value.
+
+For example, we could take an array of numbers and reduce them to a single value representing the sum of those numbers.
+
+<Image
+  src="/images/blog/javascript-reduce/reducing-an-array-of-numbers.png"
+  width={628 / 2}
+  height={488 / 2}
+  layout="fixed"
+  alt="reducing an array of numbers to a single value"
+/>
+
+Or, we could take an array of objects and total up the values from a specific property
+on those objects.
+
+<Image
+  src="/images/blog/javascript-reduce/reducing-objects.png"
+  width={340}
+  height={170}
+  layout="fixed"
+  alt="reducing an object's property to a single value"
+/>
+
+We could also, for example, take an array of letter strings and reduce those letters to a single string.
+
+<Image
+  src="/images/blog/javascript-reduce/reducing-letters.png"
+  width={1120 / 3}
+  height={694 / 3}
+  layout="fixed"
+  alt="reducing strings of letters to a single string"
+/>
+
+<br />
+<br />
+
+**Reduce** is like a "Swiss Army Knife" of JavaScript array methods!
+
+## A Code Example
+
+Let's move forward and see **reduce** in action.
+
+For this example, we'll see how we can get the total value of a particular property from objects in an array.
+
+Let's create a <Syntax>const</Syntax> called <Syntax>spiceGirls</Syntax> and set it equal to an array of objects.
+Notice that each one of these objects has a <Syntax>name</Syntax> property and a <Syntax>numCats</Syntax> property(short for _number of cats_).
+
+```js
+const spiceGirls = [
+  { name: "ginger", numCats: 2 },
+  { name: "sporty", numCats: 1 },
+  { name: "baby", numCats: 0 },
+  { name: "posh", numCats: 3 },
+  { name: "scary", numCats: 6 },
+];
+```
+
+With **reduce**, we can collectively sum up the number of cats the Spice Girls have.
+Essentially, we want to take this array of objects and reduce it to a single numeric value.
+
+<Image
+  src="/images/blog/javascript-reduce/reduce-funnel.png"
+  width={1090}
+  height={1056}
+  layout="responsive"
+  alt="reduce is like a funnel that can reduce multiple values to a single value"
+/>
+
+And that's one of the cool things about **reduce**.
+We can start with an array and reduce it to a value of several different types:
+object, array, simple string, numeric, etc.
+
+In this case, we'll reduce it to a single number.
+
+The first thing we'll do is take that <Syntax>spiceGirls</Syntax> array and call **reduce** on it.
+
+```js
+const totalCats = spiceGirls.reduce(() => {});
+```
+
+Now, **reduce** takes two arguments:
+
+- a callback function (aka the _reducer_)
+- an initial value
+
+Let's set our initial value to zero.
+
+```js
+const totalCats = spiceGirls.reduce(() => {}, 0);
+```
+
+Now let's look at the reducer callback function.
+
+The reducer callback accepts at least two arguments:
+
+- the accumulator (<Syntax>accum</Syntax> for short)
+- current value (<Syntax>currValue</Syntax> for short)
+
+(As with array methods like [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) and [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), current value represents each element in the array).
+
+```js
+const totalCats = spiceGirls.reduce((accum, currValue) => {}, 0);
+```
+
+So **reduce** will iterate(loop) through each element of the array (which will be the current value
+for that iteration).
+
+And our **accumulator** will be initialized to a value of zero.
+
+Think of the **accumulator** as a sponge.
+On each iteration, it's going to "soak" up a calculation.
+
+<Image
+  src="/images/blog/javascript-reduce/accumulator-is-like-a-sponge.png"
+  width={1358}
+  height={746}
+  layout="responsive"
+  alt="the reduce method's accumulator is like a sponge"
+/>
+
+<br />
+
+Then, we'll return the result of that calculation as the new **accumulator** value for the next iteration.
+
+For this example, we add the **accumulator** value to <Syntax>currValue.numCats</Syntax>.
+(<Syntax>numCats</Syntax> is the particular property whose value we want to tally up on each iteration).
+
+BTW, a critical but often forgotten aspect of working with **reduce** is that the new value must be returned.
+
+And logging <Syntax>totalCats</Syntax> to the console yields a single numeric value of 12.
+
+```js
+const totalCats = spiceGirls.reduce((accum, currValue) => {
+  return accum + currValue.numCats;
+}, 0);
+console.log(totalCats);
+```
+
+## A Closer Look at Initial Value
+
+Let's take a closer look at that initial value we had set to zero.
+
+Since we had provided the initial value, the **accumulator** was initialized to 0.
+This sets the current value to the first element in the array for the first iteration.
+
+```js
+const totalCats = spiceGirls.reduce((accum, currValue) => {
+  return accum + currValue.numCats;
+}, 0);
+```
+
+And because we provided that initial value as a numeric value of 0, the calculation returned: 0 + 2.
+(_2 being the number of cats from the first object in the array_).
+
+```js
+const spiceGirls = [
+  { name: "ginger", numCats: 2 },
+  { name: "sporty", numCats: 1 },
+  { name: "baby", numCats: 0 },
+  { name: "posh", numCats: 3 },
+  { name: "scary", numCats: 6 },
+];
+```
+
+However, if we omit the initial value, the console will log <Syntax>[object Object] 1036</Syntax>.
+
+So when the initial value is omitted, <Syntax>accum</Syntax> is initialized to the first element in the array.
+And <Syntax>currValue</Syntax> gets initialized to the second element in the array.
+
+Since we're targeting the <Syntax>numCats</Syntax> property on each iteration, the object tries adding to a numeric value.
+That's why we get <Syntax>[object Object] 1036</Syntax> in the console rather than a single numeric value.
+
+If you're more of a visual learner, check out the video version of this article:
+
+<YouTube id="nT7yYmOjkbk" alt="javascript reduce video" imgSrc="/images/blog/javascript-reduce/javascript-reduce-video.jpg" />

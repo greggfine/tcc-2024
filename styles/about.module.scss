@@ -1,0 +1,69 @@
+@import "mixins";
+.about {
+  @include section-spacing;
+  padding: 20px;
+  &__content {
+    margin: auto;
+    font-size: 1.2rem;
+    padding-top: 1em;
+    max-width: 95%;
+    font-family: "IBM Plex Sans", sans-serif;
+
+    @media (min-width: 960px) {
+      padding-bottom: 0.5em;
+      max-width: 900px;
+    }
+    &:nth-of-type(1) {
+      margin-top: 1em;
+    }
+  }
+  &__heading {
+    max-width: 90%;
+    color: var(--mainPurple);
+    text-align: center;
+    border-bottom: 2px solid var(--mainPurple);
+    border-top: 2px solid var(--mainPurple);
+    padding: 20px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 90px;
+    background-color: rgb(243 241 242);
+    font-size: 1.8rem;
+    font-family: "IBM Plex Sans", sans-serif;
+
+    &__name {
+      color: white;
+      text-shadow: 3px 3px 0 var(--mainRed), -1px -1px 0 var(--mainRed),
+        1px -1px 0 var(--mainRed), -1px 1px 0 var(--mainRed),
+        1px 1px 0 var(--mainRed);
+    }
+    @include section-spacing;
+    @media (min-width: 450px) {
+      font-size: 2.1rem;
+    }
+    @media (min-width: 960px) {
+      width: 50%;
+      font-size: 2.5rem;
+    }
+  }
+  &__imgContainer {
+    width: 100%;
+    margin: auto;
+    @media (min-width: 960px) {
+      width: 50%;
+    }
+  }
+  &__greggAboutImg {
+    border: 4px double var(--secondaryRed) !important;
+  }
+  &__link {
+	color: #8c0133;
+	font-weight: 500;
+
+	&:hover {
+		text-decoration: none;
+		color: var(--mainRed);
+	}
+  }
+}

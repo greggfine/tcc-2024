@@ -1,0 +1,453 @@
+---
+title: GSAP ScrollTrigger Text Animation | 70's Style
+date: "December 1, 2022"
+description: Learn a cool text highlighting effect using GSAP ScrollTrigger
+thumbnailUrl: "/images/blog/gsap-scrolltrigger-text-animations/gsap-scrolltrigger-text-animations-tutorial.jpg"
+altText: "GSAP ScrollTrigger Text Animation | 70's Style"
+author: "Gregg Fine"
+tags: ["gsap", "scrolltrigger", "scrollytelling"]
+url: "gsap-scrolltrigger-text-animation-seventies-style"
+---
+
+## Introduction
+
+We’ll focus on pinning, scrubbing, and using an index to create a scrub delay
+
+Show some examples of 70’s style text .
+
+## Demo the Final Project
+
+## Initial HTML
+
+Let's start by scaffolding our **index.html** file with some
+basic **HTML** boilerplate.
+
+We'll include script tags for the **GSAP** library, the **ScrollTrigger** plugin,
+and our own custom **app.js** file.
+
+We'll also link to our **CSS** stylesheet, **styles.css**, in the head section.
+
+Within the **body** tags, create a **div** with the class of <Syntax>text-wrap</Syntax>.
+This will serve as a wrapper for the text layers we'll be creating.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>70's Style Text Animation</title>
+  </head>
+  <body>
+    <div class="text-wrap"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
+  </body>
+</html>
+```
+
+<br />
+<br />
+
+## Google Fonts
+
+I wanted to use a '70s-inspired font for this project. 
+
+I found one called "Lobster" which seemed to do the trick on [Google Fonts](https://fonts.google.com/specimen/Lobster). 
+
+You'll find the three link tags needed to make the font work in the head section here:
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" 
+	rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <title>70's Style Text Animation</title>
+  </head>
+ <!-- ... -->
+```
+ 
+ <br />
+ <br />
+
+
+## Initial App.js
+
+Don't worry if you don't see anything in the browser yet!
+
+For this project, we'll create the **DOM** elements and text content via **JavaScript**.
+
+(We could create the elements manually in the **HTML** file. 
+However, with so many repetitive text layers needed to make this effect work, I opted
+to utilize a **JavaScript** loop.)
+
+<br />
+<br />
+
+In the **app.js** file, start by getting a reference to the <Syntax>text-wrap</Syntax> div we created in **index.html**.
+We'll be appending the **JavaScript**-generated text elements to it.
+
+```js
+const textWrap =document.querySelector(".text-wrap");
+```
+<br />
+
+Next, let's create an array of color strings. 
+These will be the colors associated with each text layer.
+
+```js
+const textWrap =document.querySelector(".text-wrap");
+const colors = ["blue", "light-blue", "yellow", "orange", "dark-orange", "white"];
+```
+<br />
+<br />
+
+Now, we can run **JavaScript's** [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) method on this colors array to generate the **DOM** elements.
+
+Here's how the **forEach** callback function will work:
+
+- create an **h1** element for each color using [document.createElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
+
+- give each element some **textContent**
+
+- add 2 **classes** to each element using [classList.add](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList)
+
+	The first will be a class(<Syntax>"text-layer"</Syntax>) common to all the text elements.
+	The second will be the color class unique to each element
+
+- append each of these elements to the <Syntax>textWrap</Syntax> container using [appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)
+
+```js
+const textWrap =document.querySelector(".text-wrap");
+const colors = ["blue", "light-blue", "yellow", "orange", "dark-orange", "white"];
+colors.forEach((color) => {
+  const h1El = document.createElement("h1");
+  h1El.textContent = "The Code Creative";
+  h1El.classList.add("text-layer", color);
+  textWrap.appendChild(h1El);
+})
+```
+
+<br />
+
+If we look in the browser, we'll see "The Code Creative" repeated six times. 
+(Once for each color in the array.)
+
+## Initial CSS
+
+Let’s start setting up some basic styles in our **styles.css** file.
+
+We’ll give the <Syntax>body</Syntax> a '70s shaggadelic-style brown background color.
+
+Then, we'll set up the **classes** for each of the colors from the colors array
+we created in **app.js**.
+
+You should see a funky '70s color palette in the browser now.
+
+```css
+body {
+  background-color: #392c23;
+}
+
+.blue { color: #53B6D1; }
+.light-blue { color: #A3D3D6; }
+.yellow { color: #EAE0A2; }
+.orange { color: #E7AE7A; }
+.dark-orange { color: #C65E38; }
+.white { color: #fff; }
+```
+<br />
+<br />
+
+As the starting point for the animation, we'll want those text layers stacked on top of each other.
+We can achieve this by giving the <Syntax>text-layer</Syntax> class a **position:absolute**.
+
+```css
+body {
+  background-color: #392c23;
+}
+
+.text-layer {
+  position: absolute;
+}
+
+.blue { color: #53B6D1; }
+.light-blue { color: #A3D3D6; }
+.yellow { color: #EAE0A2; }
+.orange { color: #E7AE7A; }
+.dark-orange { color: #C65E38; }
+.white { color: #fff; }
+```
+
+<br />
+<br />
+
+Then, we’ll set up the "Lobster" Google font and a font-size that dynamically scales to the viewport width.
+
+```css
+.text-layer {
+  position: absolute;
+  font-family: 'Lobster', cursive;
+  font-size: 10vw;
+}
+```
+
+<br />
+<br />
+
+Let’s address the <Syntax>text-wrap</Syntax> container **div** next.
+
+Give it a <Syntax>display:flex</Syntax> and <Syntax>justify-content:center</Syntax>.
+
+This will align the child <Syntax>text-layer</Syntax> **divs** to the center of the viewport.
+
+```css
+.text-layer {
+  position: absolute;
+  font-family: 'Lobster', cursive;
+  font-size: 10vw;
+}
+.text-wrap {
+  display: flex;
+  justify-content: center; 
+}
+```
+
+<br />
+<br />
+
+To get some scrolling height, we'll need to extend the height of the
+<Syntax>text-wrap</Syntax> **div** beyond the visible viewport.
+
+Also, as a visual aid, let's temporarily give the <Syntax>text-wrap</Syntax> a thick border.
+(This will show us the height of the <Syntax>text-wrap</Syntax> **div**.)
+
+```css
+.text-layer {
+  position: absolute;
+  font-family: 'Lobster', cursive;
+  font-size: 10vw;
+}
+.text-wrap {
+  height: 200vh; 
+  display: flex;
+  justify-content: center; 
+  border: 10px solid #fff;
+}
+```
+<br />
+
+(_**Note**: Make sure to comment the border out before you move on._)
+<br />
+<br />
+
+## Adding ScrollTrigger
+
+Back in app.js, let's [register](https://greensock.com/docs/v3/GSAP/gsap.registerPlugin()) the **ScrollTrigger** plugin.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+```
+<br />
+<br />
+
+Then, we’ll use **GSAP’s** <Syntax>toArray</Syntax> utility method to gather up all of the elements with the <Syntax>text-layer</Syntax> class into a flat **JavaScript** array.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.utils.toArray('.text-layer');
+```
+<br />
+<br />
+
+Now, we can use the **forEach** method on this array to loop over each <Syntax>textLayer</Syntax> element.
+(Within the loop, we'll be setting up our tween and <Syntax>scrollTrigger</Syntax>).
+
+Note that a critical aspect of this effect is the usage of the second **forEach** parameter, the **index**(<Syntax>idx</Syntax>)!
+Shortly, we'll see how this allows us to create the staggered layering effect.
+
+```js
+gsap.utils.toArray('.text-layer').forEach((textLayer, idx) => {
+});
+```
+
+<br />
+<br />
+
+Let's flesh out the body of the **forEach** function.
+
+As we iterate, we'll use the <Syntax>gsap.to</Syntax> method to animate
+the current target <Syntax>textLayer</Syntax>. 
+We’ll also set up a <Syntax>scrollTrigger</Syntax> object using the containing <Syntax>text-wrap</Syntax> **div** as the trigger.
+	
+
+```js
+gsap.utils.toArray('.text-layer').forEach((textLayer, idx) => {
+	gsap.to(textLayer, {
+	scrollTrigger: {
+		trigger: '.text-wrap',
+	  }
+	});
+});
+```
+
+## Enabling Markers
+
+Before going further, let’s enable <Syntax>scrollTrigger</Syntax> markers.
+These will help visualize the scroller zone.
+
+```js
+gsap.utils.toArray('.text-layer').forEach((textLayer, idx) => {
+	gsap.to(textLayer, {
+	scrollTrigger: {
+		trigger: '.text-wrap',
+		markers: true,
+	  }
+	});
+});
+```
+
+<br />
+<br />
+
+Because we haven’t explicitly defined **start** or **end** properties, the scroller zone markers are at their default positions.
+i.e., **start** is at the top of the <Syntax>text-wrap</Syntax> trigger element and **scroller-start** is at the bottom of the viewport.
+
+<br />
+
+At the moment, if we set up a tween, the animation will fire instantly.
+
+Let's try it:
+Set a <Syntax>y</Syntax> property (**GSAP's** shorthand for **transform: translateY**) to a value of <Syntax>60vh</Syntax>.
+
+This will animate the <Syntax>textLayer</Syntax> elements down by 60 viewport height units.
+
+```js
+gsap.utils.toArray('.text-layer').forEach((textLayer, idx) => {
+	gsap.to(textLayer, {
+	y: '60vh',
+	scrollTrigger: {
+		trigger: '.text-wrap',
+		markers: true,
+	  }
+	});
+});
+```
+
+## Pinning
+
+Currently, scrolling down the page will also scroll the <Syntax>text-layer</Syntax> elements.
+
+However, we want those <Syntax>text-layers</Syntax> pinned in place while we scroll.
+
+By setting the **pin** property to <Syntax>textLayer</Syntax>, the **scroller-start** marker moves to the top of the viewport. 
+
+Now, only once we've started scrolling a bit and the **start** breaches the **scroller-start**, do we get the animation.
+
+```js
+gsap.utils.toArray('.text-layer').forEach((textLayer, idx) => {
+	gsap.to(textLayer, {
+	y: '60vh',
+	scrollTrigger: {
+		trigger: '.text-wrap',
+		pin: textLayer,
+		markers: true,
+	}
+	});
+});
+```
+
+## Scrubbing
+
+Rather than immediately animating to completion, however, we want to control 
+the animation like a scrubbing playhead.
+
+To do this, we can use the **scrub** property set to a value of **true**.
+
+```js
+gsap.utils.toArray('.text-layer').forEach((textLayer, idx) => {
+	gsap.to(textLayer, {
+	y: '60vh',
+	scrollTrigger: {
+		trigger: '.text-wrap',
+		pin: textLayer,
+		scrub: true,
+		markers: true,
+	}
+	});
+});
+```
+<br />
+<br />
+
+That gives us control over the animation but we don't have the staggered effect yet.
+
+Here’s where the magic comes in!  
+
+Instead of using a boolean value for **scrub**, we’ll use a numeric calculation.
+And, in this numeric calculation, we’ll _make use of that iteration index_  
+	
+This allows us to dynamically generate unique lag times for each iteration.
+
+```js
+gsap.utils.toArray('.text-layer').forEach((textLayer, idx) => {
+	gsap.to(textLayer, {
+	y: '60vh',
+	scrollTrigger: {
+		trigger: '.text-wrap',
+		pin: textLayer,
+		scrub: (8 - idx) * 0.3,
+		markers: true,
+	}
+	});
+});
+```
+<br />
+
+
+
+Examing the results of these calculations, we see how the effect is produced:
+
+- first iteration: (8 - 0) * 0.3 = 2.4 seconds
+
+- second iteration: (8 - 1) * 0.3 = 2.1 seconds
+
+- third iteration: (8 - 2) * 0.3 = 1.8 seconds
+
+and so on...
+
+<br />
+
+## Further Experimentation
+
+Be sure to experiment with this calculation. Adjust to taste to create your
+own degree of psychedelia!
+
+Playing around with these numbers will alter the lag between text layers.
+
+Tweaking the <Syntax>y</Syntax> value changes the vertical distance the layers travel. 
+For example, changing <Syntax>30vh</Syntax> to <Syntax>130vh</Syntax> will exaggerate the effect and yield a large gap between layers.
+
+(As a side note, by using **vh** for the <Syntax>y</Syntax> values, the vertical transform height tailors itself to the viewport height.)
+
+---
+
+<Ad
+  txt="To go further with GSAP, check out Scrollytelling 101!"
+  imgSrc="/images/ads/scrollytelling-101-course.jpg"
+  imgWidth="240"
+  imgHeight="152"
+  href="https://store.thecodecreative.com/scrollytelling"
+/>

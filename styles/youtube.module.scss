@@ -1,0 +1,21 @@
+.YouTube {
+  max-width: 400px;
+  margin: auto;
+
+  img {
+    margin: auto;
+    transition: all 100ms ease-in;
+    opacity: 0.9;
+
+    &:hover {
+     transform: scale(1.01); 
+     opacity: 1;
+    }
+  }
+
+  @media (max-width: 400px) {
+    img {
+      max-width: 95%;
+    }
+  }
+}

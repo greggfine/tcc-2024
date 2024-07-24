@@ -1,0 +1,231 @@
+---
+title: How to Reverse a Linked List in JavaScript
+date: "October 29, 2022"
+description: How to Reverse a Linked List in JavaScript
+thumbnailUrl: "/images/blog/how-to-reverse-a-linked-list-in-javascript/how-to-reverse-a-linked-list-tutorial.jpg"
+altText: "How to Reverse a Linked List in JavaScript"
+author: "Gregg Fine"
+tags: ["algorithms", "javascript"]
+url: "how-to-reverse-a-linked-list-in-javascript"
+---
+
+```js
+
+```
+
+In this article, let's learn how to reverse a linked list using JavaScript.
+In particular, we'll look at an iterative solution to reverse a singly linked list.
+
+## What is a Singly Linked List?
+
+A singly linked list consists of a series of nodes.
+Each node contains a value.
+
+For example, we might have a node with the value of 5 followed by a node with the value of 6,
+followed by a node with the value of 7, and so on.
+
+<Image
+  src="/images/blog/how-to-reverse-a-linked-list-in-javascript/series-of-nodes.png"
+  width={992}
+  height={444}
+  layout="responsive"
+  alt=""
+/>
+
+<br />
+<br />
+
+In code, each node will be represented as a JavaScript object.
+And we'll link each of these node objects to the next node via a "pointer".
+
+To create this pointer, we'll set a <Syntax>next</Syntax> property on each object and
+set the next node object in the chain as its value.
+
+<Image
+  src="/images/blog/how-to-reverse-a-linked-list-in-javascript/next-pointers.png"
+  width={990}
+  height={304}
+  layout="responsive"
+  alt=""
+/>
+
+<br />
+<br />
+
+For the last node in the list, the <Syntax>next</Syntax> property will be set to a value of <Syntax>null</Syntax>.
+(_This is important because we need the <Syntax>null</Syntax> value in order to identify the last node in the list_).
+
+By the way, the final node in the list is referred to as the **tail** while the first node is referred to as the **head**.
+
+<Image
+  src="/images/blog/how-to-reverse-a-linked-list-in-javascript/head-and-tail.png"
+  width={1636}
+  height={758}
+  layout="responsive"
+  alt=""
+/>
+
+<br />
+<br />
+
+## Understanding the Approach
+
+I've set up a linked list object with a value of 5. And this object has a next property
+pointing to the next node in the list.
+That next node has a value of 6.
+It also has a next property pointing to another node with a value of 7.
+That node is the last one in the chain. Notice its next property points to null.
+
+<Image
+  src="/images/blog/how-to-reverse-a-linked-list-in-javascript/linked-list.png"
+  width={1044}
+  height={207}
+  layout="responsive"
+  alt=""
+/>
+
+<br />
+<br />
+
+So what do we need to do in order to reverse this linked list?
+We need to, essentially, reverse the next pointers.
+We want to point them to their previous node rather than their next node.
+
+<Image
+  src="/images/blog/how-to-reverse-a-linked-list-in-javascript/forward.png"
+  width={1884}
+  height={760}
+  layout="responsive"
+  alt=""
+/>
+
+<br />
+<br />
+
+<Image
+  src="/images/blog/how-to-reverse-a-linked-list-in-javascript/reverse.png"
+  width={1822}
+  height={781}
+  layout="responsive"
+  alt=""
+/>
+
+The big problem with a singly linked list is that each node object only has a pointer to the next node.
+
+To solve this problem, we'll create a variable called "previous" and set it to be null.
+
+Now, we can take what was previously the head and set its next property to our new "previous" variable.
+Then we can move to each successive node in the linked list and reassign its next property to the node which came before it.
+
+When we get to the last node (previously the "tail") in the list, it will now become the new head of the list.
+And that's what we're going to return.
+
+## Implementing Our Algorithm
+
+Let's define a function called reverseList.
+We'll be passing the linked list into the function.
+Let's call it "head" since that's the first node in the list.
+This is the linked list with the head with the value 5 and all the next nodes and so on.
+
+```js
+function reverseList(head) {}
+```
+
+As i mentioned, in order to reverse it we're going to create a new variable.
+
+We'll call it prev for previous and we'll initialize it to a value of null.
+
+Because, in order to reverse the linked list, we're going to need to take the next property from the very first node and point it to null because that's going to be the new tail.
+
+We're also going to create another variable.
+And we'll call it next.
+And we'll initialize that to null.
+
+You'll see why we need this in a moment.
+
+Now, the next thing we're going to do is we're going to create a while loop.
+
+Because what we're going to have is an iterative process where we keep moving along to each successive node in the list and basically reassign the node's next property to the previous node.
+
+Since we're starting at the head node, we're going to say: while head does not equal null.
+
+Because, remember, a next property with the value of null tells us that that's the last node in the chain.
+
+And what we're going to do throughout this iterative process is to keep updating head to be the next node in the chain.
+
+And we want to do this while whatever head is currently is not equal to null.
+
+Because once it has equaled null then we're done with this process of reversing the list.
+
+And we can return our reverse link list at that point.
+
+So, we're saying, while head does not equal null.
+And, in here, in this while loop is where we're going to do all that reassignment of the next properties.
+
+And, as well, we're going to have to keep updating what head is or the current node as well as updating what previous is.
+
+So here's where all the reversing is going to take place. Inside of this while loop here.
+
+As i said, we're going to take the head node and assign it to this new previous variable which has the value of null.
+
+Currently, the head node with the value of 5, was pointing to the next node with the value of 6.
+
+But now we've severed that and, instead, we've pointed it to prev or previous with the value of null.
+
+Now, the other things that we need to do in here though are we need to do some reassignments so that we can go through all the nodes in the linked list and sever their next properties and reassign them to previous nodes.
+
+So remember before we set up this next variable and we signed it to a value of null we initialized it to null.
+
+Well, we're going to use that next variable inside this while loop and start out by assigning it to head.next.
+
+Because we're going to need a way to store a reference to what was the next node which was the node with the value of 6.
+
+Before we sever it from the current node, which we're doing here when we're assigning head.next now to previous.
+
+So now that we've set this up we can move along through the nodes in the linked list by taking that previous variable and now assigning that to what was the head node which was that node with the value 5.
+
+Right, so now null is not what previous is anymore but that head node with the value of 5 is now going to be the previous node and now that we've done that we can take the head node and assign that to be next.
+
+We've basically taken previous and head and move them one step further in the chain.
+
+After we've gone through this entire process moving along through the chain, at some point we're going to reach null.
+
+So we know we've reached the end of the linked list.
+
+And we can now return our linked list in its reverse state.
+
+So what we're going to do is to return prev or previous because previous has become the last node now or the new head basically.
+
+So let's save what we have.
+
+Let's come down here and actually call the function.
+
+And we're going to pass in the link list.
+
+And we'll want to console.log out the reversed version of the list.
+
+So let's save. Let's clear our terminal and let's see what we have.
+
+And here you can see our reverse list.
+
+Previously, we started with the value of 5 and then 6 and then 7.
+
+But here now you can see we're starting with a value of seven and then six and then five.
+
+So you can see that we've reversed it.
+
+## Big O Notation
+
+In terms of the time complexity of this algorithm, this algorithm has a linear time complexity or big o of n.
+
+And that's because the time it takes to iterate through this entire linked list is going to depend on the size of the inputted linked list or how many nodes it has.
+
+In terms of space, we can say that this has big o of one or constant time.
+
+Because we're not creating a new linked list, we're reversing everything in place.
+
+So we're basically using what we have and just reassigning things.
+
+If you're more of a visual learner, check out the video version of this article:
+
+<YouTube id="UCv-EmtvPe4" />

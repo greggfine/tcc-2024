@@ -1,0 +1,132 @@
+.Post {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2rem;
+  max-width: 90%;
+  margin: 2rem auto;
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: #fdf9ff;
+  color: #374151;
+
+  @media (min-width: 960px) {
+    flex-direction: row;
+    max-width: 850px;
+    margin-top: 4rem;
+  }
+
+  a {
+    color: #60098a;
+    text-decoration: underline;
+  }
+
+  blockquote {
+    margin-top: 90px;
+    margin-bottom: 90px;
+    p::before {
+      content: open-quote;
+      color: var(--mainPurple);
+      font-size: 4rem;
+      line-height: 0;
+    }
+    p strong {
+      font-style: italic;
+      font-weight: 500;
+      color: #550a7a;
+    }
+  }
+
+  pre {
+    background-color: #000;
+    border-radius: 10px;
+  }
+
+  code[class*="language-"] {
+    color: #fcfcfc;
+    // margin-bottom: 60px;
+    padding: 20px;
+    font-size: 1rem;
+    border-radius: 2%;
+  }
+
+  &__meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 48px;
+    color: hsl(0deg 0% 45%);
+    font-size: 0.875rem;
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+
+  &__header {
+    font-size: 2.25rem;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 24px;
+  }
+
+  h2 {
+    margin-top: 60px;
+    margin-bottom: 20px;
+
+    a {
+      color: #111827;
+      font-size: 2.25rem;
+      text-decoration: none;
+    }
+  }
+
+  img {
+    width: 85%;
+    // max-width: 200px !important;
+    display: block;
+    margin-right: auto;
+    margin-top: 60px;
+    margin-bottom: 80px;
+    // box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 12px !important;
+    box-shadow: rgb(173 65 65) 0px 4px 12px !important;
+
+  }
+
+  p {
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  div {
+    span {
+      max-width: 600px;
+    }
+  }
+
+  &__tags {
+    font-family: "IBM Plex Sans", sans-serif;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    gap: 10px;
+    margin-bottom: 60px;
+
+    li {
+      background-color: #000;
+      color: #fff;
+      padding: 0.25rem 1rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  ul {
+    padding-left: 0;
+
+    li {
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+  }
+}

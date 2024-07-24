@@ -1,0 +1,57 @@
+[
+  {
+    "imgSrc": "/images/courses/coding-for-musicians-course.jpg",
+    "imgAlt": "Web Audio API course by Gregg Fine available from macProVideo",
+    "imgWidth": 500,
+    "imgHeight": 500,
+    "title": "Web Audio Explored",
+    "subtitle": "CODING FOR MUSICIANS 101",
+    "description": " The Web Audio API lets you create and synthesize audio right in your web browser. Explore the world of coding using the JavaScript language in this made-for-musicians course, by coder and musician Gregg Fine!",
+    "link": "https://www.macprovideo.com/course/web-audio-explored?afid=LYaI709I1H",
+    "linkText": "Get the course"
+  },
+  {
+    "imgSrc": "/images/courses/scrollytelling-101-course.jpg",
+    "imgAlt": "Scrollytelling 101 course exploring GSAP's ScrollTrigger and web animation",
+    "imgWidth": 789,
+    "imgHeight": 500,
+    "title": "Scrollytelling 101",
+    "subtitle": "WEB ANIMATION EXPLORED",
+    "description": " Create Awesome Scroll-Based Web Animations With GSAP + ScrollTrigger!",
+    "link": "https://store.thecodecreative.com/scrollytelling",
+    "linkText": "Get the course"
+  },
+  {
+    "imgSrc": "/images/courses/dom-events-and-javascript-course.jpg",
+    "imgAlt": "DOM Events and JavaScript course by The Code Creative",
+    "imgWidth": 789,
+    "imgHeight": 444,
+    "title": "DOM Events and JavaScript",
+    "subtitle": "FROM ZERO TO EXPERT!",
+    "description": " Learn to master and manipulate DOM Events with JavaScript (and ace your next front-end interview too!)",
+    "link": "https://store.thecodecreative.com/dom-events-and-javascript",
+    "linkText": "Get the course"
+  },
+  {
+    "imgSrc": "/images/courses/ultimate-dom-and-js-workout-course.jpg",
+    "imgAlt": "The Ultimate DOM and JavaScript Workout Course: a free web development course with a series of fun coding challenges",
+    "imgWidth": 798,
+    "imgHeight": 444,
+    "title": "The Ultimate DOM & JavaScript Workout!",
+    "subtitle": "WEB DEV MASTERY",
+    "description": " Build the DOM with JavaScript through this series of fun coding challenges!",
+    "link": "https://store.thecodecreative.com/ultimate-dom-and-js-workout",
+    "linkText": "Get the course"
+  },
+  {
+    "imgSrc": "/images/courses/the-code-creative-youtube-channel.jpg",
+    "imgAlt": "The Code Creative YouTube Channel which teaches modern web development skills",
+    "imgWidth": 500,
+    "imgHeight": 500,
+    "title": "The Code Creative Channel",
+    "subtitle": "YOUTUBE TUTORIALS",
+    "description": " The Code Creative teaches you modern web development skills in a way that's entertaining, concise, and easy to understand! Topics include: JavaScript, React, Redux, ES6, CSS, Web Audio API, Node.js, and much more. We have new videos posted every week.",
+    "link": "https://www.youtube.com/c/TheCodeCreative",
+    "linkText": "Watch the channel"
+  }
+]

@@ -1,0 +1,68 @@
+// @import "fonts";
+@import "mixins";
+.CardGrid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  opacity: 1;
+  position: relative;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 140px;
+  gap: 60px;
+
+  @media (min-width: 960px) {
+    flex-flow: row wrap;
+    width: 85%;
+    margin: auto;
+    padding: 0px 0 60px;
+    align-content: space-around;
+    height: 700px;
+    margin-top: 180px;
+    margin-bottom: 240px;
+  }
+  @media (min-width: 1200px) {
+    margin-bottom: 160px;
+  }
+
+  &__serviceCard {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 25%;
+    padding: 10px;
+
+    @media (min-width: 960px) {
+      flex-basis: 35%;
+    }
+  }
+
+  &__cardIcon {
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--mainRed);
+    border-radius: 50%;
+    padding: 5px;
+    transition: transform 0.3s ease-out;
+
+    &:hover {
+      transform: rotate(20deg) scale(1.1);
+    }
+  }
+
+  &__serviceCardTitle {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: #3b244d;
+    font-weight: 700;
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+
+  &__secondaryCardContent {
+    color: var(--secondaryText);
+    line-height: 1.5;
+    max-width: 428px;
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+}

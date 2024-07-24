@@ -1,0 +1,330 @@
+---
+title: JavaScript Event Bubbling and Capturing Made Simple!
+date: "October 13, 2022"
+description:  An explanation of the 3 phases of event propagation - capturing, target, bubbling and how you can use them for event delegation and more!
+thumbnailUrl: "/images/blog/javascript-event-bubbling-and-capturing-made-simple/event-bubbling-tutorial.jpeg"
+altText: "JavaScript event bubbling and capturing tutorial"
+author: "Gregg Fine"
+tags: ["coding", "javascript", "dom"]
+url: "javascript-event-bubbling-and-capturing-made-simple"
+---
+
+Hey everybody! In this article we're going to talk about [event capturing](https://javascript.info/bubbling-and-capturing#capturing) and [event bubbling](https://javascript.info/bubbling-and-capturing#bubbling) in JavaScript.
+
+These concepts are critical to understand if you want to take control of the way that events fire in the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+and also simply to understand what's happening when we fire or trigger an event.
+
+So let's get going!
+---
+
+## A Hierarchy of Elements
+
+To understand event **bubbling** and **capturing**, we first need to establish a mental model of HTML elements existing in a hierarchy.
+
+In this diagram, we can say that the <Syntax>li</Syntax> is a child of the parent <Syntax>ul</Syntax> element. And the parent <Syntax>ul</Syntax> element, in turn, is a child of the parent<Syntax> div</Syntax>.
+And the <Syntax>div</Syntax> is a child of the parent <Syntax>body</Syntax> element and so on.
+
+<Image
+  src="/images/blog/javascript-event-bubbling-and-capturing-made-simple/element-hierarchy.png"
+  width={1822}
+  height={1444}
+  alt="HTML elements exist in a nested hierarchy"
+/>
+
+As we continue to ascend up the DOM tree, we eventually reach the <Syntax>document</Syntax> and finally the <Syntax>window</Syntax> object.{" "}
+
+In other words, when we're structuring our HTML, we're establishing hierarchies of child elements to parents to grandparents...
+
+<br />
+
+To clarify, let's look at an example in code:
+
+Here, in my HTML, I have an outer div with a class of <Syntax>container</Syntax>.
+And, within that div, I have a single <Syntax>ul</Syntax> with two <Syntax>lis</Syntax>.
+
+```html
+<div class="container">
+  <ul>
+    <li>The Code Creative</li>
+    <li>Event Bubbling and Capturing</li>
+  </ul>
+</div>
+```
+
+In my CSS, I've given that <Syntax>container</Syntax> div a green border
+and the <Syntax>ul</Syntax> a red border.
+Inside of the <Syntax>ul</Syntax>, we see the two <Syntax>lis</Syntax>:
+"The Code Creative" and "Event Bubbling and Capturing".
+
+<Image
+  src="/images/blog/javascript-event-bubbling-and-capturing-made-simple/green-border.png"
+  width={3382}
+  height={846}
+  alt="The HTML elements used in this JavaScript event bubbling and capturing tutorial"
+/>
+
+The CSS looks like this:
+
+```css
+.container {
+  border: 10px solid #00ff00;
+  font-size: 32px;
+  padding: 40px;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0 auto;
+  list-style-type: none;
+  width: 20vw;
+  border: 5px solid #ff0000;
+}
+
+li {
+  margin: 40px;
+  border: 1px solid #000;
+  text-align: center;
+}
+```
+
+Here's the important part: Because of this nested hierarchy, if I set up one of these <Syntax>lis</Syntax> to respond to a click event and the user clicks on one of these <Syntax>lis</Syntax>, we can, essentially, say that the user has
+clicked on the parent <Syntax>ul</Syntax>. In the same way, we can also say that the user has clicked on the enclosing <Syntax>container</Syntax> div.
+
+So again, if I'm clicking on the child element, I'm really clicking on all of the outer parent elements as well!
+
+## Event Propagation
+
+Which brings us to the idea of **event propagation**. (_"propagation" means "widely spreading"_).
+
+When an event is "fired" on a child element, that event
+spreads or "propagates" throughout the entire DOM hierarchy.
+
+<Image
+  src="/images/blog/javascript-event-bubbling-and-capturing-made-simple/fired.jpeg"
+  width={1920}
+  height={1080}
+  alt="definition of the JavaScript event term 'fired'"
+/>
+
+<br />
+<br />
+
+And it does this in three different phases:
+
+- the **capture** phase.
+- the **target** phase.
+- the **bubble** phase.
+
+Let's talk a little bit about each of these phases.
+
+
+## The Capture and Target Phases
+
+Using our HTML heirarchy diagram, if we "fire" an event on the <Syntax>li</Syntax>, the <Syntax>li</Syntax> would be considered to
+be the **target** element.
+
+And firing that event initiates the **capture** phase.
+
+<Image
+  src="/images/blog/javascript-event-bubbling-and-capturing-made-simple/capture-phase.jpeg"
+  width={1024}
+  height={768}
+  alt="The capture and target phases in relationship to HTML element hierarchy"
+/>
+
+In the **capture** phase, the <Syntax>window</Syntax> object, at the top of the hierarchy, gets notified _first_ of the click event.
+
+Then, descending down the DOM tree, the <Syntax>document</Syntax> gets notified next.
+And then the <Syntax>HTML</Syntax> element gets notified.
+And then the <Syntax>body</Syntax> element. And then the <Syntax>div</Syntax>. And then the <Syntax>ul</Syntax>.
+These notifications all occur first as part of the **capture** phase.
+
+Finally, the <Syntax>li</Syntax>,(which is the **target**), gets notified. This can also be referred to as the **target** phase.
+
+## The Bubble Phase
+
+Once that <Syntax>li</Syntax> or **target** element has been notified, we ascend back up the DOM tree in what's called the **bubbling**
+phase.
+
+<Image
+  src="/images/blog/javascript-event-bubbling-and-capturing-made-simple/bubbling-phase.jpeg"
+  width={1024}
+  height={768}
+  alt="The bubble phase in relationship to HTML element hierarchy"
+/>
+
+Once again, all of the elements up the hierarchy are notified. This time in reverse order, however.
+
+So, after the **target** element has been notified, the <Syntax>ul</Syntax> is notified next. Then the <Syntax>div</Syntax> is notified. Then the <Syntax>body</Syntax>, up to the <Syntax>HTML</Syntax> element, up to the <Syntax>document</Syntax> and finally to the <Syntax>window</Syntax> object.
+
+## Bubbling vs. Capturing
+
+Why are the three event stages and **event propagation** important to know about?
+
+For one thing, as developers, we can decide whether we want the
+callback functions associated with each event to fire during the **capture** phase or during the **bubble** phase.
+
+<Image
+  src="/images/blog/javascript-event-bubbling-and-capturing-made-simple/bubbling-capturing.jpeg"
+  width={1920}
+  height={1080}
+  alt="definition of the JavaScript DOM terms bubbling and capturing"
+/>
+
+<br />
+<br />
+
+The [**addEventListener**](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) method makes it easy to use one or the other.
+
+Now, by default, **addEventListener** invokes the callbacks during the **bubbling** phase.
+
+```js
+li.addEventListener("click", () => {
+  console.log("li clicked!");
+});
+```
+
+If we want to change that to the **capture** phase, we can pass in a boolean value as the third argument to <Syntax>addEventListener</Syntax>.
+(Note: this value is **false** by default)
+
+So, passing in **true** as a third argument means that we want the callback function to fire on the **capture** phase for the element.
+
+```js
+const li = document.querySelector("li");
+
+li.addEventListener(
+  "click",
+  () => {
+    console.log("li clicked!");
+  },
+  true
+);
+```
+
+Another way to pass this in, which will produce an identical result, is to pass in an object with a key of <Syntax>capture</Syntax> and a value set to **true**.
+Passing it this way allows us to use this third parameter as an **options object**, enabling the inclusion of additional parameters.
+
+```js
+const li = document.querySelector("li");
+
+li.addEventListener(
+  "click",
+  () => {
+    console.log("li clicked!");
+  },
+  { capture: true }
+);
+```
+
+## stopPropagation
+
+There may be some situations where you don't want this propagation. Or, perhaps, you
+want to limit the extent to which it occurs.
+
+And for this, we have a method called <Syntax>stopPropagation</Syntax>.
+
+<Image
+  src="/images/blog/javascript-event-bubbling-and-capturing-made-simple/stop-propagation.jpeg"
+  width={1920}
+  height={1080}
+  alt="JavaScript stopPropagation method represented by a woman holding up her hand"
+/>
+
+We can find the <Syntax>stopPropagation</Syntax> method on the **event object** that gets passed in automatically
+to the <Syntax>addEventListener's</Syntax> callback function.
+
+If, for example, we clicked on the <Syntax>li</Syntax> child element, the container <Syntax>div's</Syntax> callback would fire first(assuming **capture** is set to **true**).
+It would then propagate down to the next child element, the <Syntax>ul</Syntax>, and its callback would fire.
+
+If we used <Syntax>event.stopPropagation,</Syntax> on the container <Syntax>div</Syntax> though, what should happen is that only the callback
+on the container element would fire but go no further.
+
+```js
+const container = document.querySelector("container");
+
+container.addEventListener(
+  "click",
+  (event) => {
+    event.stopPropagation();
+    console.log("container clicked!");
+  },
+  { capture: true }
+);
+```
+
+## Event Delegation
+
+One of the main reasons why event **bubbling** and **capturing** is valuable is because we can use it for [**event
+delegation**](https://javascript.info/event-delegation).
+
+Thanks to the phenomenon of **event propagation**, with **event delegation**, we can avoid wasteful code duplication resulting from
+adding event listeners to many individual elements.
+
+Instead, we only need to listen on a _single_ parent element. **Event delegation** leverages the way **bubbling** and **capturing** work.
+We can use these phases to identify precisely which **target** element got clicked.
+
+## Event Delegation: Code Example
+
+Say we have two <Syntax>lis</Syntax>. We want to add an event listener to each one. When each receives a click, their
+associated text content should log to the console.
+
+```html
+<div class="container">
+  <ul>
+    <li>The Code Creative</li>
+    <li>Event Bubbling and Capturing</li>
+  </ul>
+</div>
+```
+
+So, clicking on the first one would log “The Code Creative” and clicking the second one would log “Event Bubbling and Capturing”.
+
+Your first instinct might be to select and add an event listener to each one separately. Or loop through all of them and add event listeners to each.
+
+However, now that we know, in particular, about event **bubbling**, we can add the event listener _only_
+to the parent <Syntax>div</Syntax> container element.
+
+And, because the callback function associated with this event listener gives us access to the **event object**, we can use the <Syntax>target</Syntax> property on that **event object** to identify exactly which one of the <Syntax>lis</Syntax> received the click.
+
+For this to work, we first get a reference to the parent <Syntax>div</Syntax> container element and then set up our event listener on that container <Syntax>div</Syntax> to listen for a click event.
+
+```js
+const container = document.querySelector("container");
+
+container.addEventListener("click", (event) => {
+  console.log(event.target.textContent);
+});
+```
+
+Remember I said that the callback function to **addEventListener** automatically
+receives the **event object**? Well, one of the properties on that **event object** is the **target** property.
+
+And that **target** property lets us know exactly which of the child elements got clicked.
+
+So, in this case, we can log out <Syntax>event.target.textContent</Syntax> since we want to get the text content
+from each <Syntax>li</Syntax>.
+
+Now, clicking on “The Code Creative” will log “The Code Creative” to the console. And clicking on “Event Bubbling and Capturing” will log “Event Bubbling and Capturing”.
+
+<Image
+  src="/images/blog/javascript-event-bubbling-and-capturing-made-simple/log-to-console.png"
+  width={2636}
+  height={1016}
+  alt="Result of our code in the Chrome Developer Tools console"
+/>
+
+**Event delegation** is frequently used when writing code. Hopefully, now you have a better understanding of exactly how it works.
+
+## Conclusion
+
+In this article, we learned about the three phases of **event propagation**: **capturing**, **target**, and **bubbling**.
+We saw how to control or set the phase to our preference. And we learned how to use it practically via **event delegation**.
+
+Check out the video below to solidify your understanding!
+
+<YouTube id="SZhifL_Gi1E" alt="javascript event bubbling and capturing video" imgSrc="/images/blog/javascript-event-bubbling-and-capturing-made-simple/javascript-event-bubbling-video.jpg" />
+
+<Ad txt="To go further with this topic, check out DOM Events and JavaScript" 
+imgSrc="/images/ads/dom-events-and-javascript-course.jpg"
+imgWidth="240" imgHeight="135" href="https://store.thecodecreative.com/dom-events-and-javascript"
+/>

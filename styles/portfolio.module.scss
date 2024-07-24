@@ -1,0 +1,79 @@
+@import "mixins";
+.Portfolio {
+  &__websites {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+    padding: 40px 0px;
+    font-size: 1.5rem;
+    width: 90%;
+    @include inner-section-spacing;
+
+    @media (min-width: 1200px) {
+      width: 70%;
+    }
+  }
+
+  &__horizontalRow {
+    height: 0.5px;
+    margin: 0 auto;
+    background-color: var(--secondaryText);
+    opacity: 0.3;
+    width: 50%;
+    transition: all 1s;
+    &__trans {
+      width: 65vw;
+      opacity: 1;
+    }
+  }
+
+  &__heading {
+    background: #1f062c no-repeat center;
+    background-color: var(--mainPurple);
+    background-size: cover;
+    background-blend-mode: screen;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media (min-width: 960px) {
+      height: 400px;
+    }
+  }
+
+  &__title {
+    color: var(--secondaryRed);
+    font-weight: 700;
+    font-size: 4rem;
+    text-shadow: -2px 2px 2px #5e3a3a63;
+  }
+
+  &__subheading {
+    color: var(--secondaryRed);
+    font-size: 2rem;
+  }
+
+  &__headerWrapper {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2% 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  &__websitesWrapper {
+    text-align: center;
+  }
+
+  &__wrapperHeading {
+    font-family: "IBM Plex Sans", sans-serif;
+    color: #3f224d;
+    @include section-spacing;
+    font-size: 3.2rem;
+    font-weight: 900;
+  }
+}

@@ -1,0 +1,289 @@
+---
+title: How to Change CSS Background Image Opacity [But Not the Text!]
+date: January 11, 2023
+description: How to change CSS background image opacity without changing the foreground text
+thumbnailUrl: "/images/blog/how-to-change-css-bg-image-opacity/how-to-change-bg-image-opacity-tutorial.jpg"
+altText: "How to Change CSS Background Image Opacity [But Not the Text!]"
+author: "Gregg Fine"
+tags: ["css", "web-development"]
+url: "how-to-change-css-background-image-opacity-without-changing-the-text"
+---
+
+## Introduction
+
+
+Have you ever had that annoying situation where you can't get your foreground
+text to contrast enough with your background image?
+
+<Image
+  src="/images/blog/how-to-change-css-bg-image-opacity/low-contrast-image.png"
+  width={600}
+  height={278}
+  layout="responsive"
+  alt="example of low contast between foreground text and background image "
+/>
+
+<br />
+
+So what do you do?
+Well, you probably come into the **CSS** rule that holds the background
+image and try lowering its opacity.
+
+But then, lo and behold, you notice that the foreground text opacity has also been reduced. 😠
+
+<Image
+  src="/images/blog/how-to-change-css-bg-image-opacity/lower-contrast-image.png"
+  width={600}
+  height={278}
+  layout="responsive"
+  alt="lowering the background image's opacity also lowers the nested text's opacity"
+/>
+
+Let's figure out a solution to this common conundrum!
+
+<hr />
+
+## Why Does This Problem Occur?
+
+Notice in the **HTML** for this example that the **h1** is nested inside the **section** element.
+
+```html
+<body>
+  <section>
+    <h1>WINTER MADNESS</h1>
+  </section>
+</body>
+```
+
+The problem occurs because this **h1** _inherits_ its opacity from the **CSS** rule for the **section**.
+
+So, in the **CSS**, when we lower the **section** element's opacity, we're 
+also lowering the opacity of the **h1**.
+
+```css
+section {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-image: url("images/pexels-magda-ehlers-714482.jpg");
+  background-size: cover;
+  opacity: 0.3;
+}
+
+h1 {
+  color: #fff;
+}
+```
+
+Therefore, we need to sever this inheritance connection!
+
+<hr />
+
+## Finding the Solution With Pseudo-Elements
+
+To solve this problem, let's work on putting those background image properties onto a [pseudo-element](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements).
+(_pseudo-elements allow you to style specific parts of an element_).
+
+We'll use the **before** pseudo-element and apply it to the **section** rule.
+The **before** pseudo-element will act as the first child element of the **section**.
+
+Let's set it to have a **content** property with the value of an empty string. 
+
+```css
+section {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-image: url("images/pexels-magda-ehlers-714482.jpg");
+  background-size: cover;
+}
+
+section::before {
+  content: "";
+}
+
+h1 {
+  color: #fff;
+}
+```
+<br />
+
+We can see that pseudo-element in Google Chrome's developer console.
+<Image
+  src="/images/blog/how-to-change-css-bg-image-opacity/pseudo-element-in-the-console.png"
+  width={600}
+  height={313}
+  layout="responsive"
+  alt="examining the pseudo-element in the developer console"
+/>
+
+<br />
+<br />
+
+Now, let's take the background image properties off the **section** element and put them on the **before** pseudo-element.
+
+```css
+section {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+section::before {
+  background-image: url("images/pexels-magda-ehlers-714482.jpg");
+  background-size: cover;
+  content: "";
+}
+
+h1 {
+  color: #fff;
+}
+```
+
+<hr />
+
+## Sizing and Positioning the Pseudo-Element
+
+Before we can see this pseudo-element in the viewport though, we'll need it to fill out the width and height of the parent **section** element.
+To accomplish this, we'll give it a **position: absolute**.
+
+```css
+section::before {
+  background-image: url("images/pexels-magda-ehlers-714482.jpg");
+  background-size: cover;
+  content: "";
+  position: absolute;
+}
+```
+<br />
+
+Typically, an element with **position: absolute**, needs to be set it in relation to a parent element.
+Since we want to set it in relation to the **section** element, we'll give the **section** rule a **position: relative**.
+
+```css
+section {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+```
+<br />
+
+Now, we need to define our top, right, bottom, and left settings for this absolutely positioned pseudo-element.
+
+To do this all at once, we can use the [inset](https://developer.mozilla.org/en-US/docs/Web/CSS/inset) property and set it to a value of zero.
+
+```css
+section {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+section::before {
+  background-image: url("images/pexels-magda-ehlers-714482.jpg");
+  background-size: cover;
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+```
+
+<br />
+<br />
+
+Now you'll see the background image magically appear in the viewport! ✨✨✨
+
+<Image
+  src="/images/blog/how-to-change-css-bg-image-opacity/foreground-text-not-visible.png"
+  width={600}
+  height={276}
+  layout="responsive"
+  alt="background image but no visible foreground text"
+/>
+
+<br />
+
+But hold on...don't get too excited just yet. Where's the **h1**? 🤔
+
+<hr />
+
+## Creating a Stacking Context for the H1 Text
+
+The **h1** is currently getting hidden in the stacking order. This is because the **section** and **section::before**
+pseudo-element have their positions set to **relative** and **absolute**.
+
+Fortunately, we can remedy this with a handy property called [isolation](https://developer.mozilla.org/en-US/docs/Web/CSS/isolation).
+
+If we set **isolation**, on the **h1**, to have a value of **isolate**, we can create a new stacking context.
+That will get the **h1** out in front of those other elements.
+
+```css
+h1 {
+  color: #fff;
+  isolation: isolate;
+}
+```
+<br />
+
+And now, with the **h1** visible, we can lower the opacity of the background image _independently_ from the text.
+
+Also, in the **section** rule, setting a background color of black(#000) helps improve the contrast between background and foreground as the pseudo-element's opacity is lowered.
+
+```css
+section {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  background-color: #000;
+}
+
+section::before {
+  background-image: url("images/pexels-magda-ehlers-714482.jpg");
+  background-size: cover;
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+}
+
+h1 {
+  color: #fff;
+  isolation: isolate;
+}
+```
+
+<Image
+  src="/images/blog/how-to-change-css-bg-image-opacity/good-contrast-image.png"
+  width={600}
+  height={284}
+  layout="responsive"
+  alt="good contrast between background image and foreground text"
+/>
+
+<br />
+
+Experiment by tweaking the opacity value in the pseudo-element and the background color value in the **section** element to taste.
+
+---
+
+<br />
+
+If you're more of a visual learner, check out the video version of this article:
+
+<YouTube
+  id="pyPfpXaH2kY"
+  alt="How to Change CSS Background Image Opacity video"
+  imgSrc="/images/blog/how-to-change-css-bg-image-opacity/how-to-change-bg-image-opacity-tutorial.jpg"
+/>
+
+<Ad
+  txt="To take your web development skills to the next level, check out DOM Events and JavaScript"
+  imgSrc="/images/ads/dom-events-and-javascript-course.jpg"
+  imgWidth="240"
+  imgHeight="135"
+  href="https://store.thecodecreative.com/dom-events-and-javascript"
+/>

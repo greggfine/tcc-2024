@@ -1,0 +1,470 @@
+---
+title: GSAP ScrollTrigger | Start and End
+date: "November 26, 2022"
+description: Get started with GSAP's ScrollTrigger and create your first scroll-based animation!
+thumbnailUrl: "/images/blog/gsap-scrolltrigger-start-and-end/scolltrigger-start-and-end-tutorial.jpg"
+altText: "GSAP ScrollTrigger Start and End"
+author: "Gregg Fine"
+tags: ["gsap", "scrolltrigger", "scrollytelling"]
+url: "gsap-scrolltrigger-start-and-end"
+---
+
+## Introduction
+
+In this second part of the [**GSAP ScrollTrigger**](https://greensock.com/docs/v3/Plugins/ScrollTrigger) series, we'll examine the **start** and **end** properties.
+
+In [part one](https://www.thecodecreative.com/blog/scrolltrigger-getting-started), we saw how a target element can be animated when a trigger element first enters the viewport.
+
+But what if we want that target element's animation to start, for example, when:
+
+- the top of the trigger element gets to the center of the viewport?
+- the top of the trigger element is 200 pixels from the top of the viewport?
+- the middle of the trigger element is 30% from the top of the viewport?
+
+The **start** and **end** properties allow us to achieve this type of flexibility.
+
+## Accessing ScrollTrigger Properties
+
+We'll start with this initial HTML setup for our example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="div1"></div>
+    <div class="div2">
+      <div class="square"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/ScrollTrigger.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+And here is our initial CSS for the style.css file:
+
+```css
+body {
+  margin: 0;
+}
+
+.div1,
+.div2 {
+  height: 100vh;
+}
+
+.div1 {
+  background-color: pink;
+}
+.div2 {
+  background-color: salmon;
+}
+.square {
+  width: 150px;
+  height: 150px;
+  background-color: fuchsia;
+}
+.square2 {
+  margin-top: 300px;
+  width: 150px;
+  height: 150px;
+  background-color: blue;
+}
+```
+
+In app.js, instead of assigning the <Syntax>scrollTrigger</Syntax> property to a string, we'll assign its value to an object.
+
+This will allow us to access many additional and helpful **ScrollTrigger** properties!
+
+One of those properties is called <Syntax>trigger</Syntax>.
+
+As you might guess, we'll assign the element we want to act as the trigger to it.
+
+In our case, this will be the <Syntax>div</Syntax> with the class of <Syntax>square</Syntax>.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: { trigger: ".square" },
+});
+```
+
+## The Start Property
+
+At the moment, the animation triggers when the target element first enters the viewport.
+(_This is the default behavior, by the way_).
+
+We're interested, however, in being able to trigger the animation at a point of our choosing.
+
+To do this, we'll use the <Syntax>start</Syntax> property on the <Syntax>scrollTrigger</Syntax> object.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: { trigger: ".square", start: //...  }
+});
+```
+
+There are a few different ways to set its value:
+
+- as a number
+- as a string
+- as a function
+
+To have the animation start once the viewport has scrolled 400 pixels, for example, a numeric value can be used. (_Note that "pixels" is implied_)
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: { trigger: ".square", start: 400 },
+});
+```
+
+If we want to use string values for the <Syntax>start</Syntax> property, we have several options:
+
+- keywords ("top", "center", "bottom")
+- percentages
+- pixels
+
+In this example, we are using the keywords <Syntax>top</Syntax> and <Syntax>center</Syntax>.
+
+The first value, <Syntax>top</Syntax>, represents the part of the trigger which will initiate the animation once it meets the second value, <Syntax>center</Syntax>.
+
+That second value represents a location in the viewport.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: { trigger: ".square", start: "top center" },
+});
+```
+
+## Using Markers
+
+**GSAP** also provides a handy property called <Syntax>markers</Syntax>.
+
+Markers is a visual aid that helps us set start and end points.
+
+Let's set it to a boolean value of <Syntax>true</Syntax>.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: { trigger: ".square", start: "top center", markers: true },
+});
+```
+
+We can now see <Syntax>start</Syntax>, <Syntax>end</Syntax>, <Syntax>scroller-start</Syntax>, and <Syntax>scroller-end</Syntax> markers on the right side of the viewport.
+
+<Image
+  src="/images/blog/gsap-scrolltrigger-start-and-end/markers.jpg"
+  width={600}
+  height={333}
+  layout="responsive"
+  alt="scrolltrigger markers"
+/>
+
+<br />
+
+The <Syntax>start</Syntax> marker indicates the top of the trigger element.
+
+Although we haven't explicitly set the <Syntax>end</Syntax> property, we also see an "end" marker.
+(_This is because it defaults to the end of the trigger element_).
+
+The <Syntax>scroller-start</Syntax> marker is in the center of the viewport.
+This corresponds to the second value of <Syntax>center</Syntax> we gave to the <Syntax>start</Syntax> property.
+
+And the <Syntax>scroller-end</Syntax> marker defaults to the top of the viewport.
+
+<br />
+
+We also mentioned using percentages and pixel values for the <Syntax>start</Syntax> property.
+
+Let's alter the <Syntax>start</Syntax> values with percentages and pixels to see how the markers are affected.
+
+Instead of <Syntax>top</Syntax> and <Syntax>center</Syntax>, let's use <Syntax>top</Syntax> and <Syntax>30%</Syntax>.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: { trigger: ".square", start: "top 30%", markers: true },
+});
+```
+
+We can see the <Syntax>scroller-start</Syntax> is positioned <Syntax>30%</Syntax> down from the top of the viewport.
+
+<Image
+  src="/images/blog/gsap-scrolltrigger-start-and-end/markers-30-percent.png"
+  width={600}
+  height={363}
+  layout="responsive"
+  alt="scrolltrigger markers at 30 percent"
+/>
+
+Now, the animation will start when the top of the trigger element reaches that 30% position.
+
+## Customizing the Markers
+
+To fine-tune the appearance of the markers, we can use an object rather than a simple boolean value.
+
+In this example, I've altered the start and end colors, font-size, weight, and indent value.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: {
+    trigger: ".square",
+    start: "top 30%",
+    markers: {
+      startColor: "purple",
+      endColor: "fuchsia",
+      fontSize: "4rem",
+      indent: 100,
+      fontWeight: "bold",
+    },
+  },
+});
+```
+
+<Image
+  src="/images/blog/gsap-scrolltrigger-start-and-end/customized-markers.png"
+  width={600}
+  height={354}
+  layout="responsive"
+  alt="customizing scrolltrigger markers"
+/>
+
+Altering the look of these markers can be helpful in development when experimenting with animations.
+(_Make sure to disable them in production!_)
+
+## The End Property
+
+Let's explore the <Syntax>end</Syntax> property now.
+
+To illustrate how it works, we'll introduce an additional property called <Syntax>toggleClass</Syntax>.
+
+The class assigned to <Syntax>toggleClass</Syntax> will be toggled on the target element once the trigger element has fired.
+(_We'll set it's value to be a class which we'll create in our CSS_).
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: {
+    trigger: ".square",
+    start: "top 30%",
+    markers: true,
+    toggleClass: "red",
+  },
+});
+```
+
+```css
+body {
+  margin: 0;
+}
+
+.div1,
+.div2 {
+  height: 100vh;
+}
+
+.div1 {
+  background-color: pink;
+}
+.div2 {
+  background-color: salmon;
+}
+.square {
+  width: 150px;
+  height: 20vh;
+  background-color: fuchsia;
+}
+.red {
+  background-color: red;
+}
+```
+
+Let's comment out the <Syntax>x</Syntax> property and add an <Syntax>end</Syntax> property to the <Syntax>scrollTrigger</Syntax> object.
+
+The <Syntax>end</Syntax> property will set the point at which the <Syntax>scrollTrigger</Syntax> has finished or ended.
+And, in this case, the square element will toggle back to its background-color of fuchsia.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  //   x: 700,
+  duration: 3,
+  scrollTrigger: {
+    trigger: ".square",
+    start: "top 30%",
+    end: "center 20%",
+    markers: true,
+    toggleClass: "red",
+  },
+});
+```
+
+The <Syntax>end</Syntax> property works in the same way as the <Syntax>start</Syntax> property.
+
+It's values can be a:
+
+- number
+- string
+- function
+
+In our example, when the center of the trigger element reaches twenty percent down from the top of the viewport,
+the <Syntax>scrollTrigger</Syntax> will be ended.
+
+With our markers set to <Syntax>true</Syntax>, we can see these start and end points.
+
+The <Syntax>start</Syntax> marker aligns with the top of the trigger element.
+
+The <Syntax>end</Syntax> marker aligns with the center of the trigger element.
+
+The <Syntax>scroller-start</Syntax> marker is 30% down from the top of the viewport.  
+(_This corresponds to the second value we gave to the <Syntax>start</Syntax> property_).
+
+And the <Syntax>scroller-end</Syntax> marker is 20% down from the top of the viewport.  
+(_This corresponds to the second value we gave to the <Syntax>end</Syntax> property_).
+
+So, when the <Syntax>start</Syntax> meets the <Syntax>scroller-start</Syntax>, our square will toggle to red.
+
+When the <Syntax>end</Syntax> meets the <Syntax>scroller-end</Syntax>, the square will toggle back to fuchsia.
+
+## Using a Function for the Start Property
+
+Now, let's look at how we can set the values of the <Syntax>start</Syntax> or <Syntax>end</Syntax> properties as a function.
+
+Let's assign an arrow function as the value of the <Syntax>end</Syntax> property and return a template string:
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  //   x: 700,
+  duration: 3,
+  scrollTrigger: {
+    trigger: ".square",
+    start: "top 30%",
+    end: () => ``,
+    markers: true,
+  },
+});
+```
+
+Our goal will be to set the <Syntax>end</Syntax> trigger to be 150 pixels from the starting point.
+
+So, in our function, we'll use <Syntax>document.querySelector</Syntax> to get a reference to the **div** with class of square.
+
+Then, we'll use the **offsetHeight** property to get the pixel value of that square.
+
+Finally, we'll use the [**addition assignment operator**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Addition_assignment) to assign the offset value to the <Syntax>end</Syntax> property.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  //   x: 700,
+  duration: 3,
+  scrollTrigger: {
+    trigger: ".square",
+    start: "top 30%",
+    end: () => `+=${document.querySelector(".square").offsetHeight}`,
+    markers: true,
+  },
+});
+```
+
+What's cool is that we can now give this height a dynamic responsive value.
+
+For example, instead of setting the <Syntax>square</Syntax> class to have a height of 350px, let's set it to a responsive value of 20vh.
+(_vh is **viewport height units**_)
+
+```css
+body {
+  margin: 0;
+}
+
+.div1,
+.div2 {
+  height: 100vh;
+}
+
+.div1 {
+  background-color: pink;
+}
+.div2 {
+  background-color: salmon;
+}
+.square {
+  width: 150px;
+  height: 20vh;
+  background-color: fuchsia;
+}
+.red {
+  background-color: red;
+}
+```
+
+Now, when the height of the viewport changes, the **ScrollTrigger's** endpoint will update itself to the current height of the square.
+
+## Conclusion
+
+In this article, we learned about **ScrollTrigger's** <Syntax>start</Syntax> and <Syntax>end</Syntax> properties.
+
+We learned how to use an object as the <Syntax>scrollTrigger</Syntax> property's value to access additional properties.
+
+We also saw how we could use markers to get a visual representation of the <Syntax>start</Syntax> and <Syntax>end</Syntax> points.
+
+---
+
+If you're more of a visual learner, check out the video version of this article:
+
+<YouTube
+  id="ZCtXfJMdgE0"
+  alt="gsap scrolltrigger start and end video"
+  imgSrc="/images/blog/gsap-scrolltrigger-start-and-end/scrolltrigger-start-and-end-video.jpg"
+/>
+
+<Ad
+  txt="To go further with GSAP, check out Scrollytelling 101!"
+  imgSrc="/images/ads/scrollytelling-101-course.jpg"
+  imgWidth="240"
+  imgHeight="152"
+  href="https://store.thecodecreative.com/scrollytelling"
+/>

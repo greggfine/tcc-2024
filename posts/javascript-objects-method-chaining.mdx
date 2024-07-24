@@ -1,0 +1,267 @@
+---
+title: This Is Why JavaScript Method Chaining Is So Useful
+date: "October 2, 2022"
+description: Understand Method Chaining aka Function Chaining in JavaScript.
+thumbnailUrl: "/images/blog/javascript-objects-method-chaining/javascript-object-method-chaining-tutorial.jpg"
+altText: "JavaScript method chaining tutorial"
+author: "Gregg Fine"
+tags: ["web-audio-api", "javascript"]
+url: "javascript-objects-method-chaining"
+---
+
+Let's look at a technique called [Method Chaining](https://www.geeksforgeeks.org/method-chaining-in-javascript/), aka  **Function Chaining**,
+and find out how it can make our code more concise and readable.
+
+For the examples in this article, we'll work with JavaScript's class syntax in conjunction with the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
+
+(The **Web Audio API** is native to JavaScript, available in the browser, and allows the creation and manipulation of sound sources.)
+
+## Let's Write Some Code!
+
+Let's start by setting up our **index.html** file:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Web Audio API</title>
+  </head>
+  <body>
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+Working with the **Web Audio API** requires us to first instantiate an Audio Context. (We'll do that in the first line of our **app.js** file).
+
+```js
+const ctx = new (window.AudioContext || window.webkitAudioContext)();
+```
+
+Then, we want to use the class syntax to create sounds that we can start and stop playing.
+
+<br />
+
+We'll create a class called <Syntax>Sound</Syntax> and build out its [constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor). (_The constructor is a function that runs when an instance gets created. It assigns various properties to the object instance._)
+
+```js
+class Sound {
+  constructor() {}
+}
+```
+
+Before we flesh this out further, it's probably worth looking at how this class is ultimately used to create an instance. (That will give context for the rest of the explanation).
+
+{" "}
+
+<br />
+
+So, to create an instance of a class, we invoke that class using the <Syntax>new</Syntax> keyword like so.
+
+```js
+new Sound();
+```
+
+And if we pass arguments in, they'll correspond to the parameters that the constructor function receives.
+
+<br />
+
+So, without doing anything else, if we invoke the <Syntax>Sound</Syntax> class with the <Syntax>new</Syntax> keyword and log it to the console, we see that we get an empty <Syntax>Sound</Syntax> object.
+
+```js
+console.log(new Sound());
+```
+
+<Image
+  src="/images/blog/javascript-objects-method-chaining/method-chaining_empty-object.png"
+  width={600}
+  height={126}
+  layout="responsive"
+  alt="examining a JavaScript class invoked with the 'new' keyword in the Chrome Dev Tools console"
+/>
+
+<br />
+<br />
+
+Let's go back now and flesh out the **constructor** to give this object some properties.
+
+As I said before, the goal is to create a sound that we can start and stop playing.
+We can do that by calling the <Syntax>createOscillator</Syntax> method on the **Audio
+Context**. So we'll do that here and assign it to <Syntax>this.osc</Syntax> (_short
+for Oscillator_).
+
+```js
+class Sound {
+  constructor() {
+    this.osc = ctx.createOscillator();
+  }
+}
+```
+
+If we log that to the console, our instance object is no longer empty. We now have an **OscillatorNode** property on our object. And this **OscillatorNode** is _itself_ an object with various properties.
+
+<Image
+  src="/images/blog/javascript-objects-method-chaining/method-chaining_object-w-various-properties.png"
+  width={600}
+  height={226}
+  layout="responsive"
+  alt="examining the Web Audio API's OscillatorNode object"
+/>
+
+<br />
+<br />
+We use the <Syntax>this</Syntax> keyword, as in <Syntax>this.osc</Syntax>. The object
+instance created will be what <Syntax>this</Syntax> refers to. And we'll likely want
+to assign the result of invoking this **Sound** class to a variable.
+
+For example, we can create <Syntax>const</Syntax> <Syntax>sound1</Syntax> and assign that to equal the invocation of **new Sound**. Then, we can also create <Syntax>const</Syntax> <Syntax>sound2</Syntax> and assign that to equal the invocation of **new Sound**.
+
+```js
+const sound1 = new Sound();
+const sound2 = new Sound();
+```
+
+And then, if we log each of these, we can see that we get two separate instances of the **Sound** object.
+
+<Image
+  src="/images/blog/javascript-objects-method-chaining/method-chaining_separate-instances.png"
+  width={600}
+  height={68}
+  layout="responsive"
+  alt="viewing two separate instances of a JavaScript class in the console"
+/>
+
+<br />
+<br />
+
+By using the <Syntax>this</Syntax> keyword when setting up our class, the object that gets returned from instantiating that class is what the <Syntax>this</Syntax> keyword refers to. And so if we assign this returned object to a variable, that variable is now what the <Syntax>this</Syntax> keyword refers to.
+
+<br />
+Going back to our Constructor, we'll also need to connect the oscillator to the Audio
+Context's **destination**. The **destination** represents your computer's audio output.
+
+```js
+class Sound {
+  constructor() {
+    this.osc = ctx.createOscillator();
+    this.osc.connect(ctx.destination);
+  }
+}
+```
+
+To make the sound audible, there are two **Web Audio API** methods available. Thse are, appropriately, called <Syntax>start</Syntax> and <Syntax>stop</Syntax>.
+
+And we'll write these as methods on our <Syntax>Sound</Syntax> class.
+
+<br />
+
+First, we'll write the <Syntax>playSound</Syntax> method.
+
+And that method will call <Syntax> this.osc.start();</Syntax>
+
+```js
+class Sound {
+  constructor() {
+    this.osc = ctx.createOscillator();
+    this.osc.connect(ctx.destination);
+  }
+  playSound() {
+    this.osc.start();
+  }
+}
+```
+
+**NOTE**: if you're trying this yourself, turn your speakers down to a reasonable volume level before you try to play the sound.
+
+<br />
+
+Since we've instantiated a new **Sound** and assigned it to a variable called <Syntax> sound1 </Syntax>
+, we can call the <Syntax>playSound</Syntax> method on <Syntax>sond1</Syntax>. And
+when we save the file, we should hear a tone, which is a sine wave.
+
+```js
+sound1.playSound();
+```
+
+Now here is where **Method Chaining** comes into play!
+
+Since we know that invoking new **Sound** returns an object, instead of writing <Syntax>sound1.playSound</Syntax> on a new line, we can chain it onto the end of the invocation of <Syntax>new Sound</Syntax> using [dot notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors).
+
+```js
+const sound1 = new Sound().playSound();
+```
+
+If we save our file, we should hear our sound playing like before.
+
+<br />
+
+Let's try to create the <Syntax>stopSound</Syntax> method now. I'll use a JavaScript <Syntax> setTimeout </Syntax>
+to stop the oscillator from playing after 1 second, represented as 1000 milliseconds.
+
+```js
+class Sound {
+  constructor() {
+    this.osc = ctx.createOscillator();
+    this.osc.connect(ctx.destination);
+  }
+  playSound() {
+    this.osc.start();
+  }
+  stopSound() {
+    setTimeout(() => {
+      this.osc.stop();
+    }, 1000);
+  }
+}
+```
+
+I'm gonna go back and put <Syntax>playSound</Syntax> on its own line, like before, and then, on a new line, I'll call <Syntax>stopSound</Syntax>. So the tone should play and then stop after approximately 1 second.
+
+```js
+const sound1 = new Sound();
+sound1.playSound();
+sound1.stopSound();
+```
+
+Let's make these three lines more concise now using **method chaining**.
+
+As we did before, we can call <Syntax>playSound</Syntax> using dot notation off of <Syntax>newSound</Syntax>. And then we can go ahead and chain <Syntax>stopSound</Syntax> directly after <Syntax>playSound</Syntax>.
+
+```js
+const sound1 = new Sound().playSound().stopSound();
+```
+
+If we now save the file, we can hear the sound keeps playing on and on.
+
+{" "}
+
+<br />
+
+Let's take a look at why it didn't work.
+
+<br />
+
+What we see in the console is <Error>Uncaught TypeError: Cannot read property 'stopSound' of undefined</Error>.
+
+<br />
+Why is it saying <Error>undefined</Error>?
+
+If we look at the <Syntax>playSound</Syntax> method, we can see that it doesn't return anything. It does start _playing_ the sound. However, it returns **undefined**.
+
+So <Syntax>stopSound</Syntax> is trying to determine what the <Syntax>this</Syntax> keyword is referencing. All it sees is **undefined**.
+
+{" "}
+
+<br />
+
+So what we want to do to make this work is to return <Syntax>this</Syntax> from the <Syntax>playSound</Syntax> method. If we do that, <Syntax>stopSound</Syntax> will now have an object with an <Syntax>osc</Syntax> property to reference and can, therefore, go ahead and stop the sound from playing.
+
+## Conclusion
+
+Even though we looked at **method chaining** here through the lens of web audio, this technique can be used all over the place. It's used extensively in the real world in various codebases and libraries.
+
+**To recap**: we started by going over JavaScript's class syntax. We looked at its **constructor** function and the usage of the <Syntax>this</Syntax> keyword. We learned a bit about the **Web Audio API** and, ultimately, saw how **method chaining** can make our code more concise and clean.
+
+
+<YouTube id="uM_-OZCU9-I" alt="javascript objects and method chaining video" imgSrc="/images/blog/javascript-objects-method-chaining/javascript-objects-method-chaining-video.jpg" />

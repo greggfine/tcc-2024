@@ -1,0 +1,259 @@
+---
+title: Choosing JavaScript's Var, Let or Const With Confidence
+date: "September 27, 2022"
+description: With so many ways to declare a variable in JavaScript, how do you know which one to pick?
+thumbnailUrl: "/images/blog/javascript-var-let-const/javascript-var-let-const-tutorial.jpg"
+altText: "Understanding the difference between JavaScript var, let, and const keywords"
+author: "Gregg Fine"
+tags: ["coding", "javascript"]
+url: "javascript-var-let-const"
+---
+
+JavaScript has so many ways to declare variables: <Syntax>var</Syntax>, <Syntax>let</Syntax>, <Syntax>const</Syntax>.
+
+Which one to pick?
+
+This post will clarify the differences between these JavaScript keywords. And once we understand the nuances
+between them, we’ll be on our way to making the right choice.
+
+<Image
+  src="/images/blog/javascript-var-let-const/left-human-hand-2764675-1024x381.jpg"
+  width={650}
+  height={242}
+  layout="responsive"
+  alt="thumbs up response to learning the differences between JavaScript's 'let', 'var', and 'const' keywords"
+/>
+**ES2015 (ES6)** introduced <Syntax>let</Syntax> and <Syntax>const</Syntax> to the
+JavaScript language.
+
+Before **ES2015**, <Syntax>var</Syntax> was the only keyword available for
+holding values.{" "}
+
+## Var
+
+The <Syntax> var </Syntax> keyword, compared to <Syntax>let</Syntax>, and <Syntax>const</Syntax>, has the most
+flexibility.
+
+**It can be redeclared with a new value. Its value can also be updated**.
+
+<br />
+
+To make sure that we're on the same page so far, let's illustrate this with an example.
+
+<br />
+
+If we declare:
+
+```js
+var name = "Frank";
+```
+
+We can then redeclare:
+
+```js
+var name = "Bob";
+```
+
+Now, if we want to update the value assigned to <Syntax>var name</Syntax>, we
+can do:
+
+```js
+name = "Bobby";
+```
+
+<Image
+  src="/images/blog/javascript-var-let-const/var-so-flexible.jpeg"
+  width={622}
+  height={365}
+  layout="responsive"
+  alt="JavaScript's 'var' keyword is flexible like a cat"
+/>
+## Const
+
+Now we can examine the <Syntax>const</Syntax> keyword, which is practically the polar
+opposite of the <Syntax>var</Syntax> keyword.
+
+This is because, unlike <Syntax>var</Syntax>, a <Syntax>const</Syntax> **can’t be
+redeclared nor can it be updated**.
+
+<br />
+
+Let's take a look at an example.
+
+If we declare:
+
+```js
+const name = "Frank";
+```
+
+We're unable to redeclare <Syntax>const name</Syntax>:
+
+```js
+const name = "Bob";
+```
+
+Doing so will result in a [SyntaxError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError) letting us know that <Error>Identifier ‘name’
+has already been declared</Error>.
+
+<br />
+And an attempt to update the assignment of <Syntax>const name</Syntax>:
+
+```js
+name = "Bobby";
+```
+
+will result in a [TypeError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError)<Error> Assignment to constant variable! </Error>
+
+<Image
+  src="/images/blog/javascript-var-let-const/const-tough-cookie.001.jpeg"
+  width={650}
+  height={366}
+  layout="responsive"
+  alt="JavaScript's 'const' keyword is strict because it can't be redeclared or updated"
+/>
+
+<br />
+<br />
+
+One source of confusion is that the thing that is constant is the **binding** of
+the declared <Syntax>const</Syntax> to the value. It's not necessarily that the value itself
+becomes immutable.
+
+When the value assigned is a primitive(string,
+number, boolean, null, undefined, or symbol), the value is immutable. However, when
+the value is an object, like an array, mutation of the value is possible.
+
+<br />
+
+To demonstrate the mutability of an object when declared as a <Syntax> const</Syntax>, we’ll first declare <Syntax>const</Syntax> <Syntax>colors</Syntax> as an Array:
+
+```js
+const colors = [“blue”, “red”, “green”, “yellow”];
+```
+
+We can then <Syntax>push</Syntax>, for example, to this array without problem:
+
+```js
+colors.push(“purple”);
+```
+
+Now the value of <Syntax>const</Syntax> <Syntax>colors</Syntax> is:
+
+```js
+[“blue”, “red”, “green”, “yellow”, “purple”]
+```
+
+See, that array was mutable after all. 🙂
+
+<br />A good rule of thumb for <Syntax>const</Syntax> is to use <Syntax>
+  const
+</Syntax> when we have data we _do not expect to rebind_. Not only does it help
+prevent accidental reassignment, but it also helps communicate our intent for
+both our future selves as well as others who may read our code.
+
+## Let
+
+Now, the JavaScript <Syntax>let</Syntax> keyword falls in the middle of <Syntax>var</Syntax> and <Syntax>const</Syntax> in terms
+of flexibility. Because, unlike <Syntax>var</Syntax>, **redeclaration is not possible**. Like <Syntax>var</Syntax>,
+however, **it is possible to update**.
+
+<br />
+
+Let's look at <Syntax>let</Syntax> in the context of our previous examples.
+
+If we declare:
+
+```js
+let name = "Frank";
+```
+
+We're unable to redeclare <Syntax>let</Syntax> <Syntax>name</Syntax>:
+
+```js
+let name = "Bob";
+```
+
+The result is a **SyntaxError** letting us know that <Error>Identifier ‘name’ has
+already been declared</Error>
+
+<br />
+Updating the assignment of <Syntax>let</Syntax> <Syntax>name</Syntax>, however,
+is valid:
+
+```js
+name = "Bobby";
+```
+
+## Scope
+
+We’ve seen how binding works with <Syntax>var</Syntax>, <Syntax>let</Syntax>, and <Syntax>const</Syntax>.
+
+Another big idea to discuss to help clarify the differences between these keywords is [Scope](https://developer.mozilla.org/en-US/docs/Glossary/Scope).
+
+Before **ES2015**, there were two kinds of scope: **Global** and **Function**.
+
+Now, however, we have “**Block Scope**” as well.
+
+Anytime we have curly brackets, as in an **If** statement, **Block Scope** is indicated. (Some other places to find <Syntax>Block Scope</Syntax> are with the <Syntax>For</Syntax>, <Syntax>While</Syntax>, and <Syntax>Do</Syntax> keywords).
+
+The idea behind scope, in general, is that it lets us know where variables are available within our program.
+
+So, a variable assigned within a function, for example, is said to be locally scoped to that particular function.
+
+We can think of the curly brackets as a fence or prison walls within which it confines locally scoped variables.
+
+<Image
+  src="/images/blog/javascript-var-let-const/locally-scoped.001.jpeg"
+  width={650}
+  height={366}
+  layout="responsive"
+  alt="The 'let' and 'const' keywords are block scoped. It's like they're behind prison walls because they can't be accessed from their outer environment."
+/>
+
+<br />
+<br />
+
+Both <Syntax>const</Syntax> and <Syntax>let</Syntax> are block scoped. And the benefit of block scoping is that
+it prevents these variables from being accessible from their outer
+environment.
+
+Usually, a <Syntax>var</Syntax> declared within a function is only accessible
+within that function.
+
+Take the following function as an example:
+
+```js
+function sayName() {
+    var name = “Frank”;
+    console.log(name);
+}
+```
+
+If we then try to log **name** in the global scope, we get a
+[ReferenceError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError): <Error>name is not defined</Error>. Here, we can say that <Syntax>var</Syntax> is function
+scoped.
+
+Block scoping, however, is like a more specific level of scope.
+
+Take this example:
+
+```js
+function sayName() {
+  var name = "Frank";
+  {
+    let color = "red";
+  }
+  console.log(name);
+  console.log(color);
+}
+```
+
+Although this example isn't too practical, it illustrates the point.
+
+In this case, once we invoke <Syntax>sayName</Syntax>, we see “Frank” printed to the console.
+
+However, we get a ReferenceError: <Error>color is not defined</Error>.
+
+As we can see, since we used the <Syntax>let</Syntax> keyword when declaring <Syntax>color</Syntax>, <Syntax>color</Syntax> is block scoped.
+
+Therefore, it's only available within the curly brackets in which it resides.{" "}

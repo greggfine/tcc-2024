@@ -1,0 +1,32 @@
+[
+  {
+    "href": "/",
+    "name": "Home",
+    "pathname": "/"
+  },
+  {
+    "href": "/portfolio",
+    "name": "Portfolio",
+    "pathname": "/portfolio"
+  },
+  {
+    "href": "/courses",
+    "name": "Courses",
+    "pathname": "/courses"
+  },
+  {
+    "href": "https://store.thecodecreative.com/",
+    "name": "Store",
+    "pathname": "/store"
+  },
+  {
+    "href": "/blog",
+    "name": "Blog",
+    "pathname": "/blog"
+  },
+  {
+    "href": "/contact",
+    "name": "Contact",
+    "pathname": "/contact"
+  }
+]

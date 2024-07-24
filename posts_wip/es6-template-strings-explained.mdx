@@ -1,0 +1,79 @@
+---
+title: ES6 Template Strings Explained
+date: "September 29, 2022"
+description: ES6 template strings explained
+thumbnailUrl: "/images/blog/es6-template-strings-explained/blur-bright-close-up-416381-1024x678__1594068755_108.53.93.92.jpg"
+author: "Gregg Fine"
+tags: ["coding", "javascript"]
+---
+
+In this article, we'll learn about the [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) feature introduced in **ES6**.
+
+<br />
+
+A **template string** is structured as follows:
+
+<SyntaxHighlighter language="javascript">{`var firstName = “Gregg”;
+\`My name is \${firstName}.\``}</SyntaxHighlighter>
+
+There are two things to take notice of here:
+
+- We use back-ticks `` to enclose the template string(as opposed to traditional single or double quotes).
+- We use the dollar symbol followed by curly brackets (also referred to as a **placeholder**).
+  Variables or expressions placed within these curly brackets will be evaluated.
+
+As we can see, one of the benefits of **template strings** is that they allow us to interpolate strings with variables and expressions in a cleaner, more elegant manner.
+
+In this way, they add a bit of [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) to our code.
+
+<br />
+
+Let’s start with a comparison between the traditional approach to string interpolation and the newer template string approach:
+
+<SyntaxHighlighter language="javascript">
+  {`
+var color = “blue”;
+console.log("My favorite color is " + color + “.");
+	`}
+</SyntaxHighlighter>
+
+This results in: **My favorite color is blue**.
+
+<br />
+
+A few things that make this traditional approach feel clunky are:
+
+- Whenever we interpolate a variable, we need to continually open and close our string with quotes and then add on that variable with the plus operator.
+- Also, using spaces and punctuation marks feels a bit awkward. In the above example, we had to remember to add a space after the word “is” and then use another pair of double quotes just to get that period in at the end.
+
+So, we can say that this traditional approach is a bit difficult to read and a bit difficult to grok.
+
+Now, let’s contrast this with the newer template string approach:
+
+<SyntaxHighlighter language="javascript">
+  {`
+var color = “blue”;
+	`}
+</SyntaxHighlighter>
+
+In my opinion, template strings are easier to write and understand. We only need to think about two things: the overall string enclosed in back-ticks and whatever variables(or expressions) we want to interpolate.
+
+## Multiline Strings
+
+Another place where template strings are beneficial is when working with multiline strings.
+
+Traditionally, getting part of a string to appear on a new line requires using the newline character: \n.
+
+For example, to make the word “blue” appear on a new line would require:
+
+console.log(“My favorite color is \nblue.”)
+
+Now, however, the newline character isn't necessary to create a line break.
+
+All we need to do is write:
+
+<SyntaxHighlighter language="javascript">
+  {`
+    `}
+
+</SyntaxHighlighter>

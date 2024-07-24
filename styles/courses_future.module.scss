@@ -1,0 +1,49 @@
+.buttons {
+	.btn {
+		border-radius: 20%;
+		background: #fff;
+		padding: 10px;
+		margin-right: 10px;
+	}
+}
+
+
+.header {
+	text-align: center;
+	font-weight: 900;
+}
+
+.hero {
+	text-align: center;
+	color: #fff;
+	height: 400px;
+	background: #aaa;
+	font-weight: 900;
+	display: grid;
+	place-items: center;
+}
+
+.videocourses {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	padding: 100px;
+}
+
+.plans {
+	text-align: center;
+	color: #fff;
+	height: 400px;
+	background: #777;
+	font-weight: 900;
+	display: grid;
+	place-items: center;
+}
+
+.whatyouget {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	padding: 100px;
+
+}

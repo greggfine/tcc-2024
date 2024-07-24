@@ -1,0 +1,276 @@
+---
+title: preventDefault Explained in JavaScript
+date: "October 12, 2022"
+description: JavaScript's preventDefault method allows you to prevent the browser's default behavior when events are fired.
+thumbnailUrl: "/images/blog/prevent-default-explained-in-javascript/prevent-default-tutorial.jpg"
+altText: "JavaScript preventDefault tutorial"
+author: "Gregg Fine"
+tags: ["coding", "javascript"]
+url: "prevent-default-explained"
+---
+
+If you work with JavaScript events before, you've likely come across the [**preventDefault**](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) method.
+
+In this article, we'll learn what **preventDefault** is and how we can use it in our code.
+
+## Default Browser Events
+
+First of all, let's talk about browser events in general. You see, most of the events that occur in the browser have default actions associated with them.
+
+For example, let's say we had an **anchor** tag for "wikipedia.org"
+
+```html
+<a href="https://www.wikipedia.org">Wikipedia</a>
+```
+
+<Image
+  src="/images/blog/prevent-default-explained-in-javascript/wiki.png"
+  width={914}
+  height={374}
+  layout="responsive"
+  alt="clicking on an anchor tag for wikipedia"
+/>
+
+When we click on it, it takes us to wikipedia.org.
+No surprise there!
+
+For that action to happen, however, notice that we didn't have to do anything special.
+All we did was set up an **anchor** tag with an <Syntax>href</Syntax> attribute.
+We didn't explicitly create an event handler for this.
+
+The browser has a _default_ action for **anchor** tags.
+And that default action takes us to the link specified by the <Syntax>href</Syntax>.
+
+<br />
+
+There are, of course, other default actions that the browser executes for various event types.
+
+For example, by default, clicking on an input of type **checkbox** toggles it on and off.
+
+```html
+<a href="https://www.wikipedia.org">Wikipedia</a> <input type="checkbox" />
+```
+
+<Image
+  src="/images/blog/prevent-default-explained-in-javascript/checkbox-1.png"
+  width={1251}
+  height={360}
+  layout="responsive"
+  alt="unchecked input of type 'checkbox'"
+/>
+
+<br />
+
+<Image
+  src="/images/blog/prevent-default-explained-in-javascript/checkbox-2.png"
+  width={1113}
+  height={383}
+  layout="responsive"
+  alt="checked input of type 'checkbox'"
+/>
+
+Again, notice we did nothing explicitly to enable that.
+
+<br />
+
+Another example could be input fields.
+When the user types into an input field, text characters get added, yet we don't create that behavior ourselves.
+
+And, perhaps, the most common browser default is on a form submission.
+When a user clicks the **submit** button in a form, that form, by default, takes us to the URL value of its **action** attribute.
+
+## Overriding Default Behavior
+
+Sometimes, though, we don't want the default action the browser gives us when an event is fired.
+
+Instead, we want to implement some custom behavior or functionality.
+
+Let's see how we can do that in our code using **preventDefault**.
+
+For this example, let's write some JavaScript.
+
+Let's listen for an event on the **window** object. That event will be the **contextmenu** event.
+
+```js
+window.addEventListener("contextmenu", (e) => {
+  console.log(e);
+});
+```
+
+Here we're using the **addEventListener** method to register an event handler which will be invoked
+when the **contextmenu** event type is fired.
+
+The **contextmenu**, fired by right-clicking the mouse or with a control-click(_on a Mac_), looks something like this:
+
+<Image
+  src="/images/blog/prevent-default-explained-in-javascript/context-menu.png"
+  width={1922}
+  height={1088}
+  layout="responsive"
+  alt="context menu popup on a Mac"
+/>
+
+<br />
+<br />
+
+And note that whenever we use **addEventListener**, we automatically get access to an **event object**.
+
+<Image
+  src="/images/blog/prevent-default-explained-in-javascript/event-object.png"
+  width={2860}
+  height={1608}
+  layout="responsive"
+  alt="group of web developers working with the JavaScript Event Object"
+/>
+
+<br />
+
+In our code example, we refer to that **event object** with the letter **e**.
+(The letter **e** is a common naming shorthand for the **event object**. You will also
+often see this referred to as **ev** or **evt**).
+
+<br />
+
+If we fire that **contextmenu** event, we can see the **event object** in the console.
+(_it's a **PointerEvent** in this case_)
+
+<Image
+  src="/images/blog/prevent-default-explained-in-javascript/pointer-event.png"
+  width={2804}
+  height={1524}
+  layout="responsive"
+  alt="examining a JavaScript event object in Google Chrome Dev Tools console"
+/>
+
+<br />
+<br />
+<br />
+
+Now, before we prevent the default on the **contextmenu** event, let's spice things up by adding a couple elements inside our **body** tags.
+
+What we're going to do is prevent that context menu from showing up when the user right-clicks.
+Instead, we're going to surprise them with an image!
+
+<br />
+
+So, let's make a <Syntax>div</Syntax> and give it a class of **container**.
+Let's also create a <Syntax>p</Syntax> tag with the text content "Right-click for a spicy surprise!".
+(_This <Syntax>div</Syntax> will be empty for now but we'll ultimately append our image to it._)
+
+```html
+<body>
+  <p>Right-click for a spicy surprise!</p>
+  <div class="container"></div>
+</body>
+```
+
+<Image
+  src="/images/blog/prevent-default-explained-in-javascript/spicy-surprise.png"
+  width={1524}
+  height={784}
+  layout="responsive"
+  alt="browser displaying the text content of the paragraph tag"
+/>
+
+<br />
+<br />
+
+And now, in our event listener, instead of logging the **event object**, we'll call the **preventDefault** method.
+Using **preventDefault** here should prevent that context menu from appearing.
+
+```js
+window.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+```
+
+Now that we've successfully prevented the browser's default behavior, let's get a reference to the container <Syntax>div</Syntax> element.
+
+```js
+const container = document.querySelector(".container");
+
+window.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+```
+
+Then, let's create an image element:
+
+```js
+const container = document.querySelector(".container");
+
+window.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+  const img = document.createElement("img");
+});
+```
+
+And let's point the image source to a file I have in my directory called **girls.jpg**.
+
+```js
+const container = document.querySelector(".container");
+
+window.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+  const img = document.createElement("img");
+  img.src = "girls.jpg";
+});
+```
+
+Now, we can append that image element to the container:
+
+```js
+const container = document.querySelector(".container");
+
+window.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+  const img = document.createElement("img");
+  img.src = "girls.jpg";
+  container.appendChild(img);
+});
+```
+
+Ok, time to right-click and see what happens...
+
+<Image
+  src="/images/blog/prevent-default-explained-in-javascript/spice-girls.png"
+  width={1590}
+  height={1100}
+  layout="responsive"
+  alt="The Spice Girls without the context menu blocking them"
+/>
+
+Look at that! It's the Spice Girls! 😍
+
+<br />
+<br />
+
+If we hadn't used **preventDefault** and tried to right-click, you'll see the context menu obscuring our view of the Spice Girls.
+And that's not a very good user experience, is it? 😃
+
+<Image
+  src="/images/blog/prevent-default-explained-in-javascript/spice-girls-blocked.png"
+  width={1886}
+  height={1338}
+  layout="responsive"
+  alt="The Spice Girls with the context menu blocking them"
+/>
+
+<br />
+<br />
+
+As silly as this example might be, it hopefully clarified the role that **preventDefault** plays.
+
+By using **preventDefault**, we can stop the browser's default behavior and substitute another behavior for the default one.
+
+Check out the video below to further solidify your understanding of **preventDefault** in JavaScript!
+
+<YouTube id="iHEN0obf3TA" alt="javascript prevent default video" imgSrc="/images/blog/prevent-default-explained-in-javascript/javascript-prevent-default-video.jpg" />
+
+<Ad
+  txt="To go further with this topic, check out DOM Events and JavaScript"
+  imgSrc="/images/ads/dom-events-and-javascript-course.jpg"
+  imgWidth="240"
+  imgHeight="135"
+  href="https://store.thecodecreative.com/dom-events-and-javascript"
+/>

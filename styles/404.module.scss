@@ -1,0 +1,63 @@
+.Error {
+  margin: 0 auto;
+  font-family: "IBM Plex Sans", sans-serif;
+  &__header {
+    text-align: center;
+    color: var(--mainPurple);
+    padding-top: 60px;
+    font-size: 4rem;
+    margin-bottom: 0;
+  }
+
+  &__img {
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+    height: 80%;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+      rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+      rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  }
+
+  &__para {
+    text-align: center;
+    font-size: 2rem;
+    margin: 0 0 60px;
+  }
+
+  &__linkgroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 50%;
+    max-width: 640px;
+    margin: 0 auto 40px;
+
+    @media (min-width: 800px) {
+      flex-direction: row;
+    }
+
+    &__link {
+      text-align: center;
+      color: var(--secondaryText) !important;
+      border: 1px solid var(--mainRed) !important;
+      background-color: rgba(0, 0, 0, 0);
+      padding: 16px 12px;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 400;
+      width: 220px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+        rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+      &:hover {
+        background-color: var(--secondaryRed) !important;
+        border: 1px solid currentColor !important;
+        color: #fff !important;
+        cursor: pointer;
+      }
+    }
+  }
+}

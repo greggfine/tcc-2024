@@ -1,0 +1,183 @@
+---
+title: Styling in Svelte | The Basics
+date: "November 29, 2022"
+description: Styling in Svelte
+thumbnailUrl: "/images/blog/styling-in-svelte-the-basics/styling-in-svelte-tutorial.jpg"
+altText: "Styling in Svelte"
+author: "Gregg Fine"
+tags: ["svelte", "web-development", "css"]
+url: "styling-in-svelte-the-basics"
+---
+
+## Introduction
+
+In this post, you'll learn four aspects of basic styling in [**Svelte**](https://svelte.dev/):
+scoped styles, global styles, the Style directive, and the Class directive.
+
+## Scoped Styles
+
+Straight out the gate, when you write styles within a pair of style tags in a **.Svelte** file, those styles are scoped to the component.
+
+This means if we set a color of “red” for an **h1** in one component, an **h1** in a different component won't be affected.
+
+Essentially, each component's **CSS** is isolated from other components' **CSS**.
+
+How is this scoping accomplished?: **Svelte** generates unique class names during compilation to ensure conflicts are avoided.
+
+## Global Styles
+
+Of course, **Svelte** doesn't limit us to scoped styles.
+
+We can also create global styles via a couple of methods.
+
+The first method is to create a global stylesheet. (**global.css**, for example).
+
+We can then import this stylesheet into a layout file (**\_\_layout.svelte**) within a pair of script tags.
+
+```js
+<script>import '$lib/styles/global.css';</script>
+```
+
+Svelte also gives us the **global modifier** allowing us to opt out of
+the default scoping behavior.
+
+And we can do so for any given rule.
+For example:
+
+```js
+:global(h1){
+  color: red;
+}
+```
+
+## The Style Directive
+
+One of the great things about working with a reactive framework like **Svelte** is that we can dynamically set values for **CSS** styles.
+
+Look at this example where we set the **CSS** <Syntax>color</Syntax> property to a variable.
+(We've named the variable <Syntax>myColor</Syntax>).
+
+```js
+<script>
+  let myColor = "red";
+</script>
+
+<h1 style:color={myColor}>Hello</h1>
+```
+
+What's the benefit of setting the value this way?: that variable can be changed dynamically.
+
+For example, let's add a button element with an <Syntax>on:click</Syntax> directive.
+(_<Syntax>on:click</Syntax> is the equivalent of using the [**addEventListener**](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) method with <Syntax>click</Syntax> as the event type_).
+
+When that button is clicked, we'll invoke a function called <Syntax>changeColor</Syntax>.
+
+This function will re-assign the <Syntax>myColor</Syntax> variable to “orange.”
+
+```js
+<script>
+  let myColor = 'red';
+  function changeColor() {
+    myColor = "orange"	;
+  }
+</script>
+<h1 style:color={myColor}>Hello</h1>
+<button on:click={changeColor}>Change Color</button>
+```
+
+Although this is a contrived example, the concept should be apparent.
+
+Since **Svelte's** overarching philosophy leans towards simplicity, we get a nice shorthand we can use when the **CSS** property name is the same as the variable name.
+
+If, for example, we named our variable <Syntax>color</Syntax>, instead of <Syntax>myColor</Syntax>, we can make our code more terse:
+
+```js
+<script>
+  let color = 'red';
+  function changeColor() {
+    color = "orange"	;
+  }
+</script>
+<h1 style:color>Hello</h1>
+<button on:click={changeColor}>Change Color</button>
+```
+
+What's not to love? 😍
+
+And what about a situation where we need to set multiple styles?
+
+```js
+<script>
+  let color = 'red';
+  let fontSize = '64px';
+</script>
+
+<h1 style:color style:font-size={fontSize}>Hello</h1>
+
+```
+
+## The Class Directive
+
+Setting dynamic classes on elements is basically the same as using <Syntax>style:property</Syntax>.
+
+Here's an example where we set a class called <Syntax>active</Syntax> equal to the value of a variable called <Syntax>active</Syntax>:
+
+```js
+<script>
+  let active = true;
+</script>
+<h1 class:active={active}>Hello</h1>
+```
+
+Notice that we are setting that <Syntax>active</Syntax> variable to a boolean value.
+
+So, using the <Syntax>class:name</Syntax> directive is a perfect way to toggle classes on or off.
+
+You might've noticed that our class name (<Syntax>active</Syntax>) is the same as our variable name.
+
+As with <Syntax>style:property</Syntax>, we can use the shorthand and omit everything after the class name:
+
+```js
+<script>
+  let active = true;
+</script>
+<h1 class:active>Hello</h1>
+```
+
+## Conditional Styling
+
+To finish off our exploration of basic styling in **Svelte**, let's look at a common scenario for toggling a class on or off based on the state of a variable.
+
+We can use a [**ternary operator**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) directly inline to achieve this:
+
+```js
+<script>
+  let active = true;
+</script>
+<h1 class:active={active? active : ''}>Hello</h1>
+```
+
+This can also be shortened to:
+
+```js
+<script>
+  let active = true;
+</script>
+<h1 class:active={active}>Hello</h1>
+
+```
+
+And, of course, we can flip the state of that <Syntax>active</Syntax> variable from true to false and vice versa via a user interaction like a button click, for example.
+
+<br />
+<br />
+
+---
+
+If you prefer watching a video or want to dive deeper into **Svelte** styling, you can watch the video version of this post here:
+
+<YouTube
+  id="etUliqGJAaY"
+  alt="styling in svelte video"
+  imgSrc="/images/blog/styling-in-svelte-the-basics/styling-in-svelte-video.jpg"
+/>

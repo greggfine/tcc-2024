@@ -1,0 +1,311 @@
+---
+title: Image Alt Text | The Complete Guide for Web Developers
+date: "October 21, 2022"
+description: Writing SEO-friendly image alt text helps increase our rankings in Google Search and allows our websites to be accessible to visually impaired users.
+thumbnailUrl: "/images/blog/image-alt-text/image-alt-tag-tips-tutorial.jpeg"
+altText: "Image Alt Text Tutorial"
+author: "Gregg Fine"
+tags: ["web-development", "seo"]
+url: "image-alt-text-complete-guide"
+---
+
+## Introduction
+
+Image Alt Text can often seem like an afterthought. What's the point of creating alt text once our images are already visibly working on our site? Alt text seems so simple at first glance that web developers can take it for granted without realizing how beneficial it can be for accessibility and SEO.
+
+By the end of this article, you'll have a better understanding of what image alt text is and why it's so vital. Writing SEO-friendly image alt text helps us get the most out of our images in Google Image Search, increases our rankings in Google Web Search, and allows our websites to be accessible to visually impaired users.
+
+---
+
+## What is Image Alt Text?
+
+Alt text, also known as alternative text, is used by screen readers and search engines to determine what an image is all about. It describes the content of an image and, hopefully, places it in a context, i.e., the context of the website or web page it's part of.
+
+To create alt text for an image, we use the “alt” attribute on an <Syntax>img</Syntax> element in our HTML:
+
+```html
+<img
+  src="/blog/woman-walking-dog.jpg"
+  alt="woman walking dog in central park"
+/>
+```
+
+<Image
+  src="/images/blog/image-alt-text/pexels/woman-walking-dog-in-central-park.jpg"
+  width={600}
+  height={424}
+  layout="responsive"
+  alt="woman walking dog in central park"
+/>
+
+<br />
+<br />
+
+You might have also heard this described as being an “alt tag”. However, this seems like a misnomer to me. I prefer to use the term “alt text” or “alt attribute”.
+Although we are “tagging” the image in a way, an HTML "tag" is technically an element enclosed in angle brackets such as an <Syntax>h1</Syntax>.
+
+```html
+<h1>The Code Creative</h1>
+```
+
+---
+
+## Why Is Image Alt Text Important?
+
+In the world of SEO, one of the most important things we can do is create a page accessible to search engines and users. This means creating alt text for each image on our site, ideally including keywords related to our content.
+
+In terms of SEO, web crawlers (that index and rank sites) have to rely on image processing
+algorithms. Search engine crawlers don't visually understand and interpret images in the same way a sighted user would.
+
+A fuzzy version of this image, for instance, might be analogous to the restricted way a web crawler would interpret it.
+
+<Image
+  src="/images/blog/image-alt-text/pexels/smiling-clown-on-motorcyle-blurred.jpg"
+  width={300}
+  height={200}
+  layout="fixed"
+  alt="smiling clown on motorcycle"
+/>
+
+<br />
+
+This is where alt text steps in to provide web crawlers with interpretable text content.
+
+```html
+<img
+  src="/blog/smiling-clown-on-motorcycle.jpg"
+  alt="smiling clown on motorcycle"
+/>
+```
+
+<Image
+  src="/images/blog/image-alt-text/pexels/smiling-clown-on-motorcyle.jpg"
+  width={300}
+  height={200}
+  layout="fixed"
+  alt="smiling clown on motorcycle"
+/>
+
+As we can imagine, by omitting this information from our images, there's less of a chance that Google will index them. When we say "index", we mean that these images won't show up in the Google Image Search results.
+
+As an example, a search for "legendary guitarists" results in the images indexed by Google for the topic.
+
+<Image
+  src="/images/blog/image-alt-text/google-image-search-for-legendary-guitarists.png"
+  width={300}
+  height={268}
+  layout="fixed"
+  alt="google image search results for legendary guitarists"
+/>
+
+And, notice that when you do a general web search for a topic, images are often the first to appear in Google Search Engine Results Pages (SERPS).
+
+<Image
+  src="/images/blog/image-alt-text/google-search-for-legendary-guitarists.png"
+  width={300}
+  height={128}
+  layout="fixed"
+  alt="google search results for legendary guitarists"
+/>
+
+So, by ignoring alt text, we potentially miss out on a great source of SEO traffic!
+
+### Alt text as Keyword Opportunity
+
+Alt text is also an opportunity to use any keyword or keywords being targeted for SEO purposes. While we don't want to overdo it and stuff our alt text with these keywords, it _is_ a good idea to use them in at least an image or two on the page.
+
+### Alt text for Accessibility
+
+When it comes to accessibility, without alt text we potentially ignore thousands of visually impaired users. Visually impaired users employ screen readers to navigate and receive feedback as they explore a webpage. These screen readers read the image's alt text aloud.
+
+This image of a pair of monkeys, for example, has the alt text of "a pair of rhesus macaques grooming each other". A screen reader, like Mac's VoiceOver app for example, will read this text aloud once the user navigates to it.
+
+<Image
+  src="/images/blog/image-alt-text/rhesus-macaques-grooming-each-other.png"
+  width={700}
+  height={493}
+  layout="responsive"
+  alt="a pair of rhesus macaques grooming each other"
+/>
+
+### Alt text as a Fallback
+
+Lastly, alt text serves as a fallback when an image can't be loaded on the page. And, assuming the image was important in the first place, alt text ensures that the user receives the intended information.
+
+In this example where an image of a boombox was unable to load, the alt text stepped in to describe the missing image.
+
+<Image
+  src="/images/blog/image-alt-text/mdn/missing-image-on-mdn-webpage.png"
+  width={700}
+  height={340}
+  layout="responsive"
+  alt="missing image on mdn webpage"
+/>
+
+<br />
+
+## Tips for Writing Great Alt Text
+
+### Make it Descriptive and Specific for the Context
+
+Now that we understand the role and importance of alt text, let's learn some strategies for writing it effectively.
+
+First of all, we want our image alt text to be _descriptive_ and _specific_. We also want to take into consideration the _context_ in which our image exists.
+
+As an example, what are some of the different ways we could write alt text for this image of a guitar?
+
+We could simply use the word "guitar".
+But, this feels too generic in my opinion.
+Also, as a rule of thumb, we want to avoid single word alt text.
+
+```html
+<img src="/blog/guitar.jpg" alt="guitar" />
+```
+
+<Image
+  src="/images/blog/image-alt-text/zzounds/fender-stratocaster.jpg"
+  width={700}
+  height={228}
+  layout="responsive"
+  alt="guitar"
+/>
+
+<br />
+So, how can we get more descriptive and specific?
+
+By including the make and model of "fender stratocaster", we're getting more specific and, hopefully, closer to what
+a user might be searching for.
+
+```html
+<img src="/blog/guitar.jpg" alt="fender stratocaster guitar" />
+```
+
+But now, let's also consider the _context_ in which this image resides.
+
+If this image was used on a website called “10 Types of Electric Guitars”, this second option
+might be a good choice.
+
+What if the website was called “The History of Legendary Guitarists and Their Guitars”?
+
+Well, now this might be a more descriptive and specific choice considering the context:
+
+```html
+<img
+  src="/blog/guitar.jpg"
+  alt="jimi hendrix olympic white fender stratocaster guitar"
+/>
+```
+
+So, giving context to an image helps Google understand how it relates to the website, web page, or article
+in which it lives.
+
+By the way, it's unnecessary to begin alt text with the words “image of” or “picture of”.
+Instead, we want to get immediately to the point and describe the image.
+(Screen readers and Google bots already understand the element is an image from
+its HTML markup).
+
+### Find a Balance
+
+While it's important to be descriptive and specific, we don't want to push it too far.
+
+For example, if we had used:
+
+```html
+<img
+  src="/blog/guitar.jpg"
+  alt="jimmy hendrix 1969 black and white fender stratocaster 
+  electric guitar legendary guitarist classic rock"
+/>
+```
+
+Well, now we risk our content being identified as spammy by Google's algorithm. This is often referred to as “keyword stuffing” or “over-optimization”. Google is smart enough to identify this kind of trickery. So, try to avoid adding superflous details.
+
+Try to close your eyes and see your alt text in your mind. See what kind of mental image it conjures. Ask yourself if it can be more descriptive. Or, perhaps it's TOO wordy and can be condensed.
+
+**Tip** In terms of overall length, it's best to keep alt text relatively short, somewhere around 125 characters or less is usually recommended. Think of it like a Tweet and keep it as concise as possible.
+
+## What about Decorative Images?
+
+Many websites contain imagery that is simply decorative. Things like dividing lines, shapes, ornaments, illustrative decorations, etc. These images add character and vibe to the site but don't add informative content to the page.
+
+**Tip**
+If you can remove the image from the site and the site doesn't lose any essential information, consider it to be decorative.
+
+As an example, here is a decorative illustration from udemy.com of people holding hands. It adds character and style to the site. But eliminating it, probably wouldn't result in loss of critical information.
+
+<Image
+  src="/images/blog/image-alt-text/udemy/decorative-image-on-udemy-website.png"
+  width={700}
+  height={304}
+  layout="responsive"
+  alt="decorative image on udemy website"
+/>
+
+In these cases, we want to include the alt attribute in our markup but leave the alt text's value empty.
+(Note: you can also simply use the word **alt** without the equal sign and quotes)
+
+For example:
+
+```html
+<img src="/blog/people-holding-hands.jpg" alt="" />
+```
+
+```html
+<img src="/blog/people-holding-hands.jpg" alt />
+```
+
+You might be thinking “If the alt text is empty, why include the attribute at all?”
+
+Well, including the empty alt attribute, is a signal of intentionality. We're intentionally telling Google and screen readers that the image is purely decorative.
+
+You see, with screen readers, providing the empty alt attribute can prevent unnecessary “noise”, so to speak.
+When a screen reader encounters an empty alt attribute, it ignores it and skips over it.
+
+On the other hand, if we completely remove the alt attribute, the screen reader reads the file name.
+This seems extraneous and not very useful.
+
+### More Complex Decorative Images
+
+There are also times when an image is decorative but more complex than a simple shape or ornament.
+
+For example, let's say we have a website about stress management.
+We might use a decorative photo like this to give our design an overall feeling of relaxation and well-being:
+
+<Image
+  src="/images/blog/image-alt-text/unsplash/people-enjoying-beautiful-day-in-park.jpg"
+  width={700}
+  height={225}
+  layout="responsive"
+  alt="people enjoying beautiful day in the park"
+/>
+
+While this photo does contribute to the overall feeling, it doesn't contain vital or essential information.
+
+In these cases, rather than leaving the alt text blank, use it to convey emotion and mood. That way, a visually impaired user can get a similar experience to that of a sighted user.
+
+Something like "people enjoying beautiful day in the park" can enrich the screen reader experience by conveying the tone and flavor of the site.
+
+```html
+<img
+  src="/blog/people-in-park.jpg"
+  alt="people enjoying beautiful day in the park"
+/>
+```
+
+You can read more about decorative images on the [Web Accessibility Initiative(WAI) website](https://www.w3.org/WAI/tutorials/images/decorative/).
+
+## Conclusion
+
+I hope this article has inspired you to spend some time creating effective alt text for your images.
+
+We explored the role of alt text in accessibility.
+As the [W3C](https://www.w3.org/standards/webdesign/accessibility) states:
+“The mission of the Web Accessibility Initiative (WAI) is to lead the Web to its full potential to be accessible, enabling people with disabilities to participate equally on the Web.”
+
+We've also seen how alt text is used by search engines to help them understand the content of your images.
+So, use this as an SEO opportunity to help Google index and rank your website!
+
+To further solidify your knowledge, check out the video below:
+
+
+<YouTube id="_FgZki7nBVo" alt="image alt text complete guide video" imgSrc="/images/blog/image-alt-text/image-alt-text-video.jpg" />

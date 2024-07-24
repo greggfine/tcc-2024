@@ -1,0 +1,377 @@
+---
+title: GSAP ScrollTrigger Text Animation | Revealing Text
+date: "December 3, 2022"
+description: Learn a cool text reveal effect using GSAP ScrollTrigger
+thumbnailUrl: "/images/blog/gsap-scrolltrigger-text-animations/gsap-scrolltrigger-text-animations-tutorial.jpg"
+altText: "GSAP ScrollTrigger Text Animation | Revealing Text"
+author: "Gregg Fine"
+tags: ["gsap", "scrolltrigger", "scrollytelling"]
+url: "gsap-scrolltrigger-text-animation-revealing-text"
+---
+
+## Introduction
+
+In this article, we’ll create a cool text animation effect using GSAP
+and ScrollTrigger.
+
+In particular, we’ll use stagger in conjunction with scrubbing to create
+an effect where each consecutive line of text fills out its color
+and becomes more opaque.
+
+## Demo the Final Product
+
+## HTML
+
+Let's start by setting up some HTML boilerplate in our index.html file.
+
+Via a series of script tags, we'll import the GSAP library, ScrollTrigger plugin,
+and our own custom app.js file.
+
+We'll also link to our styles.css file in the head.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/ScrollTrigger.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+<br />
+
+Withing the body, create a section element with a class of container.
+This will serve as the container for a series of paragraph tags.
+
+I've created three paragraph elements for this project but the number
+and content are up to you.
+
+```html
+  <body>
+    <section class="container">
+      <p>Learning</p>
+      <p>scrollytelling with</p>
+      <p>The Code Creative</p>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/ScrollTrigger.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+<br />
+<br />
+
+## CSS
+
+In styles, css, create a rule for the container div.
+
+Give it a height of 200vh to get some vertical scrolling in the browser.
+
+Also, give it some margin-top.
+This will provide space before the scroller-start point is reached.
+
+```css
+.container {
+  height: 200vh;
+  margin-top: 200px;
+}
+```
+
+<br />
+<br />
+
+Now, create a rule for the paragraph tags.
+
+In this rule, we can amp up the drama by increasing the font-size.
+We'll set it to 10vw.
+(By using vw(viewport width units), the text will scale with the width of the viewport.)
+
+Also, zero out the margins to eliminate the default paragraph styles provided by the user-agent.
+This will bring the paragraph lines closer together and make them feel more unified.
+
+```css
+.container {
+  height: 200vh;
+  margin-top: 200px;
+}
+
+p {
+  margin: 0;
+  font-size: 10vw;
+}
+```
+
+<br />
+<br />
+
+## Creating a Linear-Gradient
+
+Moving forward, let's set up a linear-gradient for the paragraph background color.
+
+This linear-gradient will flow to the right.
+
+And the stops of white and dark grey will each take 50% of the gradient.
+
+```css
+.container {
+  height: 200vh;
+  margin-top: 200px;
+}
+
+p {
+  margin: 0;
+  font-size: 10vw;
+  background-image: linear-gradient(to right, white 50%, rgb(50, 45, 45) 50%);
+}
+```
+
+<br />
+<br />
+
+Next, let's use the background-size property to double the gradient's width to 200%.
+
+Now, the the white portion of the gradient will cover the full width of the paragraph.
+(experiment with different width values to see how this works)
+
+```css
+p {
+  margin: 0;
+  font-size: 10vw;
+  background-image: linear-gradient(to right, white 50%, rgb(50, 45, 45) 50%);
+  background-size: 200% 100%;
+}
+```
+
+<br />
+<br />
+
+We'll compensate for this increase in width by setting the background-position-x property to 100%.
+
+This will move the right edge of the gradient(the dark grey part) to the right edge of the paragraph element.
+
+You should now see the text covered by this grey background.
+
+This background-position-x property is what we'll be animating with JavaScript.
+Hence the need to set its initial position to 100%.
+
+```css
+p {
+  margin: 0;
+  font-size: 10vw;
+  background-image: linear-gradient(to right, white 50%, rgb(50, 45, 45) 50%);
+  background-size: 200% 100%;
+  background-position-x: 100%;
+}
+```
+
+<br />
+<br />
+
+## Clipping the Background Gradient to Text
+
+Next, set a background-clip property to a value of “text”.
+(also, use the webkit prefix for browser compatibility)
+
+Once we do this, the background gradient's color will be clipped to the text content.
+
+```css
+p {
+  margin: 0;
+  font-size: 10vw;
+  background-image: linear-gradient(to right, white 50%, rgb(50, 45, 45) 50%);
+  background-size: 200% 100%;
+  background-position-x: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+```
+
+<br />
+<br />
+
+Set the paragraph's color property to transparent.
+(Note: this is the same as using rgba(0,0,0,0))
+
+This allows the animated linear-gradient to come through as the text's color.
+
+And we can see the initial gradient color once we apply a background-color to the containing body element.
+
+```css
+body {
+  background-color: #0e0017;
+}
+.container {
+  height: 200vh;
+  margin-top: 200px;
+}
+
+p {
+  margin: 0;
+  font-size: 10vw;
+  background-image: linear-gradient(to right, white 50%, rgb(50, 45, 45) 50%);
+  background-size: 200% 100%;
+  background-position-x: 100%;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+```
+
+## JavaScript
+
+In app.js, let's start by registering the ScrollTrigger plugin.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+```
+
+<br />
+<br />
+
+We'll use the gsap.to method to animate that background-position-x property.
+(The elements we'll be animating are the paragraphs.)
+
+Because we're in JavaScript-land, we need to use the camel case version of the property:
+backgroundPositionX
+
+Set it to 0%.
+(Remember, we want that background.gradient's left edge(white) to move to the left edge
+of the paragraph element.)
+
+```js
+gsap.to("p", {
+  backgroundPositionX: "0%",
+});
+```
+
+<br />
+<br />
+
+To preview the effect, we can temporarily set a duration property to 5 seconds.
+
+As you can see, each paragraph animates at the same time.
+
+```js
+gsap.to("p", {
+  backgroundPositionX: "0%",
+  duration: 5,
+});
+```
+
+<br />
+<br />j However, we want those animations to be staggered. i.e., we want each successive
+paragraph's animation to start later than the previous one.
+
+So, rather than using the duration property, use the stagger property and set it to a value of 0.7.
+(We'll tweak this later.)
+
+```js
+gsap.to("p", {
+  backgroundPositionX: "0%",
+  stagger: 0.7,
+});
+```
+
+<br />
+<br />
+
+## Incorporating ScrollTrigger
+
+The next step is to bring in ScrollTrigger.
+
+We’ll use the scrollTrigger property and assign it to an object.
+In this object, we’ll make the paragraph elements the trigger.
+
+Let’s also enable markers to visualize the scroller zone.
+
+```js
+gsap.to("p", {
+  backgroundPositionX: "0%",
+  stagger: 0.7,
+  scrollTrigger: {
+    trigger: "p",
+    markers: true,
+  },
+});
+```
+
+At the moment, the animation plays immediately since we've already passed the scroller-start.
+(scroller-start defaults bottom of the viewport)
+We want the animation to start though as we scroll up into the scroller zone.
+
+So, let’s set a “start” property with the value “top 15%.
+
+This means that the animation will only start once the top of the paragraph trigger element reaches 15% down from the top of the viewport.
+
+```js
+gsap.to("p", {
+  backgroundPositionX: "0%",
+  stagger: 0.7,
+  scrollTrigger: {
+    trigger: "p",
+    scrub: 1,
+    start: "top 15%",
+    markers: true,
+  },
+});
+```
+
+Let’s also set a scrub property and assign it a value of 1.
+We could set scrub to true but, using a number, will give a bit looser of a feel to the scrub playhead.
+
+```js
+gsap.to("p", {
+  backgroundPositionX: "0%",
+  stagger: 0.7,
+  scrollTrigger: {
+    trigger: "p",
+    scrub: 1,
+    start: "top 15%",
+    markers: true,
+  },
+});
+```
+
+To fine-tune the stagger, I’ll set it to 0.4.
+
+Now, each staggered element will start 400ms after the previous element.
+
+```js
+gsap.to("p", {
+  backgroundPositionX: "0%",
+  stagger: 0.4,
+  scrollTrigger: {
+    trigger: "p",
+    scrub: 1,
+    start: "top 15%",
+    markers: true,
+  },
+});
+```
+
+For the finished product, don’t forget to disable the markers!
+
+---
+
+<Ad
+  txt="To go further with GSAP, check out Scrollytelling 101!"
+  imgSrc="/images/ads/scrollytelling-101-course.jpg"
+  imgWidth="240"
+  imgHeight="152"
+  href="https://store.thecodecreative.com/scrollytelling"
+/>

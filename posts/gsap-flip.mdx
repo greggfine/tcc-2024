@@ -1,0 +1,236 @@
+---
+title: GSAP Flip
+date: "October 14, 2022"
+description: GSAP's Flip plugin is all about seamlessly transitioning elements on your webpage between two different states.
+thumbnailUrl: "/images/blog/gsap-flip/gsap-flip-tutorial.jpg"
+altText: "GSAP Flip tutorial"
+author: "Gregg Fine"
+tags: ["web-development", "gsap"]
+url: "gsap-flip"
+---
+
+In this article, we'll look at a cool plugin from **GSAP** called **Flip**.
+(_This is a free plugin, at the time of this article, so you should be able to follow along._)
+
+**GSAP Flip** is all about seamlessly transitioning elements in your web page between two different states.
+It makes transitions that would be very difficult to accomplish a whole lot easier to pull off!
+
+The term **Flip** is derived from an acronym, coined by developer Paul Lewis.
+The acronym stands for
+**first-last-invert-play**
+
+<Image
+  src="/images/blog/gsap-flip/flip.png"
+  width={2518}
+  height={1468}
+  layout="responsive"
+  alt="Flip is an acronym for first, last, invert, play"
+/>
+
+<br />
+
+## Flip Examples
+
+Here's an example of the **Flip** plug-in in action from a [codepen](https://codepen.io/chriscoyier/full/ExwXaKy) by Chris Coyier.
+
+Here we have a mini gallery. You'll see a large featured image on top and two smaller images on the bottom.
+
+When one of the bottom images is clicked, it seamlessly transitions to become the larger featured image.
+
+<Image
+  src="/images/blog/gsap-flip/chris-coyier-gsap-flip-example.gif"
+  width={720}
+  height={405}
+  layout="responsive"
+  alt="A Codepen by Chris Coyier demonstrating the GSAP Flip plugin"
+/>
+
+<br />
+
+---
+
+Here's another **Flip** example from a [codepen](https://codepen.io/hexagoncircle/full/RwLQLop) by Ryan Mulligan.
+Notice that clicking on a box results in it getting moved out of its containing box down to the shopping cart in the lower right.
+
+<Image
+  src="/images/blog/gsap-flip/ryan-mulligan-gsap-flip-example.gif"
+  width={720}
+  height={405}
+  layout="responsive"
+  alt="A Codepen by Ryan Mulligan demonstrating the GSAP Flip plugin"
+/>
+
+The **Flip** plugin enables us to create these types of seamless transitions.
+
+## Installing Flip
+
+Let's get started by installing the **Flip** plugin and **GSAP** core.
+
+Go to the [GSAP installation page](https://greensock.com/docs/v3/Installation?checked=core,flip)
+and find the **GSAP 3 Install Helper**(note: **GSAP** is at version 3 at the time of this article).
+
+Under the **CDN Extra Plugins** tab, make sure that **Flip** is checked.
+Now, find the two necessary script tags below in the "Browser code" section.
+(_The first one is the **GSAP** core library. The second one is for the **Flip** plugin_).
+
+Click on the "COPY CODE" button.
+Then, you can paste these script tags into your HTML file.
+(_generally, you'd want to paste them before the closing <Syntax>body</Syntax> tag_)
+
+## Let's Write Some Code!
+
+Let's create an example where we re-parent a div into another <Syntax>div</Syntax>(rotated 30 degrees) in response to a click event.
+
+Here's how the final result will look:
+
+<Image
+  src="/images/blog/gsap-flip/reparent_lg.gif"
+  width={720}
+  height={405}
+  layout="responsive"
+  alt="A div being re-parented into another div using GSAP Flip"
+/>
+
+<br />
+<br />
+<br />
+
+In an HTML file, let's begin by creating two <Syntax>divs</Syntax>: one with a class of <Syntax>container</Syntax> and one with a class of <Syntax>box</Syntax>.
+
+```html
+<body>
+  <div class="container"></div>
+  <div class="box"></div>
+</body>
+```
+
+Let's also create some CSS styles for these elements.
+
+```css
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}
+.container {
+  border: 1px solid #000;
+  width: 200px;
+  height: 200px;
+  margin-left: 40%;
+  margin-top: 10%;
+  transform: rotate(-30deg);
+}
+```
+
+Now let's do some basic JavaScript setup.
+
+We'll start by "registering" the **Flip** plugin:
+
+```js
+gsap.registerPlugin(Flip);
+```
+
+After that, let's get references to the <Syntax>container</Syntax> and the <Syntax>box</Syntax> elements.
+
+```js
+gsap.registerPlugin(Flip);
+
+const container = document.querySelector(".container");
+const box = document.querySelector(".box");
+```
+
+---
+
+## First
+
+Now that we have some initial setup out of the way, let's satisfy the **First** part of the **Flip** acronym:
+getting the initial state of the element.
+
+For this, the **Flip** plugin gives us a method called **getState**.
+We pass in the box <Syntax>div</Syntax> to **getState** because it's the element we want to re-parent.
+And **getState** will record it's initial rotation, size, position, and skew.
+
+```js
+gsap.registerPlugin(Flip);
+
+const container = document.querySelector(".container");
+const box = document.querySelector(".box");
+
+document.addEventListener("click", (e) => {
+  let state = Flip.getState(".box");
+});
+```
+
+---
+
+## Last
+
+The next step of the process is called **Last**.
+
+In this step, we want to do something to the element to put it into its final state.
+
+For example, we could add a class to the element using the **classList** method.
+And that added class could do various things such as changing its size, rotation, position, etc.
+
+Another example of a **Last** state would be something where we re-parent the element.
+And that's exactly what we're going to do.
+
+We'll take our <Syntax>container</Syntax> element and use the **appendChild** method to re-parent the box <Syntax>div</Syntax>.
+
+```js
+gsap.registerPlugin(Flip);
+
+const container = document.querySelector(".container");
+const box = document.querySelector(".box");
+
+document.addEventListener("click", (e) => {
+  let state = Flip.getState(".box");
+  container.appendChild(box);
+});
+```
+
+---
+
+## Invert and Play
+
+Then, finally, we'll look at **Invert** and **Play**.
+
+To work with these steps, the **Flip** plugin provides a method called **from**.
+The **from** method is where the real magic happens because it makes the transition happen automatically. ✨
+
+<br />
+
+The **from** method takes two arguments:
+
+- the state or initial state that was recorded
+- an **options object** (_If you've worked with **GSAP**, you're probably familiar with the **options object**.
+  This **options object** can contain properties like **duration** and **ease**._)
+
+```js
+gsap.registerPlugin(Flip);
+
+const container = document.querySelector(".container");
+const box = document.querySelector(".box");
+
+document.addEventListener("click", (e) => {
+  let state = Flip.getState(".box");
+  container.appendChild(box);
+  Flip.from(state, { duration: 1, ease: "power1.out" });
+});
+```
+
+During the **Invert** and **Play** stages, **Flip** already knows about the initial and final states of the element. So it can apply offsets to the element to make it appear first in its initial state.
+Then it animates the _removal_ of those offsets to transition it to its final state.
+
+Check out the video below to further solidify your understanding of the **GSAP Flip** plugin!
+
+
+<YouTube id="wKiHaQO8X24" alt="gsap flip video" imgSrc="/images/blog/gsap-flip/gsap-flip-video.jpg" />
+
+<Ad
+  txt="To go further with GSAP, check out Scrollytelling 101!"
+  imgSrc="/images/ads/scrollytelling-101-course.jpg"
+  imgWidth="240"
+  imgHeight="152"
+  href="https://store.thecodecreative.com/scrollytelling"
+/>

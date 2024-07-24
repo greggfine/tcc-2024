@@ -1,0 +1,206 @@
+---
+title: DOM Events and the Prototype Chain
+date: "October 13, 2022"
+description: DOM Events and the Prototype Cahin
+thumbnailUrl: "/images/blog/dom-events-and-the-prototype-chain/dom-events-and-the-prototype-chain_thumb.jpg"
+author: "Gregg Fine"
+tags: ["dom", "javascript"]
+---
+
+In this article, let's explore DOM events and the prototype chain in JavaScript.
+
+What I'm curious about, in particular, is the **addEventListener** method that we work with all the time to listen to and handle DOM events.
+
+<Image
+  src="/images/blog/dom-events-and-the-prototype-chain/add-event-listener.png"
+  width={2250}
+  height={428}
+  layout="responsive"
+/>
+
+Where does the **addEventListener** method come from and how is it that we're able to respond to events on that button element?
+
+Let's experiment a bit and <Syntax>alert</Syntax> that button to see what type of object it is.
+
+```html
+<button>Click Me!</button>
+```
+
+```js
+const btn = document.querySelector("button");
+alert(btn);
+```
+
+<Image
+  src="/images/blog/dom-events-and-the-prototype-chain/alert.png"
+  width={1447}
+  height={377}
+  layout="responsive"
+/>
+
+As we can see, it's an object of type **HTMLButtonElement**.
+
+Let's use **console.dir** to examine the properties of this button object in the console.
+If we expand it, we can see a myriad of properties available on it.
+
+<Image
+  src="/images/blog/dom-events-and-the-prototype-chain/button-object.png"
+  width={1200}
+  height={606}
+  layout="responsive"
+/>
+
+Notice, however, that you won't find an **addEventListener** method here.
+So how, then, were we able to use **addEventListener** on that button?
+
+## Exploring the Prototype Chain
+
+I think a diagram might help in our quest to find that **addEventListener** method.
+
+On the bottom of this diagram, you can see the **HTMLButtonElement**.
+This **HTMLButtonElement** is an object and it happens to also be the prototype of our <Syntax>button</Syntax>. (_Remember, we're working within the context of the **DOM**, the "document object model"_).
+
+<Image
+  src="/images/blog/dom-events-and-the-prototype-chain/bottom-of-chain.png"
+  width={1732}
+  height={1456}
+  layout="responsive"
+/>
+
+<br />
+
+Had we continued to scroll down through the properties and methods of our <Syntax>button</Syntax> object,
+we would have eventually see this **HTMLButtonElement** prototype.
+
+<Image
+  src="/images/blog/dom-events-and-the-prototype-chain/html-button-element.png"
+  width={1055}
+  height={527}
+  layout="responsive"
+/>
+
+<br />
+<br />
+
+This **HTMLButtonElement** is part of a larger chain of objects.
+In JavaScript, this chain of objects is called the **prototype chain**.
+This **prototype chain** allows our **HTMLButtonElement** to inherit properties and methods from objects or prototypes higher up in the chain.
+
+So, perhaps, **addEventListener** lives on an object higher up in the chain?
+Let's keep exploring...
+
+## Bolded vs. Non-Bolded Methods and Properties
+
+If we continue scrolling, notice that some properties and methods are bolded and some aren't.
+
+<Image
+  src="/images/blog/dom-events-and-the-prototype-chain/bold-v-non-bold.png"
+  width={1348}
+  height={1338}
+  layout="responsive"
+/>
+
+- **bolded** properties and methods actually live on this prototype
+- **non-bolded** properties and methods that are inherited from prototypes higher up in the chain.
+
+## HTMLElement
+
+Let's proceed up the prototype chain and look at the next prototype: the **HTMLElement**.
+
+<Image
+  src="/images/blog/dom-events-and-the-prototype-chain/html-element.png"
+  width={1730}
+  height={1482}
+  layout="responsive"
+/>
+
+So, again, we can expand it and we can see that this **HTMLElement** has its own properties which are bolded.
+
+And again, further down, all these properties and methods which aren't bolded but which are inherited from prototypes higher up in the chain.
+
+So what you can see, on the **HTMLElement** prototype, are all those properties and methods which are common to **HTMLElements** regardless of the specific type of element.
+
+One thing that's notable is all these **onevent** properties: **onClick**, **onChange**, **onClose**, **onBlur**.
+
+These are all those **onevent** properties which can be assigned to various html elements.
+
+## Another Way of Examining the Prototype
+
+A bit earlier, I mentioned there was another way that we could look at the prototype.
+
+Take a look at the following code:
+
+```js
+const anchorTag = document.createElement("a");
+anchorTag.__proto__;
+```
+
+## HTMLAnchorElement
+
+If we look at the console now, we can see we go directly to the prototype, the **HTMLAnchorElement**.
+
+If I want to go to the next prototype in the chain, I can, again, do my double underscore proto double underscore.
+
+Now you can see we're at the **HTMLElement** level.
+
+By the way, the double underscore proto is known as "dunder proto".
+
+## HTMLElement
+
+At this point in the process, we're at the **HTMLElement** level.
+
+But let's keep this party going and move up to the next prototype in the chain.
+
+Again we'll append one of these dunder protos.
+
+## Element
+
+We can see we're at the **Element** level.
+
+And we can take a quick scan of its properties and methods.
+
+Here's some that you've probably seen before: **getElementsByClassname**, **getElementsByTagname** and so on.
+
+## Node
+
+Let's keep it moving and look at the next prototype in the chain.
+
+Here we come to the Node.
+
+If we look at the Node prototype object, we can see the various types of nodes listed out:
+
+There's a **comment node**, an **attribute node**, a **text node**, and an **element node**.
+
+Also, the Node prototype object has contains many things related to DOM traversal.
+
+For instance, there's the **parent element**, **parent node**, **previous sibling** and so on.
+
+Now, let's go one step further up the chain.
+
+Again, we'll do our double underscores proto.
+
+Here's the part you've been waiting for:
+
+## Target
+
+We finally get to that event target prototype object.
+
+And, if we expand it,
+we find **addEventListener**, **removeEventListener**, and **dispatchEvent**.
+
+This was kind of surprising to me when i realized that the event Target prototype object was all the way up here, near the top of the prototype chain hierarchy.
+
+This is the thing that gives those html elements the ability to listen to and respond to events.
+
+Also interesting is that, if we look at the prototype of the event target, what we can see is that we have the base JavaScript object.
+
+<Image
+  src="/images/blog/dom-events-and-the-prototype-chain/event-target.png"
+  width={1670}
+  height={1460}
+  layout="responsive"
+/>
+
+This JavaScript object is the final base JavaScript object because its prototype is **null**.
+
+<YouTube id="iRAZ3cR8HLI" />

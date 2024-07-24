@@ -1,0 +1,13 @@
+node_modules
+.now
+example_pics
+keynote
+brainstorming
+.prettierrc
+.env.local
+tsconfig.json
+.next
+discard
+/public/robots.txt
+/public/sitemap.xml
+helpers

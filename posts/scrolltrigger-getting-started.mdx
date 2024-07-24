@@ -1,0 +1,350 @@
+---
+title: GSAP ScrollTrigger | Getting Started
+date: "November 8, 2022"
+description: Get started with GSAP's ScrollTrigger and create your first scroll-based animation!
+thumbnailUrl: "/images/blog/scrolltrigger-getting-started/scolltrigger-getting-started-tutorial.jpg"
+altText: "GSAP ScrollTrigger Getting Started"
+author: "Gregg Fine"
+tags: ["gsap", "scrolltrigger", "scrollytelling"]
+url: "gsap-scrolltrigger-getting-started"
+---
+
+## Introduction
+
+In this article, we'll learn the basics of using the [ScrollTrigger](https://greensock.com/scrolltrigger/) plug-in from **GreenSock**(aka GSAP or the GreenSock Animation Platform).
+ScrollTrigger allows us to create awesome scroll-based animations and is a powerful tool in [scrollytelling](https://store.thecodecreative.com/scrollytelling).
+Unlike traditional animations, which might start when the page loads, scroll-based animations trigger based on the user's scroll position in the viewport.
+
+## Installing ScrollTrigger
+
+You can find the **Install Helper** for ScrollTrigger on [GreenSock's website](https://greensock.com/docs/v3/Installation?checked=core,scrollTrigger).
+To get a quick start, choose the **CDN** option and make sure that **ScrollTrigger** is checked in the **Extra Plugins** column.
+
+GSAP is the core library and ScrollTrigger is the specific plugin we use to trigger animations with the scroll bar.
+We'll need both for our code to work.
+
+In the **Browser code** section below, select **COPY CODE** to copy the script tags to your clipboard.
+
+<Image
+  src="/images/blog/scrolltrigger-getting-started/gsap3-install-helper.png"
+  width={600}
+  height={560}
+  layout="responsive"
+  alt="gsap3 install helper"
+/>
+
+<br />
+<br />
+
+Create a basic HTML file and paste these script tags before the closing <Syntax>body</Syntax> tag.
+Let's also create an additional script tag for our own app.js file.
+(This is where we'll write our ScrollTrigger code).
+
+Now, create a style.css file and link to it in the <Syntax>head</Syntax> of the HTML document.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/
+gsap/3.11.3/ScrollTrigger.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+## Creating HTML Elements
+
+Let's start setting up some basic HTML elements.
+
+Create two <Syntax>divs</Syntax> and give them a class of <Syntax>div1</Syntax> and <Syntax>div2</Syntax>.
+Inside the second <Syntax>div</Syntax>, create another <Syntax>div</Syntax> and give it a class of <Syntax>square</Syntax>.
+
+```html
+<body>
+  <div class="div1"></div>
+  <div class="div2">
+    <div class="square"></div>
+  </div>
+</body>
+```
+
+## Setting Up the CSS
+
+We'll need to style this a bit before we can see anything on the page.
+
+Create a rule for the <Syntax>body</Syntax> and zero out the margins.
+(_This will prevent any browse default margin styling getting in our way_).
+
+Next, give <Syntax>div1</Syntax> and <Syntax>div2</Syntax> a height of 100vh.
+And, to distinguish them, we'll give each a different background color.
+("pink" for <Syntax>div1</Syntax> and "salmon" for <Syntax>div2</Syntax>).
+
+```css
+body {
+  margin: 0;
+}
+
+.div1,
+.div2 {
+  height: 100vh;
+}
+
+.div1 {
+  background-color: pink;
+}
+.div2 {
+  background-color: salmon;
+}
+```
+
+In the browser, we can see <Syntax>div1</Syntax>(pink) taking up the entire height of the viewport.
+However, when we scroll down, we see <Syntax>div2</Syntax>(salmon) enter the viewport.
+
+<Image
+  src="/images/blog/scrolltrigger-getting-started/div1-and-div2-in-the-browser.png"
+  width={400}
+  height={179}
+  layout="fixed"
+  alt="pink div1 and salmon div2 in the browser"
+/>
+
+## Styling the Square Div
+
+Now that we have the main <Syntax>divs</Syntax> set up, let's add some styling to that <Syntax>div</Syntax> with the class of <Syntax>square</Syntax>.
+(_This is the element we'll be animating_).
+
+In our CSS, let's give it a width and height of 150 pixels and a background color of "fuchsia".
+
+```css
+body {
+  margin: 0;
+}
+
+.div1,
+.div2 {
+  height: 100vh;
+}
+
+.div1 {
+  background-color: pink;
+}
+.div2 {
+  background-color: salmon;
+}
+.square {
+  width: 150px;
+  height: 150px;
+  background-color: fuchsia;
+}
+```
+
+Now, in the browser, if we scroll down, we see that fuchsia square on the left side of the viewport.
+
+<Image
+  src="/images/blog/scrolltrigger-getting-started/fuchsia-square-in-viewport.png"
+  width={400}
+  height={182}
+  layout="fixed"
+  alt="fuchsia square on left side of viewport"
+/>
+
+## Animating the Square Div
+
+Let's move into our app.js file now and start writing some GSAP code.
+
+First, we'll create a basic tween(animation) using a method called [<Syntax>to</Syntax>](<https://greensock.com/docs/v3/GSAP/gsap.to()>).
+
+This method takes two arguments:
+
+- the target element to animate
+- a **vars** object
+
+The [vars object](https://greensock.com/docs/v3/GSAP/Tween/vars) contains properties we want to animate as well as special properties like duration, delay, etc.
+
+```js
+gsap.to(".square", {});
+```
+
+Let's animate our square from the left to right.
+
+Normally, we can do that via CSS using the [translateX](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translateX) function.
+But GSAP gives us the **x** shorthand. We can assign **x** the number of pixels we want the element to move.
+We'll use the number 700. (Notice that pixels is inferred).
+
+```js
+gsap.to(".square", {
+  x: 700,
+});
+```
+
+Let's also set an animation duration of 3 seconds.
+
+```js
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+});
+```
+
+Now, if we refresh the page and scroll down, you'll see that the square has already moved 700 pixels to the right.
+This is because the animation is being triggered on page load. We haven't implemented ScrollTrigger yet.
+
+<Image
+  src="/images/blog/scrolltrigger-getting-started/animation-triggered-on-page-load.png"
+  width={400}
+  height={177}
+  layout="fixed"
+  alt="animation already triggered on page load"
+/>
+
+<br />
+<br />
+
+## Registering ScrollTrigger
+
+Let's remedy that though and bring ScrollTrigger into the mix.
+
+First, let's register the plugin.
+
+For this, GSAP provides a method called [**registerPlugin**](<https://greensock.com/docs/v3/GSAP/gsap.registerPlugin()>).
+We'll pass ScrollTrigger into this method as an argument.
+
+According to the documentation, the **registerPlugin** method ensures that the GSAP core library and the ScrollTrigger plugin work together seamlessly.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+});
+```
+
+## Adding ScrollTrigger
+
+In the **vars object**, let's define a property called <Syntax>scrollTrigger</Syntax>(_notice that the "s" is lowercase_).
+We'll set its value to be the <Syntax>div</Syntax> with the class of <Syntax>square</Syntax> because we want this <Syntax>div</Syntax> to trigger the animation.
+This trigger element will fire once it has entered the viewport.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: ".square",
+});
+```
+
+Now, when we scroll down, we should see the <Syntax>square</Syntax> <Syntax>div</Syntax> animate once it's entered the viewport.
+
+<Image
+  src="/images/blog/scrolltrigger-getting-started/animation-on-viewport-entry.gif"
+  width={480 / 1.2}
+  height={270 / 1.2}
+  layout="fixed"
+  alt="square div animates on entering viewport"
+/>
+
+## Using a Different Element as the Trigger
+
+Let's learn how we can use an element, other than the target, as the trigger.
+
+In our HTML, underneath the <Syntax>div</Syntax> with a class of <Syntax>square</Syntax>, let's create another <Syntax>div</Syntax>.
+We'll give it a class of <Syntax>square2</Syntax>.
+
+```html
+<body>
+  <div class="div1"></div>
+  <div class="div2">
+    <div class="square"></div>
+    <div class="square2"></div>
+  </div>
+</body>
+```
+
+Then, in our CSS file, let's create a rule for <Syntax>square2</Syntax> and give it a background-color of blue.
+This will help distinguish it from the fuchsia square.
+
+Let's also give it a margin-top ot 300 pixels.
+This will position it lower than the first square and help us see how to use it as a trigger element.
+Remember, we want the first square to start animating once the second square enters the viewport.
+
+```css
+body {
+  margin: 0;
+}
+
+.div1,
+.div2 {
+  height: 100vh;
+}
+
+.div1 {
+  background-color: pink;
+}
+.div2 {
+  background-color: salmon;
+}
+.square {
+  width: 150px;
+  height: 150px;
+  background-color: fuchsia;
+}
+.square2 {
+  margin-top: 300px;
+  width: 150px;
+  height: 150px;
+  background-color: blue;
+}
+```
+
+In app.js, instead of assigning the <Syntax>scrollTrigger</Syntax> property a value of <Syntax>square</Syntax>, we'll assign it to <Syntax>square2</Syntax>.
+
+```js
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".square", {
+  x: 700,
+  duration: 3,
+  scrollTrigger: ".square2",
+});
+```
+
+Now, the animation will no longer start when the fuchsia square enters the viewport.
+The fuchsia square's animation will be triggered only when the blue square enters the viewport.
+
+<Image
+  src="/images/blog/scrolltrigger-getting-started/different-element-triggering-animation.gif"
+  width={480 / 1.2}
+  height={270 / 1.2}
+  layout="fixed"
+  alt="different element triggering animation"
+/>
+
+<hr />
+
+If you're more of a visual learner, check out the video version of this article:
+
+<YouTube
+  id="WEky7V490Rs"
+  alt="gsap scrolltrigger getting started video"
+  imgSrc="/images/blog/scrolltrigger-getting-started/scrolltrigger-getting-started-video.jpg"
+/>
+
+<Ad
+  txt="To go further with GSAP, check out Scrollytelling 101!"
+  imgSrc="/images/ads/scrollytelling-101-course.jpg"
+  imgWidth="240"
+  imgHeight="152"
+  href="https://store.thecodecreative.com/scrollytelling"
+/>

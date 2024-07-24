@@ -1,0 +1,117 @@
+@import "mixins";
+.testimonials {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  //   @media (min-width: 960px) {
+  @media (min-width: 1500px) {
+    flex-direction: row;
+    width: 85%;
+  }
+  &__heading {
+    text-align: center;
+    color: var(--mainPurple);
+    border-bottom: 2px solid var(--mainPurple);
+    border-top: 2px solid var(--mainPurple);
+    padding: 20px;
+    width: 100%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 90px;
+    background-color: rgb(243 241 242);
+    font-size: 1.8rem;
+    font-family: "IBM Plex Sans", sans-serif;
+    @include section-spacing;
+    @media (min-width: 450px) {
+      font-size: 2.1rem;
+    }
+    @media (min-width: 960px) {
+      width: 50%;
+      font-size: 2.5rem;
+    }
+    span {
+      color: white;
+      text-shadow: 3px 3px 0 var(--mainRed), -1px -1px 0 var(--mainRed),
+        1px -1px 0 var(--mainRed), -1px 1px 0 var(--mainRed),
+        1px 1px 0 var(--mainRed);
+    }
+  }
+  &__card {
+    border-radius: 30px;
+    background-color: #ececec;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 0;
+    position: relative;
+    margin: 40px 20px;
+    box-shadow: 2px 7px 12px 9px #e2e0e1;
+    max-width: 500px;
+
+    @media (min-width: 960px) {
+      max-width: 700px;
+    }
+
+    i {
+      font-size: 3em;
+      color: var(--mainPurple);
+    }
+    &__img {
+      border-radius: 50%;
+      width: 180px;
+      height: 180px;
+      display: block;
+      margin: auto;
+      border: 10px solid #fff;
+      object-fit: cover;
+      object-position: 0%;
+    }
+    &__infoWrapper {
+      text-align: center;
+      color: white;
+      font-size: 1.2em;
+      position: relative;
+      top: 20px;
+    }
+    &__name {
+      font-weight: 900;
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+    &__company {
+      position: relative;
+      top: -16px;
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+    &__quote {
+      padding: 1em 0em;
+      font-size: 1em;
+      text-align: left;
+      font-family: "IBM Plex Sans", sans-serif;
+      @media (min-width: 800px) {
+        font-size: 1.1em;
+      }
+      @media (min-width: 1500px) {
+        // padding: 2em 0.1em;
+        padding: 2em 0em;
+        font-size: 1em;
+        // text-align: center;
+      }
+    }
+    &__shape {
+      position: absolute;
+      bottom: 0;
+      height: 240px;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      clip-path: polygon(0% 0%, 100% 40%, 100% 100%, 0% 100%);
+      background-color: var(--secondaryRed);
+    }
+  }
+}

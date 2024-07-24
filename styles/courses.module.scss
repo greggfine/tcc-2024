@@ -1,0 +1,68 @@
+@import "mixins";
+.courses {
+  &__img {
+    object-fit: contain;
+    flex-grow: 1;
+  }
+  &__course {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 120px !important;
+    border: 6px double var(--mainPurple);
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(74, 25, 98, 0.4) 0px 5px, rgba(74, 25, 98, 0.3) 0px 10px,
+      rgba(74, 25, 98, 0.2) 0px 15px, rgba(74, 25, 98, 0.1) 0px 20px,
+      rgba(74, 25, 98, 0.05) 0px 25px;
+    @media (min-width: 800px) {
+      flex-direction: row;
+    }
+    @media (min-width: 1200px) {
+      width: 70%;
+    }
+    @include section-spacing;
+  }
+  &__course > span {
+    flex-basis: 40%;
+    background-color: #ede9f1 !important;
+  }
+  &__anchor {
+    // color: #b72afb;
+    color: #8c0133;
+    font-family: "IBM Plex Sans", sans-serif;
+
+    &:hover {
+      color: var(--mainRed);
+    }
+  }
+  &__courseInfoWrapper {
+    flex-basis: 60%;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  &__courseInfoHeader {
+    color: #fff;
+    p {
+      margin: 0;
+      padding: 1em;
+      background-color: var(--secondaryRed);
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+    h2 {
+      background-color: var(--mainRed);
+      padding: 0.4em;
+      text-align-last: left;
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+  }
+  &__courseInfoBody {
+    font-family: "IBM Plex Sans", sans-serif;
+    padding: 1em;
+    max-width: 500px;
+
+    @media (min-width: 1000px) {
+      font-size: 1.4rem;
+      max-width: 900px;
+    }
+  }
+}

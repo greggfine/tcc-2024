@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://www.thecodecreative.com</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/contact</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/courses</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/portfolio</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/privacy</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/autoplay-policy-in-google-chrome</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/gsap-flip</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/how-to-load-an-audio-file-using-fetch</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/image-alt-text-complete-guide</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/javascript-event-bubbling-and-capturing-made-simple</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/javascript-objects-method-chaining</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/javascript-reduce</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/javascript-var-let-const</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/nth-of-type-vs-nth-child</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/prevent-default-explained</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/scrolljacking-explained</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thecodecreative.com/blog/the-300-million-dollar-button</loc><lastmod>2022-11-06T20:44:32.893Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>

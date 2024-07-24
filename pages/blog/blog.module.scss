@@ -1,0 +1,104 @@
+.Blog {
+  margin: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 960px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 4rem;
+    gap: 60px;
+  }
+
+  &__author {
+    color: #5d5454;
+    margin-top: 0;
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+
+  &__categoryWrapper {
+    text-align: center;
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+  &__categorytitle {
+    color: var(--secondaryText);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+  &__categorytype {
+    color: var(--secondaryText);
+    font-weight: 400;
+  }
+  &__post {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-radius: 0.5rem;
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  &__postTitle {
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.25;
+    padding: 10px 10px 10px 0;
+    font-family: "IBM Plex Sans", sans-serif;
+    color: #000;
+    // &:hover {
+    //   text-decoration: none;
+    // }
+  }
+  &__description {
+    font-style: italic;
+  }
+  &__date {
+    color: #201f1f;
+  }
+  &__postText {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 60%;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-family: "IBM Plex Sans", sans-serif;
+
+    // &:hover {
+    //   text-decoration: none;
+    // }
+
+    p {
+      color: #201f1f;
+    }
+  }
+  &__contentWrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+  }
+  &__img {
+    flex-basis: 40%;
+  }
+  &__tags {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    font-family: "IBM Plex Sans", sans-serif;
+    &__links {
+      background-color: #000;
+      color: #fff;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+}

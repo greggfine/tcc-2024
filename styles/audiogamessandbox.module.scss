@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap");
+.audiogamessandbox {
+  font-family: "Tilt Warp", cursive;
+
+  height: 100%;
+  //   border: 1px solid #000;
+  text-align: center;
+  //   font-size: 2.1rem;
+  &__game {
+    height: 33%;
+    width: 100%;
+    border: 0.1px solid #888;
+    padding: 4rem;
+    text-align: left;
+  }
+  &__games {
+  }
+  &__heading {
+    font-size: 2.5rem;
+  }
+  &__subheading {
+    font-size: 2rem;
+  }
+}

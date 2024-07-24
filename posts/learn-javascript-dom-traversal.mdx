@@ -1,0 +1,266 @@
+---
+title: Learn JavaScript DOM Traversal
+date: "November 7, 2022"
+description: Learn the three directions of DOM traversal and the properties that can be used to access parent, child, and sibling nodes.
+thumbnailUrl: "/images/blog/learn-javascript-dom-traversal/learn-javascript-dom-traversal-tutorial.jpg"
+altText: "Learn JavaScript DOM Traversal"
+author: "Gregg Fine"
+tags: ["dom", "javascript"]
+url: "learn-javascript-dom-traversal"
+---
+
+## Introduction
+
+When a web page gets loaded in the browser, the [**DOM**](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) or **Document Object Model** gets created.
+
+This **Document Object Model** is a tree-like structure representing the arrangement or hierarchy of elements on a page.
+
+We often want to navigate or traverse that structure with JavaScript because this allows us to manipulate page elements in various ways.
+
+## The DOM Tree Hierarchy
+
+The **DOM** tree is structured as a hierarchy. (Think of a family tree of grandparent to parent to child or siblings).
+
+<Image
+  src="/images/blog/learn-javascript-dom-traversal/family-hierarchy.png"
+  width={700 / 2}
+  height={487 / 2}
+  layout="fixed"
+  alt="dom tree hierarchy is like a family tree"
+/>{" "}
+
+For example, within a pair of <Syntax>body</Syntax> tags, we have a div with an id of <Syntax>grandparent</Syntax>.
+Within that <Syntax>grandparent</Syntax> div, we have another div with an id of <Syntax>parent</Syntax>.
+And finally, within that <Syntax>parent</Syntax> div, we have a div with an id of <Syntax>child</Syntax>.
+
+```html
+<body>
+  <div class="box" id="grandparent">
+    <div class="box" id="parent">
+      <div class="box" id="child"></div>
+    </div>
+  </div>
+</body>
+```
+
+## Getting Reference to a DOM Element
+
+Traversing and manipulating the **DOM** requires getting a reference to a **DOM** element first.
+
+We'll use <Syntax>querySelector</Syntax> to get a reference to the div with id of <Syntax>parent</Syntax>..
+
+```js
+const parentDiv = document.querySelector("#parent");
+```
+
+Now that we have a reference into the **DOM**, we can begin traversing it.
+
+And there are three different directions we can travel:
+
+- up the **DOM** tree
+- down the **DOM** tree
+- sideways (to visit a neighboring sibling element)
+
+## Traversing Up
+
+To traverse _up_ the **DOM** tree, let's take that <Syntax>parentDiv</Syntax> and use a property called [**parentElement**](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement).
+
+If we examine it in the console, we can see we're getting the div with an id of <Syntax>grandparent</Syntax>.
+This <Syntax>grandparent</Syntax> div is the parent of the div with an id of <Syntax>parent</Syntax>.
+
+```js
+const parentDiv = document.querySelector("#parent");
+console.dir(parentDiv.parentElement);
+```
+
+<Image
+  src="/images/blog/learn-javascript-dom-traversal/grandparent-div-in-console.png"
+  width={700}
+  height={317}
+  layout="responsive"
+  alt="examining grandparent div in the console"
+/>{" "}
+
+## Traversing Down
+
+To traverse _down_ the **DOM** tree, let's take the <Syntax>parentDiv</Syntax> element again but use the [**children**](https://developer.mozilla.org/en-US/docs/Web/API/Element/children) property this time.
+The <Syntax>children</Syntax> property will give us an [**HTML Collection**](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection). This **HTML Collection** contains the child elements of the parent div.
+
+```js
+const parentDiv = document.querySelector("#parent");
+console.dir(parentDiv.children);
+```
+
+In the console, we get one element: the div with an id of <Syntax>child</Syntax>.
+
+<Image
+  src="/images/blog/learn-javascript-dom-traversal/child-div-in-console.png"
+  width={700}
+  height={368}
+  layout="responsive"
+  alt="examining child div in console"
+/>{" "}
+
+<br />
+<br />
+
+If we duplicate that <Syntax>child</Syntax> div, we can now see two child elements in the console.
+
+```html
+<div class="box" id="grandparent">
+  <div class="box" id="parent">
+    <div class="box" id="child"></div>
+    <div class="box" id="child"></div>
+  </div>
+</div>
+```
+
+<Image
+  src="/images/blog/learn-javascript-dom-traversal/two-child-elements-in-console.png"
+  width={700}
+  height={275}
+  layout="responsive"
+  alt="examining child elements in console"
+/>{" "}
+
+<br />
+<br />
+
+We can use square brackets to access a specific element. To get the second
+
+<Syntax>child</Syntax> div, for example, we'd enclose the number 1 in square brackets.
+
+```js
+const parentDiv = document.querySelector("#parent");
+console.dir(parentDiv.children[1]);
+```
+
+## Traversing Sideways
+
+Now, let's try traversing sideways to visit a sibling element.
+Those divs with the id of <Syntax>child</Syntax> are siblings since they exist on the same level.
+
+```html
+<div class="box" id="grandparent">
+  <div class="box" id="parent">
+    <div class="box" id="child"></div>
+    <div class="box" id="child"></div>
+  </div>
+</div>
+```
+
+Previously, we used <Syntax>parentDiv.children[1]</Syntax> to access the second <Syntax>child</Syntax> div.
+
+```js
+const parentDiv = document.querySelector("#parent");
+console.dir(parentDiv.children[1]);
+```
+
+So, from that point, to access the first <Syntax>child</Syntax> div, we can use the [**previousElementSibling**](https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling) property.
+
+```js
+const parentDiv = document.querySelector("#parent");
+console.dir(parentDiv.children[1].previousElementSibling);
+```
+
+If we had been on the first <Syntax>child</Syntax> div, we could use [**nextElementSibling**](https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling) to get the second one.
+
+```js
+const parentDiv = document.querySelector("#parent");
+console.dir(parentDiv.children[0].nextElementSibling);
+```
+
+## Nodes vs. Elements
+
+Now, when we traverse the **DOM**, we sometimes traverse by element and sometimes by node.
+
+You see, there's a difference between a **DOM** node and a **DOM** element.
+
+While all HTML elements are nodes, not all nodes are HTML elements.
+
+To illustrate this point, let's create a comment under our <Syntax>grandparent</Syntax> div.
+This comment is a specific type of node called a **comment node**.
+
+```html
+<div class="box" id="grandparent">
+  <!-- My Comment -->
+  <div class="box" id="parent">
+    <div class="box" id="child"></div>
+    <div class="box" id="child"></div>
+  </div>
+</div>
+```
+
+We can also create another type of node called a **text node**. In this example, the **text node** consists of the words "The Code Creative" after the first <Syntax>child</Syntax> div.
+
+```html
+<div class="box" id="grandparent">
+  <!-- My Comment -->
+  <div class="box" id="parent">
+    <div class="box" id="child"></div>
+    The Code Creative
+    <div class="box" id="child"></div>
+  </div>
+</div>
+```
+
+Believe it or not, even white space, line breaks, and carriage returns classify as **text nodes**.
+
+Our divs are nodes as well. These are specifically called **element nodes**.
+
+For your reference, [here are the various node types listed on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Node).
+
+<br />
+<br />
+
+## Element Properties and Node Properties
+
+This chart shows the element properties and their corresponding node properties.
+
+<Image
+  src="/images/blog/learn-javascript-dom-traversal/element-properties-vs-node-properties.png"
+  width={700}
+  height={366}
+  layout="responsive"
+  alt="chart of element properties vs. node properties"
+/>{" "}
+
+<br />
+
+To get a parent node, for example, we could use <Syntax>parentNode</Syntax> instead of <Syntax>parentElement</Syntax>.
+Instead of <Syntax>children</Syntax>, we could use <Syntax>childNodes</Syntax>. And we can use <Syntax>nextSibling</Syntax> and <Syntax>previousSibling</Syntax> in place of <Syntax>nextElementSibling</Syntax> and <Syntax>previousElementSibling</Syntax>.
+
+<br />
+
+Let's try an example where we access nodes rather than HTML elements.
+
+Rather than using <Syntax>parentDiv.children</Syntax>, we'll use <Syntax>parentDiv.childnodes</Syntax>.
+
+```js
+const parentDiv = document.querySelector("#parent");
+console.dir(parentDiv.childNodes);
+```
+
+In the console, we see a node list with five elements.
+
+<Image
+  src="/images/blog/learn-javascript-dom-traversal/node-list.png"
+  width={700}
+  height={322}
+  layout="responsive"
+  alt="node list with five elements"
+/>{" "}
+
+Not only are we getting the two child divs within that parent div but we're also getting three text nodes. Those text nodes are the line breaks that occur after each element.
+
+If you're more of a visual learner, check out the video version of this article:
+
+<YouTube id="iAxhaoR-vgg" alt="learn javascript dom traversal video" imgSrc="/images/blog/learn-javascript-dom-traversal/dom-traversal-video.jpg" />
+
+<Ad
+  txt="To go further with this topic, check out DOM Events and JavaScript"
+  imgSrc="/images/ads/dom-events-and-javascript-course.jpg"
+  imgWidth="240"
+  imgHeight="135"
+  href="https://store.thecodecreative.com/dom-events-and-javascript"
+/>

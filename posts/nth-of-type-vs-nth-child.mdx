@@ -1,0 +1,207 @@
+---
+title: Do You Really Understand The Difference Between CSS Nth-of-Type and Nth-Child Selectors?
+date: "October 4, 2022"
+description: Understand the difference between the nth-of-type and nth-child CSS selectors.
+thumbnailUrl: "/images/blog/nth-of-type-vs-nth-child/css-nth-of-type-v-nth-child-tutorial.jpg"
+altText: "CSS nth-of-type vs. nth-child selector tutorial"
+author: "Gregg Fine"
+tags: ["coding", "css"]
+url: "nth-of-type-vs-nth-child"
+---
+
+There are two structural [pseudo-class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes#tree-structural_pseudo-classes) in CSS whose distinction can be tricky to grasp at first.
+
+In this article, let's compare the **nth-of-type** and **nth-child** selectors to
+better understand the difference.
+
+## Nth-of-Type
+
+First of all, let's look at an example of **nth-of-type**.
+
+Here we have an unordered list containing four list items:
+
+{/* <CodeBlock js={"hello"}></CodeBlock> */}
+
+```html
+<ul>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ul>
+```
+
+Now, what if we wanted to color the second <Syntax>li</Syntax>(list item) red in our CSS?
+
+We would write <Syntax>li:nth-of-type</Syntax> and then, in parentheses, put the number two.
+
+```css
+li:nth-of-type(2) {
+  color: red;
+}
+```
+
+So, what does this translate to?
+
+_"In a group of siblings of type <Syntax>li</Syntax>, select the second one."_
+
+<Image
+  width={1634}
+  height={371}
+  layout="responsive"
+  src="/images/blog/nth-of-type-vs-nth-child/second-li-has-become-red.png"
+  alt="example of selecting the second li tag using the nth-of-type CSS selector"
+/>
+
+<br />
+
+If we had put the number four in the parentheses instead of the number two, the fourth <Syntax>li</Syntax> would have been the one selected.
+
+<Image
+  width={1634}
+  height={614}
+  layout="responsive"
+  src="/images/blog/nth-of-type-vs-nth-child/4th-li.png"
+  alt="example of selecting the fourth li tag using the nth-of-type CSS selector"
+/>
+The salient thing to note is that we're talking about a **group of siblings**.
+
+<br />
+
+Let's bump up the complexity a bit and add a second <Syntax>ul</Syntax> with two nested <Syntax>li's</Syntax>.
+
+```html
+<ul>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ul>
+
+<ul>
+  <li>nested one</li>
+  <li>nested two</li>
+</ul>
+```
+
+Now, if we try selecting <Syntax>li:nth-of-type(2)</Syntax> again and applying the color red, which li's do you think will get the color?
+
+We'll see that the second <Syntax>li</Syntax> from the first <Syntax>ul</Syntax> group and the second <Syntax>li</Syntax> from the second <Syntax>ul</Syntax> group get colored red because, each time a group of siblings occurs, the count starts again.
+
+<Image
+  width={1826}
+  height={920}
+  layout="responsive"
+  src="/images/blog/nth-of-type-vs-nth-child/second-lis-get-color.png"
+  alt="example of selecting the second li tags from two separate ul elements using the nth-of-type CSS selector"
+/>
+
+## Nth-Child
+
+Let's now contrast this with the way that **nth-child** works.
+
+Again, let's look at the unordered list from our first example.
+
+If we select <Syntax>li:nth-child(2)</Syntax> and apply the color red to it, we
+see that the second <Syntax>li</Syntax> in this group of <Syntax>li's</Syntax> gets the color red.
+
+```css
+li:nth-child(2) {
+  color: red;
+}
+```
+
+<Image
+  width={1634}
+  height={371}
+  layout="responsive"
+  src="/images/blog/nth-of-type-vs-nth-child/second-li-has-become-red.png"
+  alt="example of selecting the second li tag using the nth-child CSS selector"
+/>
+
+So far, this seems to be doing the same thing that nth-of-type(2) did.
+
+Is there any difference?
+
+Yes, there is!
+
+With **nth-child**, the criteria's not:
+
+_"find the second <Syntax>li</Syntax> in a group of sibling <Syntax>li's</Syntax>"_
+
+But rather:
+
+_"find the <Syntax>li</Syntax> that's the second child of a parent element"_
+
+<br />
+In this case, that second <Syntax>li</Syntax> just also happens to be the second
+child of its parent
+<Syntax>ul</Syntax>.
+
+<br />
+
+But what if we inserted a paragraph element as the first child of the <Syntax>ul</Syntax>?
+
+```html
+<ul>
+  <p>parent</p>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ul>
+```
+
+Now which <Syntax>li</Syntax> will get the color red?
+
+It's actually going to be the first <Syntax>li</Syntax> in the sibling group because it's the second child of the <Syntax>ul</Syntax>.
+
+<Image
+  width={1510}
+  height={530}
+  layout="responsive"
+  src="/images/blog/nth-of-type-vs-nth-child/1st-child-has-become-red.png"
+  alt="example of selecting the first li tag using the nth-child CSS selector"
+/>
+
+<br />
+Just to make it clear, if we added one more <Syntax>p</Syntax> element inside the <Syntax>
+  ul
+</Syntax> and did <Syntax>li:nth-child(2)</Syntax>...
+
+```html
+<ul>
+  <p>parent</p>
+  <p>parent 2</p>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ul>
+```
+
+```css
+li:nth-child(2) {
+  color: red;
+}
+```
+
+nothing at all would get the color red because there isn't a <Syntax>li</Syntax> here that's also
+the second child of a parent!
+
+<Image
+  width={1322}
+  height={616}
+  layout="responsive"
+  src="/images/blog/nth-of-type-vs-nth-child/nothing-colored-red.png"
+  alt="example clarifying the way that the CSS nth-child selector works"
+/>
+
+<br />
+
+Hopefully, this helps to clarify the difference between **nth-of-type** and **nth-child**!
+
+Check out the video below to solidify your understanding!
+
+
+<YouTube id="dMxOojFq2ho" alt="css nth-of-type vs nth-child video" imgSrc="/images/blog/nth-of-type-vs-nth-child/css-nth-of-type-vs-nth-child-video.jpg" />

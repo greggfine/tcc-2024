@@ -1,0 +1,430 @@
+---
+title: Using GSAP ScrollTrigger With React
+date: "November 25, 2022"
+description: Using GSAP ScrollTrigger With React
+thumbnailUrl: "/images/blog/using-gsap-scrolltrigger-with-react/using-gsap-scrolltrigger-with-react-tutorial.jpg"
+altText: "Using GSAP ScrollTrigger With React"
+author: "Gregg Fine"
+tags: ["gsap", "scrolltrigger", "scrollytelling", "react"]
+url: "using-gsap-scrolltrigger-with-react"
+---
+
+## Introduction
+
+Let's learn how to use GSAP's [**ScrollTrigger**](https://greensock.com/docs/v3/Plugins/ScrollTrigger) plugin with [**React**](https://reactjs.org/).
+
+We'll start by creating a new **React** application by running <Syntax>create-react-app</Syntax> in the terminal.
+I'm calling my application "scrolltrigger-react," but you can use any name you like.
+
+```js
+npx create-react-app scrolltrigger-react
+```
+
+Once the project has been created, <Syntax>cd</Syntax> into it and open it in a code editor.
+
+```js
+cd scrolltrigger-react
+```
+
+If you're using [Visual Studio Code](https://code.visualstudio.com/), you can use this shortcut to open the project:
+
+```js
+code .
+```
+
+Running <Syntax>npm start</Syntax> in the terminal will start up a development server. And the application should
+be available to view in the browser at localhost:3000.
+
+<Image
+  src="/images/blog/using-gsap-scrolltrigger-with-react/localhost-3000.png"
+  width={600}
+  height={277}
+  layout="responsive"
+  alt=""
+/>
+
+## Installing GSAP
+
+Let's install **GSAP**!
+
+```js
+npm install gsap
+```
+
+Open up your package.json file to confirm the **GSAP** installation.
+You'll find it listed in "dependencies":
+
+```json
+{
+  "name": "scrolltrigger-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "gsap": "^3.11.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  }
+}
+```
+
+Now, open the App.js file in the "src" directory.
+
+App.js contains the DOM elements we see in the browser: the animated spinning logo, text, etc.
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+```
+
+We can delete most of these elements but keep the image with the spinning **React** logo.
+Our goal will be to animate the spinning ourselves using **GSAP** and **ScrollTrigger**.
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+
+function App() {
+  return (
+    <div className="App">
+      <img src={logo} className="App-logo" alt="logo" />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Stopping the Default Rotation with App.css
+
+First of all, let's stop the default rotation provided by **React**.
+
+Open up the App.css file in the "src" directory.
+
+Find the <Syntax>@media</Syntax> rule (line 9) and comment it out.
+
+If you look in the browser, you'll still see the logo. It should no longer be spinning, however.
+
+```css
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+/* @media (prefers-reduced-motion: no-preference){
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+} */
+```
+
+## Rotating with GSAP
+
+Once again, open up App.js and import **GSAP**.
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+import gsap from "gsap";
+```
+
+Let's animate the spinning of that logo with **GSAP**.
+
+To do this in **React**, we'll use two hooks:
+
+- **useRef**
+- **useEffect**
+
+Let's import them.
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+import gsap from "gsap";
+import { useRef, useEffect } from "react";
+```
+
+Since we want to animate the image, let's give it a **ref** attribute and assign it to <Syntax>imgRef</Syntax>.
+
+We'll also create a **const** called <Syntax>imgRef</Syntax> and assign it to <Syntax>useRef</Syntax>, initialized with a value of **null**.
+
+Once the component mounts, the <Syntax>imgRef</Syntax> constant will update to reference the **img** tag with the corresponding **ref** attribute.
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+import gsap from "gsap";
+import { useRef, useEffect } from "react";
+gsap.registerPlugin(ScrollTrigger);
+
+function App() {
+  const imgRef = useRef(null);
+  return (
+    <div className="App">
+      <img src={logo} className="App-logo" alt="logo" ref={imgRef} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Using UseEffect
+
+Let's use **React's** **useEffect** hook to work with the <Syntax>imageRef</Syntax>.
+
+We'll pass it a callback function and, as a second argument, an empty array.
+(This second argument is called the "dependency array." Leaving it empty allows the callback to run only once when the component is mounted).
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+import gsap from "gsap";
+import { useRef, useEffect } from "react";
+
+function App() {
+  const imgRef = useRef(null);
+  useEffect(() => {}, []);
+  return (
+    <div className="App">
+      <div className="helper"></div>
+      <img src={logo} className="App-logo" alt="logo" ref={imgRef} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+Inside of **useEffect**, let's create a **const** and call it <Syntax>el</Syntax> (for "element").
+
+We'll assign <Syntax>el</Syntax> to <Syntax>imgRef.current</Syntax>, which allows us to reference the image element.
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+import gsap from "gsap";
+import { useRef, useEffect } from "react";
+
+function App() {
+  const imgRef = useRef(null);
+  useEffect(() => {
+    const el = imgRef.current;
+  }, []);
+  return (
+    <div className="App">
+      <img src={logo} className="App-logo" alt="logo" ref={imgRef} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+Now let's use **GSAP's** [fromTo](<https://greensock.com/docs/v3/GSAP/gsap.fromTo()>) method to create a tween.
+
+The first argument, <Syntax>el</Syntax>, is the element we want to animate.
+
+The second argument will be an object containing our **from** parameters.
+
+The third argument will be an object containing our **to** parameters.
+
+So, we're rotating from 0 to 180 degrees over 3 seconds.
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+import gsap from "gsap";
+import { useRef, useEffect } from "react";
+
+function App() {
+  const imgRef = useRef(null);
+  useEffect(() => {
+    const el = imgRef.current;
+    gsap.fromTo(el, { rotation: 0 }, { rotation: 180, duration: 3 });
+  }, []);
+  return (
+    <div className="App">
+      <img src={logo} className="App-logo" alt="logo" ref={imgRef} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Incorporating ScrollTrigger
+
+Now that we've created the basic animation using **GSAP**, it'll be easy to incorporate **ScrollTrigger**.
+
+First, let's create an additional **div** element and give it a **className** of <Syntax>helper</Syntax>.
+This **div** will help get some scrolling height in the browser once we apply some CSS styles to it.
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+import gsap from "gsap";
+import { useRef, useEffect } from "react";
+
+function App() {
+  const imgRef = useRef(null);
+  useEffect(() => {
+    const el = imgRef.current;
+    gsap.fromTo(el, { rotation: 0 }, { rotation: 180, duration: 3 });
+  }, []);
+  return (
+    <div className="App">
+      <div className="helper"></div>
+      <img src={logo} className="App-logo" alt="logo" ref={imgRef} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+In App.css, create a rule for the <Syntax>helper</Syntax> class.
+
+Give it a **height** of 100vh and a **background-color** of orange.
+
+```css
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.helper {
+  height: 100vh;
+  background-color: orange;
+}
+
+/* @media (prefers-reduced-motion: no-preference){
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+} */
+```
+
+Back in App.js, let's import **ScrollTrigger** and [register](<https://greensock.com/docs/v3/GSAP/gsap.registerPlugin()>) the plugin.
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+import gsap from "gsap";
+import { useRef, useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+function App() {
+  const imgRef = useRef(null);
+  useEffect(() => {
+    const el = imgRef.current;
+    gsap.fromTo(el, { rotation: 0 }, { rotation: 180, duration: 3 });
+  }, []);
+  return (
+    <div className="App">
+      <div className="helper"></div>
+      <img src={logo} className="App-logo" alt="logo" ref={imgRef} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Setting up ScrollTrigger Properties
+
+In **useEffect**, let's set up **scrollTrigger** as a property within the second argument's object.
+
+We'll give it a **trigger** property and set its value to <Syntax>el</Syntax>.
+(This will be the element that triggers the animation).
+
+```jsx
+import logo from "./logo.svg";
+import "./App.css";
+import gsap from "gsap";
+import { useRef, useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+function App() {
+  const imgRef = useRef(null);
+  useEffect(() => {
+    const el = imgRef.current;
+    gsap.fromTo(
+      el,
+      { rotation: 0 },
+      {
+        rotation: 180,
+        duration: 3,
+        scrollTrigger: {
+          trigger: el,
+        },
+      }
+    );
+  }, []);
+  return (
+    <div className="App">
+      <div className="helper"></div>
+      <img src={logo} className="App-logo" alt="logo" ref={imgRef} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+Now, notice how the rotation starts when we scroll down the page and the logo enters the viewport!
+
+---
+
+If you're more of a visual learner, check out the video version of this article:
+
+<YouTube
+  id="_hbvq1TuZs8"
+  alt="gsap scrolltrigger start and end video"
+  imgSrc="/images/blog/using-gsap-scrolltrigger-with-react/using-gsap-scrolltrigger-with-react-video.jpg"
+/>
+
+<Ad
+  txt="To go further with GSAP, check out Scrollytelling 101!"
+  imgSrc="/images/ads/scrollytelling-101-course.jpg"
+  imgWidth="240"
+  imgHeight="152"
+  href="https://store.thecodecreative.com/scrollytelling"
+/>
