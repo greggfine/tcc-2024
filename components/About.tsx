@@ -1,7 +1,6 @@
 import styles from "styles/about.module.scss";
 import Image from "next/legacy/image";
 import greggAboutImg from "@/images/about/developer-gregg-fine-working-at-computer.jpg";
-import dataURL from "components/dataURL";
 import { motion } from "framer-motion";
 
 export default function About() {
@@ -23,7 +22,6 @@ export default function About() {
           className={styles.about__greggAboutImg}
           quality={70}
           placeholder="blur"
-          blurDataURL={dataURL}
           alt="Web Developer Gregg Fine working at his computer"
         />
       </motion.div>
@@ -47,17 +45,22 @@ export default function About() {
           href="https://www.youtube.com/c/TheCodeCreative"
           target="_blank"
           rel="noopener"
-		  className={styles.about__link}
+          className={styles.about__link}
         >
           The Code Creative YouTube Channel
         </a>
         , Gregg has published 19 courses with macProVideo on topics ranging from
         coding with the Web Audio API to music theory and technology. Gregg also
         actively blogs on coding, web development, and SEO on{" "}
-        <a href="/blog" className={styles.about__link}>The Code Creative Blog</a>.
+        <a href="/blog" className={styles.about__link}>
+          The Code Creative Blog
+        </a>
+        .
       </p>
       <p className={styles.about__content}>
-        Gregg lives in Westfield, NJ with his wife, his energetic {new Date().getFullYear() - 2012}-year-old daughter, and two ear-rub-loving dogs.
+        Gregg lives in Westfield, NJ with his wife, his energetic{" "}
+        {new Date().getFullYear() - 2012}-year-old daughter, and two
+        ear-rub-loving dogs.
       </p>
     </div>
   );

@@ -5,7 +5,6 @@ keynote
 brainstorming
 .prettierrc
 .env.local
-tsconfig.json
 .next
 discard
 /public/robots.txt
