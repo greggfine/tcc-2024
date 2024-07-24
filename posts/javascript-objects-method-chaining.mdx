@@ -2,7 +2,7 @@
 title: This Is Why JavaScript Method Chaining Is So Useful
 date: "October 2, 2022"
 description: Understand Method Chaining aka Function Chaining in JavaScript.
-thumbnailUrl: "/images/blog/javascript-objects-method-chaining/javascript-object-method-chaining-tutorial.jpg"
+thumbnailUrl: "./images/blog/javascript-objects-method-chaining/javascript-object-method-chaining-tutorial.jpg"
 altText: "JavaScript method chaining tutorial"
 author: "Gregg Fine"
 tags: ["web-audio-api", "javascript"]
@@ -74,7 +74,7 @@ console.log(new Sound());
 ```
 
 <Image
-  src="/images/blog/javascript-objects-method-chaining/method-chaining_empty-object.png"
+  src="./images/blog/javascript-objects-method-chaining/method-chaining_empty-object.png"
   width={600}
   height={126}
   layout="responsive"
@@ -102,7 +102,7 @@ class Sound {
 If we log that to the console, our instance object is no longer empty. We now have an **OscillatorNode** property on our object. And this **OscillatorNode** is _itself_ an object with various properties.
 
 <Image
-  src="/images/blog/javascript-objects-method-chaining/method-chaining_object-w-various-properties.png"
+  src="./images/blog/javascript-objects-method-chaining/method-chaining_object-w-various-properties.png"
   width={600}
   height={226}
   layout="responsive"
@@ -125,7 +125,7 @@ const sound2 = new Sound();
 And then, if we log each of these, we can see that we get two separate instances of the **Sound** object.
 
 <Image
-  src="/images/blog/javascript-objects-method-chaining/method-chaining_separate-instances.png"
+  src="./images/blog/javascript-objects-method-chaining/method-chaining_separate-instances.png"
   width={600}
   height={68}
   layout="responsive"
@@ -263,5 +263,8 @@ Even though we looked at **method chaining** here through the lens of web audio,
 
 **To recap**: we started by going over JavaScript's class syntax. We looked at its **constructor** function and the usage of the <Syntax>this</Syntax> keyword. We learned a bit about the **Web Audio API** and, ultimately, saw how **method chaining** can make our code more concise and clean.
 
-
-<YouTube id="uM_-OZCU9-I" alt="javascript objects and method chaining video" imgSrc="/images/blog/javascript-objects-method-chaining/javascript-objects-method-chaining-video.jpg" />
+<YouTube
+  id="uM_-OZCU9-I"
+  alt="javascript objects and method chaining video"
+  imgSrc="./images/blog/javascript-objects-method-chaining/javascript-objects-method-chaining-video.jpg"
+/>

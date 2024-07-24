@@ -2,7 +2,7 @@
 title: Autoplay Policy in Google Chrome (Critical Info for Developers)
 date: "September 28, 2022"
 description: Learn how to work with the Autoplay policy in Google Chrome for  Web Audio API developers.
-thumbnailUrl: "/images/blog/autoplay-policy-in-google-chrome/autoplay-policy-tutorial.jpg"
+thumbnailUrl: "./images/blog/autoplay-policy-in-google-chrome/autoplay-policy-tutorial.jpg"
 altText: "google chrome autoplay policy explained"
 author: "Gregg Fine"
 tags: ["web-audio-api"]
@@ -14,7 +14,7 @@ I want to talk today about the autoplay policy in Google Chrome and why it's cri
 The developers at Google decided to implement this new [autoplay policy](https://developer.chrome.com/blog/autoplay/) to help deliver better user experiences. Many of us would probably agree that going to a website and, suddenly, getting blasted with sound would be immensely annoying.
 
 <Image
-  src="/images/blog/autoplay-policy-in-google-chrome/anger.jpg"
+  src="./images/blog/autoplay-policy-in-google-chrome/anger.jpg"
   width={400}
   height={600}
   layout="fixed"
@@ -81,7 +81,7 @@ console.log(ctx.state);
 In the dev tools, we can see that the audio context is in a state of suspension. It's <Syntax>suspended</Syntax> by default.
 
 <Image
-  src="/images/blog/autoplay-policy-in-google-chrome/audioctx-suspension-reduced.png"
+  src="./images/blog/autoplay-policy-in-google-chrome/audioctx-suspension-reduced.png"
   width={600}
   height={98}
   layout="responsive"
@@ -95,7 +95,7 @@ Then, let's log the context object.
 As we can see, we have a <Syntax>state</Syntax> property with a value of <Syntax>suspended</Syntax>.
 
 <Image
-  src="/images/blog/autoplay-policy-in-google-chrome/lives-on-audioctx-object.png"
+  src="./images/blog/autoplay-policy-in-google-chrome/lives-on-audioctx-object.png"
   width={600}
   height={335}
   layout="responsive"
@@ -170,11 +170,15 @@ In this article, we talked about the <Syntax>suspended</Syntax> state and the <S
 
 Hopefully, we can now be confident that the end user will be able to hear the audio we create in the browser without being annoyed!
 
-<YouTube id="sLXcuCrBL-M" alt="autoplay policy in google chrome video" imgSrc="/images/blog/autoplay-policy-in-google-chrome/autoplay-policy-in-google-chrome-video.jpg" />
+<YouTube
+  id="sLXcuCrBL-M"
+  alt="autoplay policy in google chrome video"
+  imgSrc="./images/blog/autoplay-policy-in-google-chrome/autoplay-policy-in-google-chrome-video.jpg"
+/>
 
 <Ad
   txt="To go further with the Web Audio API, check out Coding for Musicians 101"
-  imgSrc="/images/ads/coding-for-musicians-course.jpg"
+  imgSrc="./images/ads/coding-for-musicians-course.jpg"
   imgWidth="240"
   imgHeight="240"
   href="https://www.macprovideo.com/course/web-audio-explored?afid=LYaI709I1H"

@@ -9,11 +9,11 @@ import Radium, { StyleRoot } from "radium";
 const style = {
   "@media (max-width: 960px)": {
     backgroundImage:
-      'url("/images/portfolio/unsplash/web-design-computer-setup_mobile.webp")',
+      'url("./images/portfolio/unsplash/web-design-computer-setup_mobile.webp")',
   },
   "@media (min-width: 960px)": {
     backgroundImage:
-      'url("/images/portfolio/unsplash/web-design-computer-setup.webp")',
+      'url("./images/portfolio/unsplash/web-design-computer-setup.webp")',
   },
 };
 
@@ -27,13 +27,13 @@ function Portfolio(props) {
       <Head>
         <link
           rel="preload"
-          href="/images/portfolio/unsplash/web-design-computer-setup_mobile.webp"
+          href="./images/portfolio/unsplash/web-design-computer-setup_mobile.webp"
           as="image"
           media="{max-width: 960px}"
         />
         <link
           rel="preload"
-          href="/images/portfolio/unsplash/web-design-computer-setup.webp"
+          href="./images/portfolio/unsplash/web-design-computer-setup.webp"
           as="image"
           media="{min-width: 960px}"
         />
@@ -43,7 +43,9 @@ function Portfolio(props) {
           <div className={styles.Portfolio__heading} style={style}></div>
 
           <div className={styles.Portfolio__websitesWrapper}>
-            <h2 className={styles.Portfolio__wrapperHeading}>Websites & Apps</h2>
+            <h2 className={styles.Portfolio__wrapperHeading}>
+              Websites & Apps
+            </h2>
             <ul className={styles.Portfolio__websites}>
               {websites.sites.map((site, idx) => (
                 <Website website={site} key={idx} />

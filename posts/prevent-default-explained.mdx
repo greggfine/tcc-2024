@@ -2,7 +2,7 @@
 title: preventDefault Explained in JavaScript
 date: "October 12, 2022"
 description: JavaScript's preventDefault method allows you to prevent the browser's default behavior when events are fired.
-thumbnailUrl: "/images/blog/prevent-default-explained-in-javascript/prevent-default-tutorial.jpg"
+thumbnailUrl: "./images/blog/prevent-default-explained-in-javascript/prevent-default-tutorial.jpg"
 altText: "JavaScript preventDefault tutorial"
 author: "Gregg Fine"
 tags: ["coding", "javascript"]
@@ -24,7 +24,7 @@ For example, let's say we had an **anchor** tag for "wikipedia.org"
 ```
 
 <Image
-  src="/images/blog/prevent-default-explained-in-javascript/wiki.png"
+  src="./images/blog/prevent-default-explained-in-javascript/wiki.png"
   width={914}
   height={374}
   layout="responsive"
@@ -52,7 +52,7 @@ For example, by default, clicking on an input of type **checkbox** toggles it on
 ```
 
 <Image
-  src="/images/blog/prevent-default-explained-in-javascript/checkbox-1.png"
+  src="./images/blog/prevent-default-explained-in-javascript/checkbox-1.png"
   width={1251}
   height={360}
   layout="responsive"
@@ -62,7 +62,7 @@ For example, by default, clicking on an input of type **checkbox** toggles it on
 <br />
 
 <Image
-  src="/images/blog/prevent-default-explained-in-javascript/checkbox-2.png"
+  src="./images/blog/prevent-default-explained-in-javascript/checkbox-2.png"
   width={1113}
   height={383}
   layout="responsive"
@@ -103,7 +103,7 @@ when the **contextmenu** event type is fired.
 The **contextmenu**, fired by right-clicking the mouse or with a control-click(_on a Mac_), looks something like this:
 
 <Image
-  src="/images/blog/prevent-default-explained-in-javascript/context-menu.png"
+  src="./images/blog/prevent-default-explained-in-javascript/context-menu.png"
   width={1922}
   height={1088}
   layout="responsive"
@@ -116,7 +116,7 @@ The **contextmenu**, fired by right-clicking the mouse or with a control-click(_
 And note that whenever we use **addEventListener**, we automatically get access to an **event object**.
 
 <Image
-  src="/images/blog/prevent-default-explained-in-javascript/event-object.png"
+  src="./images/blog/prevent-default-explained-in-javascript/event-object.png"
   width={2860}
   height={1608}
   layout="responsive"
@@ -135,7 +135,7 @@ If we fire that **contextmenu** event, we can see the **event object** in the co
 (_it's a **PointerEvent** in this case_)
 
 <Image
-  src="/images/blog/prevent-default-explained-in-javascript/pointer-event.png"
+  src="./images/blog/prevent-default-explained-in-javascript/pointer-event.png"
   width={2804}
   height={1524}
   layout="responsive"
@@ -165,7 +165,7 @@ Let's also create a <Syntax>p</Syntax> tag with the text content "Right-click fo
 ```
 
 <Image
-  src="/images/blog/prevent-default-explained-in-javascript/spicy-surprise.png"
+  src="./images/blog/prevent-default-explained-in-javascript/spicy-surprise.png"
   width={1524}
   height={784}
   layout="responsive"
@@ -233,7 +233,7 @@ window.addEventListener("contextmenu", (e) => {
 Ok, time to right-click and see what happens...
 
 <Image
-  src="/images/blog/prevent-default-explained-in-javascript/spice-girls.png"
+  src="./images/blog/prevent-default-explained-in-javascript/spice-girls.png"
   width={1590}
   height={1100}
   layout="responsive"
@@ -249,7 +249,7 @@ If we hadn't used **preventDefault** and tried to right-click, you'll see the co
 And that's not a very good user experience, is it? 😃
 
 <Image
-  src="/images/blog/prevent-default-explained-in-javascript/spice-girls-blocked.png"
+  src="./images/blog/prevent-default-explained-in-javascript/spice-girls-blocked.png"
   width={1886}
   height={1338}
   layout="responsive"
@@ -265,11 +265,15 @@ By using **preventDefault**, we can stop the browser's default behavior and subs
 
 Check out the video below to further solidify your understanding of **preventDefault** in JavaScript!
 
-<YouTube id="iHEN0obf3TA" alt="javascript prevent default video" imgSrc="/images/blog/prevent-default-explained-in-javascript/javascript-prevent-default-video.jpg" />
+<YouTube
+  id="iHEN0obf3TA"
+  alt="javascript prevent default video"
+  imgSrc="./images/blog/prevent-default-explained-in-javascript/javascript-prevent-default-video.jpg"
+/>
 
 <Ad
   txt="To go further with this topic, check out DOM Events and JavaScript"
-  imgSrc="/images/ads/dom-events-and-javascript-course.jpg"
+  imgSrc="./images/ads/dom-events-and-javascript-course.jpg"
   imgWidth="240"
   imgHeight="135"
   href="https://store.thecodecreative.com/dom-events-and-javascript"

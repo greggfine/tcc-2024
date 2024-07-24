@@ -2,7 +2,7 @@
 title: DOM Events and the Prototype Chain
 date: "October 13, 2022"
 description: DOM Events and the Prototype Cahin
-thumbnailUrl: "/images/blog/dom-events-and-the-prototype-chain/dom-events-and-the-prototype-chain_thumb.jpg"
+thumbnailUrl: "./images/blog/dom-events-and-the-prototype-chain/dom-events-and-the-prototype-chain_thumb.jpg"
 author: "Gregg Fine"
 tags: ["dom", "javascript"]
 ---
@@ -12,7 +12,7 @@ In this article, let's explore DOM events and the prototype chain in JavaScript.
 What I'm curious about, in particular, is the **addEventListener** method that we work with all the time to listen to and handle DOM events.
 
 <Image
-  src="/images/blog/dom-events-and-the-prototype-chain/add-event-listener.png"
+  src="./images/blog/dom-events-and-the-prototype-chain/add-event-listener.png"
   width={2250}
   height={428}
   layout="responsive"
@@ -32,7 +32,7 @@ alert(btn);
 ```
 
 <Image
-  src="/images/blog/dom-events-and-the-prototype-chain/alert.png"
+  src="./images/blog/dom-events-and-the-prototype-chain/alert.png"
   width={1447}
   height={377}
   layout="responsive"
@@ -44,7 +44,7 @@ Let's use **console.dir** to examine the properties of this button object in the
 If we expand it, we can see a myriad of properties available on it.
 
 <Image
-  src="/images/blog/dom-events-and-the-prototype-chain/button-object.png"
+  src="./images/blog/dom-events-and-the-prototype-chain/button-object.png"
   width={1200}
   height={606}
   layout="responsive"
@@ -61,7 +61,7 @@ On the bottom of this diagram, you can see the **HTMLButtonElement**.
 This **HTMLButtonElement** is an object and it happens to also be the prototype of our <Syntax>button</Syntax>. (_Remember, we're working within the context of the **DOM**, the "document object model"_).
 
 <Image
-  src="/images/blog/dom-events-and-the-prototype-chain/bottom-of-chain.png"
+  src="./images/blog/dom-events-and-the-prototype-chain/bottom-of-chain.png"
   width={1732}
   height={1456}
   layout="responsive"
@@ -73,7 +73,7 @@ Had we continued to scroll down through the properties and methods of our <Synta
 we would have eventually see this **HTMLButtonElement** prototype.
 
 <Image
-  src="/images/blog/dom-events-and-the-prototype-chain/html-button-element.png"
+  src="./images/blog/dom-events-and-the-prototype-chain/html-button-element.png"
   width={1055}
   height={527}
   layout="responsive"
@@ -94,7 +94,7 @@ Let's keep exploring...
 If we continue scrolling, notice that some properties and methods are bolded and some aren't.
 
 <Image
-  src="/images/blog/dom-events-and-the-prototype-chain/bold-v-non-bold.png"
+  src="./images/blog/dom-events-and-the-prototype-chain/bold-v-non-bold.png"
   width={1348}
   height={1338}
   layout="responsive"
@@ -108,7 +108,7 @@ If we continue scrolling, notice that some properties and methods are bolded and
 Let's proceed up the prototype chain and look at the next prototype: the **HTMLElement**.
 
 <Image
-  src="/images/blog/dom-events-and-the-prototype-chain/html-element.png"
+  src="./images/blog/dom-events-and-the-prototype-chain/html-element.png"
   width={1730}
   height={1482}
   layout="responsive"
@@ -195,7 +195,7 @@ This is the thing that gives those html elements the ability to listen to and re
 Also interesting is that, if we look at the prototype of the event target, what we can see is that we have the base JavaScript object.
 
 <Image
-  src="/images/blog/dom-events-and-the-prototype-chain/event-target.png"
+  src="./images/blog/dom-events-and-the-prototype-chain/event-target.png"
   width={1670}
   height={1460}
   layout="responsive"
