@@ -2,43 +2,43 @@
   "sites": [
     {
       "name": "Colpepper Audio",
-      "img": "/images/portfolio/colpepperAudioSite.png",
+      "img": "./images/portfolio/colpepperAudioSite.png",
       "link": "https://colpepperaudio.com/",
       "description": "Custom Website Design"
     },
     {
       "name": "Embers Music",
-      "img": "/images/portfolio/embersMusicSite.jpg",
+      "img": "./images/portfolio/embersMusicSite.jpg",
       "link": "https://embersmusic.net/",
       "description": "Custom Website Design"
     },
     {
       "name": "Suite109 Costumes",
-      "img": "/images/portfolio/suite109Site.jpg",
+      "img": "./images/portfolio/suite109Site.jpg",
       "link": "https://suite109costumes.co.uk/",
       "description": "Custom E-Commerce Website"
     },
     {
       "name": "Gregg Fine Dev",
-      "img": "/images/portfolio/greggFineDev_site.png",
+      "img": "./images/portfolio/greggFineDev_site.png",
       "link": "https://greggfinedev.com/",
       "description": "Custom Web Developer Portfolio"
     },
     {
       "name": "Hidden Tiger Music Inc.",
-      "img": "/images/portfolio/hiddenTigerMusicSite.jpg",
+      "img": "./images/portfolio/hiddenTigerMusicSite.jpg",
       "link": "http://hiddentigermusic.com/",
       "description": "Custom Website Design"
     },
     {
       "name": "Synth Explorer",
-      "img": "/images/portfolio/synthExplorer_site.png",
+      "img": "./images/portfolio/synthExplorer_site.png",
       "link": "https://greggfine.github.io/synth-explorer-2020/#!/home",
       "description": "A Code Creative project"
     },
     {
       "name": "Gregg Fine Guitar",
-      "img": "/images/portfolio/greggFineGuitarSite.jpg",
+      "img": "./images/portfolio/greggFineGuitarSite.jpg",
       "link": "https://greggfine.github.io/Guitar-Website/",
       "description": "Custom Website Design"
     }
@@ -46,25 +46,25 @@
   "apps": [
     {
       "name": "Jazz Guitar Game",
-      "img": "/images/portfolio/jazzGuitarGame_app.png",
+      "img": "./images/portfolio/jazzGuitarGame_app.png",
       "link": "https://www.greggfineguitar.com",
       "description": "A Code Creative project"
     },
     {
       "name": "Rhythmic Ear Trainer",
-      "img": "/images/portfolio/rhythmicEarTrainer_app.png",
+      "img": "./images/portfolio/rhythmicEarTrainer_app.png",
       "link": "https://greggfine.github.io/subdivision-app/",
       "description": "A Code Creative project"
     },
     {
       "name": "Music Library Search",
-      "img": "/images/portfolio/searchableMusicLibrary_app.png",
+      "img": "./images/portfolio/searchableMusicLibrary_app.png",
       "link": "https://evening-brushlands-33051.herokuapp.com/",
       "description": "A Code Creative project"
     },
     {
       "name": "Social Sharing App",
-      "img": "/images/portfolio/socialSharingApp.jpg",
+      "img": "./images/portfolio/socialSharingApp.jpg",
       "link": "https://salty-bayou-12671.herokuapp.com/",
       "description": "A Code Creative project"
     }

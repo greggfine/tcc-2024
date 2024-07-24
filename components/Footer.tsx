@@ -15,7 +15,7 @@ export default () => (
   <footer className={styles.Footer}>
     <div className={styles.Footer__logoWrapper}>
       <img
-        src="/images/footer/logo/the-code-creative_logo-dark_003.svg"
+        src="./images/footer/logo/the-code-creative_logo-dark_003.svg"
         alt="The Code Creative Logo"
         width="200"
         height="100"

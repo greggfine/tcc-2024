@@ -20,7 +20,7 @@ class MyDocument extends Document {
             content="IE=edge,chrome=1"
             httpEquiv="X-UA-Compatible"
           />{" "}
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="./favicon.png" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"

@@ -2,56 +2,56 @@
   "sites": [
     {
       "name": "Colpepper Audio",
-      "img": "/images/portfolio/colpepper-audio-website.png",
+      "img": "./images/portfolio/colpepper-audio-website.png",
       "link": "https://colpepperaudio.com/",
       "description": "Custom Website Design",
       "altText": "Website for music company Colpepper Audio"
     },
     {
       "name": "Embers Music",
-      "img": "/images/portfolio/embers-music-website.jpg",
+      "img": "./images/portfolio/embers-music-website.jpg",
       "link": "https://embersmusic.net/",
       "description": "Custom Website Design",
       "altText": "Website for music artist Embers Music"
     },
     {
       "name": "Suite109 Costumes",
-      "img": "/images/portfolio/suite-109-website.jpg",
+      "img": "./images/portfolio/suite-109-website.jpg",
       "link": "https://suite109costumes.co.uk/",
       "description": "Custom E-Commerce Website",
       "altText": "Custom e-commerce website for costume shop Suite 109 Costumes"
     },
     {
       "name": "Gregg Fine Dev",
-      "img": "/images/portfolio/gregg-fine-dev-website.png",
+      "img": "./images/portfolio/gregg-fine-dev-website.png",
       "link": "https://greggfinedev.com/",
       "description": "Custom Web Developer Portfolio",
       "altText": "Website for Web Developer Gregg Fine"
     },
     {
       "name": "Hidden Tiger Music Inc.",
-      "img": "/images/portfolio/hidden-tiger-music-website.jpg",
+      "img": "./images/portfolio/hidden-tiger-music-website.jpg",
       "link": "http://hiddentigermusic.com/",
       "description": "Custom Website Design",
       "altText": "Website for music for branding company Hidden Tiger Music"
     },
     {
       "name": "Gregg Fine Guitar",
-      "img": "/images/portfolio/gregg-fine-guitar-website.jpg",
+      "img": "./images/portfolio/gregg-fine-guitar-website.jpg",
       "link": "https://greggfine.github.io/Guitar-Website/",
       "description": "Custom Website Design",
       "altText": "Website for guitarist Gregg Fine"
     },
     {
       "name": "Jazz Guitar Game",
-      "img": "/images/portfolio/jazz-guitar-game-web-app.png",
+      "img": "./images/portfolio/jazz-guitar-game-web-app.png",
       "link": "https://greggfine.github.io/jazz-guitar-game-2/",
       "description": "JavaScript game in which players have to identify the Jazz guitarist",
       "altText": "JavaScript game developed by Gregg Fine in which players have to identify the Jazz guitarist"
     },
     {
       "name": "Rhythmic Ear Trainer",
-      "img": "/images/portfolio/rhythmic-ear-trainer-web-app.png",
+      "img": "./images/portfolio/rhythmic-ear-trainer-web-app.png",
       "link": "https://greggfine.github.io/subdivision-app/",
       "description": "Musical rhythmic ear training game coded with React and Redux.",
       "altText": "Musical rhythmic ear training game coded with React and Redux and created by The Code Creative"
@@ -60,28 +60,28 @@
   "apps": [
     {
       "name": "Jazz Guitar Game",
-      "img": "/images/portfolio/jazz-guitar-game-web-app.png",
+      "img": "./images/portfolio/jazz-guitar-game-web-app.png",
       "link": "https://greggfine.github.io/jazz-guitar-game-2/",
       "description": "JavaScript game in which players have to identify the Jazz guitarist",
       "altText": "JavaScript game developed by Gregg Fine in which players have to identify the Jazz guitarist"
     },
     {
       "name": "Rhythmic Ear Trainer",
-      "img": "/images/portfolio/rhythmic-ear-trainer-web-app.png",
+      "img": "./images/portfolio/rhythmic-ear-trainer-web-app.png",
       "link": "https://greggfine.github.io/subdivision-app/",
       "description": "Musical rhythmic ear training game coded with React and Redux.",
       "altText": "Musical rhythmic ear training game coded with React and Redux and created by The Code Creative"
     },
     {
       "name": "Music Library Search",
-      "img": "/images/portfolio/searchable-music-library-web-app.png",
+      "img": "./images/portfolio/searchable-music-library-web-app.png",
       "link": "https://evening-brushlands-33051.herokuapp.com/",
       "description": "Custom searchable music library web app.",
       "altText": "Custom searchable music library web app coded by Gregg Fine"
     },
     {
       "name": "Social Sharing App",
-      "img": "/images/portfolio/social-sharing-web-app.jpg",
+      "img": "./images/portfolio/social-sharing-web-app.jpg",
       "link": "https://salty-bayou-12671.herokuapp.com/",
       "description": "Social sharing web application developed with NodeJS, MongoDB, and SocketIO.",
       "altText": "Social sharing web application developed with NodeJS, MongoDB, and SocketIO by The Code Creative"
