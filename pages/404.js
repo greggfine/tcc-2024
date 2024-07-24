@@ -24,7 +24,7 @@ const PageNotFound = () => {
             variant="outline-primary"
             className={styles.Error__linkgroup__link}
           >
-            Check out some courses!
+            Check out some courses!!
           </Button>
         </Link>
       </div>
