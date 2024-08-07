@@ -14,7 +14,7 @@ I want to talk today about the autoplay policy in Google Chrome and why it's cri
 The developers at Google decided to implement this new [autoplay policy](https://developer.chrome.com/blog/autoplay/) to help deliver better user experiences. Many of us would probably agree that going to a website and, suddenly, getting blasted with sound would be immensely annoying.
 
 <Image
-  src="./images/blog/autoplay-policy-in-google-chrome/anger.jpg"
+  src="/images/blog/autoplay-policy-in-google-chrome/anger.jpg"
   width={400}
   height={600}
   layout="fixed"
@@ -81,7 +81,7 @@ console.log(ctx.state);
 In the dev tools, we can see that the audio context is in a state of suspension. It's <Syntax>suspended</Syntax> by default.
 
 <Image
-  src="./images/blog/autoplay-policy-in-google-chrome/audioctx-suspension-reduced.png"
+  src="https://greggfine.github.io/tcc-2024/images/blog/autoplay-policy-in-google-chrome/audioctx-suspension-reduced.png"
   width={600}
   height={98}
   layout="responsive"
@@ -95,7 +95,7 @@ Then, let's log the context object.
 As we can see, we have a <Syntax>state</Syntax> property with a value of <Syntax>suspended</Syntax>.
 
 <Image
-  src="./images/blog/autoplay-policy-in-google-chrome/lives-on-audioctx-object.png"
+  src="images/blog/autoplay-policy-in-google-chrome/lives-on-audioctx-object.png"
   width={600}
   height={335}
   layout="responsive"
