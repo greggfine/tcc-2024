@@ -1,25 +1,25 @@
 [
   {
     "title": "Website Development & Design",
-    "src": "/images/services/website-and-development-icon.png",
+    "src": "/./images/services/website-and-development-icon.png",
     "alt": "web development and design service",
     "content": "From creating a completely custom-designed website to helping you build a site on your platform of choice (WordPress, Squarespace, Shopify, etc.), The Code Creative has the tools and experience to get it done. We focus on bringing out your brand’s theme and understanding your audience, ultimately creating a cohesive and powerful experience that drives customer engagement."
   },
   {
     "title": "Custom Web Apps",
-    "src": "/images/services/custom-web-app-icon.png",
+    "src": "/./images/services/custom-web-app-icon.png",
     "alt": "custom web app service",
     "content": "From E-Commerce applications to your custom business app, The Code Creative provides full-stack web development skills to turn your ideas into reality. A custom web app can act as a unique promotional tool for your brand, helping you bond with your customers. On a more practical level, a custom web app can help your business automate time-consuming tasks and achieve greater productivity."
   },
   {
     "title": "Website Redesign",
-    "src": "/images/services/website-redesign-icon.png",
+    "src": "/./images/services/website-redesign-icon.png",
     "alt": "website redesign service",
     "content": "The Code Creative offers analysis and redesign of your current site to find better ways to serve your visitors. Is your content's messaging effective? Does your site's layout provide an elegant and easy-to-navigate user experience? What about color contrast? Is your site easy to read or are you, unknowingly, turning visitors away? The bottom line is that a better user experience can keep people on your site longer and boost revenue."
   },
   {
     "title": "Web Education & Coaching",
-    "src": "/images/services/web-education-and-coaching-icon.png",
+    "src": "/./images/services/web-education-and-coaching-icon.png",
     "alt": "web education and coaching service",
     "content": "The Code Creative's Gregg Fine offers private lessons and coaching to business owners who maintain their websites. Gregg teaches you how to work with your CMS (WordPress, Shopify, etc.) to update your content, optimize your images, and much more. Gregg also offers coaching sessions to aspiring web developers to help them develop their coding skills with a focus on JavaScript, HTML, and CSS."
   }
