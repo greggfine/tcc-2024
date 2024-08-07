@@ -16,18 +16,18 @@ export default function About() {
         transition={{ duration: 0.9, type: "spring", stiffness: 50 }}
         className={styles.about__imgContainer}
       >
-        {/* <Image
+        <Image
           src={greggAboutImg}
           layout="responsive"
           className={styles.about__greggAboutImg}
           quality={70}
           alt="Web Developer Gregg Fine working at his computer"
-        /> */}
-        <img
-          src="./images/about/developer-gregg-fine-working-at-computer.jpg"
+        />
+        {/* <img
+          src="/images/about/developer-gregg-fine-working-at-computer.jpg"
           className={styles.about__greggAboutImg}
           alt="Web Developer Gregg Fine working at his computer"
-        />
+        /> */}
       </motion.div>
       <p className={styles.about__content}>
         Gregg Fine, aka "The Code Creative", is a full-stack web developer who
