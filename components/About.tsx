@@ -16,11 +16,16 @@ export default function About() {
         transition={{ duration: 0.9, type: "spring", stiffness: 50 }}
         className={styles.about__imgContainer}
       >
-        <Image
+        {/* <Image
           src={greggAboutImg}
           layout="responsive"
           className={styles.about__greggAboutImg}
           quality={70}
+          alt="Web Developer Gregg Fine working at his computer"
+        /> */}
+        <img
+          src="./images/about/developer-gregg-fine-working-at-computer.jpg"
+          className={styles.about__greggAboutImg}
           alt="Web Developer Gregg Fine working at his computer"
         />
       </motion.div>

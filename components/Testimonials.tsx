@@ -23,12 +23,17 @@ const Testimonials = () => {
               <p className={styles.testimonials__card__quote}>
                 {testimonial.quote}
               </p>
-              <Image
+              {/* <Image
                 src={testimonial.img}
                 alt={`The Code Creative client ${testimonial.name}`}
                 className={styles.testimonials__card__img}
                 width={240}
                 height={240}
+              /> */}
+              <img
+                src={testimonial.img}
+                alt={`The Code Creative client ${testimonial.name}`}
+                className={styles.testimonials__card__img}
               />
               <div className={styles.testimonials__card__infoWrapper}>
                 <p className={styles.testimonials__card__name}>
