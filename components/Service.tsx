@@ -3,6 +3,7 @@ import Image from "next/image";
 const Service = ({ src, alt, title, content }) => {
   return (
     <div className={styles.CardGrid__serviceCard}>
+      <h1>TEST</h1>
       <Image
         src={src}
         alt={alt}
