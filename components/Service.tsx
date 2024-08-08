@@ -12,7 +12,6 @@ const Service = ({ src, alt, title, content }) => {
         width={60}
         height={60}
       />
-      {/* <img src={src} alt={alt} className={styles.CardGrid__cardIcon} /> */}
       <h2 className={styles.CardGrid__serviceCardTitle}>{title}</h2>
       <p className={styles.CardGrid__secondaryCardContent}>{content}</p>
     </div>
