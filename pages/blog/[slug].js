@@ -21,9 +21,20 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 import { basePath } from "basePath";
 
-const ResponsiveImage = (props) => (
-  <Image alt={props.alt} layout="responsive" {...props} />
-);
+// const ResponsiveImage = (props) => (
+//   <Image alt={props.alt} layout="responsive" {...props} />
+// );
+
+const ResponsiveImage = (props) => {
+  let src = props.src;
+
+  if (process.env.NODE_ENV === "production") {
+    // Prepend the basePath for production
+    src = `${basePath}${src}`;
+  }
+
+  <Image alt={props.alt} layout="responsive" {...props} src={src} />;
+};
 
 import "highlight.js/styles/atom-one-dark.css";
 

@@ -15,7 +15,7 @@ Have you ever had that annoying situation where you can't get your foreground
 text to contrast enough with your background image?
 
 <Image
-  src="./images/blog/how-to-change-css-bg-image-opacity/low-contrast-image.png"
+  src="/images/blog/how-to-change-css-bg-image-opacity/low-contrast-image.png"
   width={600}
   height={278}
   layout="responsive"
@@ -31,7 +31,7 @@ image and try lowering its opacity.
 But then, lo and behold, you notice that the foreground text opacity has also been reduced. 😠
 
 <Image
-  src="./images/blog/how-to-change-css-bg-image-opacity/lower-contrast-image.png"
+  src="/images/blog/how-to-change-css-bg-image-opacity/lower-contrast-image.png"
   width={600}
   height={278}
   layout="responsive"
@@ -64,7 +64,7 @@ section {
   height: 100vh;
   display: grid;
   place-items: center;
-  background-image: url("./images/pexels-magda-ehlers-714482.jpg");
+  background-image: url("/images/pexels-magda-ehlers-714482.jpg");
   background-size: cover;
   opacity: 0.3;
 }
@@ -93,7 +93,7 @@ section {
   height: 100vh;
   display: grid;
   place-items: center;
-  background-image: url("./images/pexels-magda-ehlers-714482.jpg");
+  background-image: url("/images/pexels-magda-ehlers-714482.jpg");
   background-size: cover;
 }
 
@@ -111,7 +111,7 @@ h1 {
 We can see that pseudo-element in Google Chrome's developer console.
 
 <Image
-  src="./images/blog/how-to-change-css-bg-image-opacity/pseudo-element-in-the-console.png"
+  src="/images/blog/how-to-change-css-bg-image-opacity/pseudo-element-in-the-console.png"
   width={600}
   height={313}
   layout="responsive"
@@ -131,7 +131,7 @@ section {
 }
 
 section::before {
-  background-image: url("./images/pexels-magda-ehlers-714482.jpg");
+  background-image: url("/images/pexels-magda-ehlers-714482.jpg");
   background-size: cover;
   content: "";
 }
@@ -150,7 +150,7 @@ To accomplish this, we'll give it a **position: absolute**.
 
 ```css
 section::before {
-  background-image: url("./images/pexels-magda-ehlers-714482.jpg");
+  background-image: url("/images/pexels-magda-ehlers-714482.jpg");
   background-size: cover;
   content: "";
   position: absolute;
@@ -186,7 +186,7 @@ section {
 }
 
 section::before {
-  background-image: url("./images/pexels-magda-ehlers-714482.jpg");
+  background-image: url("/images/pexels-magda-ehlers-714482.jpg");
   background-size: cover;
   content: "";
   position: absolute;
@@ -200,7 +200,7 @@ section::before {
 Now you'll see the background image magically appear in the viewport! ✨✨✨
 
 <Image
-  src="./images/blog/how-to-change-css-bg-image-opacity/foreground-text-not-visible.png"
+  src="/images/blog/how-to-change-css-bg-image-opacity/foreground-text-not-visible.png"
   width={600}
   height={276}
   layout="responsive"
@@ -246,7 +246,7 @@ section {
 }
 
 section::before {
-  background-image: url("./images/pexels-magda-ehlers-714482.jpg");
+  background-image: url("/images/pexels-magda-ehlers-714482.jpg");
   background-size: cover;
   content: "";
   position: absolute;
@@ -261,7 +261,7 @@ h1 {
 ```
 
 <Image
-  src="./images/blog/how-to-change-css-bg-image-opacity/good-contrast-image.png"
+  src="/images/blog/how-to-change-css-bg-image-opacity/good-contrast-image.png"
   width={600}
   height={284}
   layout="responsive"
@@ -281,12 +281,12 @@ If you're more of a visual learner, check out the video version of this article:
 <YouTube
   id="pyPfpXaH2kY"
   alt="How to Change CSS Background Image Opacity video"
-  imgSrc="./images/blog/how-to-change-css-bg-image-opacity/how-to-change-bg-image-opacity-tutorial.jpg"
+  imgSrc="/images/blog/how-to-change-css-bg-image-opacity/how-to-change-bg-image-opacity-tutorial.jpg"
 />
 
 <Ad
   txt="To take your web development skills to the next level, check out DOM Events and JavaScript"
-  imgSrc="./images/ads/dom-events-and-javascript-course.jpg"
+  imgSrc="/images/ads/dom-events-and-javascript-course.jpg"
   imgWidth="240"
   imgHeight="135"
   href="https://store.thecodecreative.com/dom-events-and-javascript"
