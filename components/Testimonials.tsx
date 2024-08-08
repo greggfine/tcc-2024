@@ -2,6 +2,7 @@ import styles from "styles/testimonials.module.scss";
 import testimonialData from "data/testimonials.json";
 import { motion } from "framer-motion";
 import Image from "next/image";
+const basePath = "/tcc-2024";
 
 const Testimonials = () => {
   return (
@@ -24,7 +25,7 @@ const Testimonials = () => {
                 {testimonial.quote}
               </p>
               <Image
-                src={testimonial.img}
+                src={`${basePath}${testimonial.img}`}
                 alt={`The Code Creative client ${testimonial.name}`}
                 className={styles.testimonials__card__img}
                 width={240}
