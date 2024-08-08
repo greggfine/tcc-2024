@@ -1,5 +1,7 @@
 import Image from "next/legacy/image";
 import styles from "styles/courses.module.scss";
+import { basePath } from "basePath";
+
 const Course = ({
   imgSrc,
   imgAlt,
@@ -14,7 +16,11 @@ const Course = ({
   return (
     <div className={styles.courses__course}>
       <Image
-        src={imgSrc}
+        src={
+          process.env.NODE_ENV === "production"
+            ? `${basePath}${imgSrc}`
+            : `${imgSrc}`
+        }
         className={styles.courses__img}
         priority={true}
         alt={imgAlt}

@@ -1,6 +1,6 @@
 [
   {
-    "imgSrc": "./images/courses/coding-for-musicians-course.jpg",
+    "imgSrc": "/images/courses/coding-for-musicians-course.jpg",
     "imgAlt": "Web Audio API course by Gregg Fine available from macProVideo",
     "imgWidth": 500,
     "imgHeight": 500,
@@ -11,7 +11,7 @@
     "linkText": "Get the course"
   },
   {
-    "imgSrc": "./images/courses/scrollytelling-101-course.jpg",
+    "imgSrc": "/images/courses/scrollytelling-101-course.jpg",
     "imgAlt": "Scrollytelling 101 course exploring GSAP's ScrollTrigger and web animation",
     "imgWidth": 789,
     "imgHeight": 500,
@@ -22,7 +22,7 @@
     "linkText": "Get the course"
   },
   {
-    "imgSrc": "./images/courses/dom-events-and-javascript-course.jpg",
+    "imgSrc": "/images/courses/dom-events-and-javascript-course.jpg",
     "imgAlt": "DOM Events and JavaScript course by The Code Creative",
     "imgWidth": 789,
     "imgHeight": 444,
@@ -33,7 +33,7 @@
     "linkText": "Get the course"
   },
   {
-    "imgSrc": "./images/courses/ultimate-dom-and-js-workout-course.jpg",
+    "imgSrc": "/images/courses/ultimate-dom-and-js-workout-course.jpg",
     "imgAlt": "The Ultimate DOM and JavaScript Workout Course: a free web development course with a series of fun coding challenges",
     "imgWidth": 798,
     "imgHeight": 444,
@@ -44,7 +44,7 @@
     "linkText": "Get the course"
   },
   {
-    "imgSrc": "./images/courses/the-code-creative-youtube-channel.jpg",
+    "imgSrc": "/images/courses/the-code-creative-youtube-channel.jpg",
     "imgAlt": "The Code Creative YouTube Channel which teaches modern web development skills",
     "imgWidth": 500,
     "imgHeight": 500,

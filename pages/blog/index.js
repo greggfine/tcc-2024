@@ -6,6 +6,7 @@ import { useState } from "react";
 import Pagination from "components/Pagination.tsx";
 import { NextSeo } from "next-seo";
 import Search from "components/Search.tsx";
+import { basePath } from "basePath";
 
 export default function Blog({ posts }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,7 +53,12 @@ export default function Blog({ posts }) {
                     <div className={styles.Blog__img}>
                       {post.frontMatter.thumbnailUrl ? (
                         <Image
-                          src={post.frontMatter.thumbnailUrl}
+                          // src={post.frontMatter.thumbnailUrl}
+                          src={
+                            process.env.NODE_ENV === "production"
+                              ? `${basePath}${post.frontMatter.thumbnailUrl}`
+                              : `${post.frontMatter.thumbnailUrl}`
+                          }
                           alt={post.frontMatter.altText}
                           width={450}
                           height={275}

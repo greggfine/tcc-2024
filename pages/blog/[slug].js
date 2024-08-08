@@ -19,6 +19,8 @@ import rehypeSlug from "rehype-slug";
 import rehypeHighlight from "rehype-highlight";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
+import { basePath } from "basePath";
+
 const ResponsiveImage = (props) => (
   <Image alt={props.alt} layout="responsive" {...props} />
 );
@@ -116,7 +118,12 @@ const PostPage = ({
           <div>
             {thumbnailUrl ? (
               <Image
-                src={thumbnailUrl}
+                // src={thumbnailUrl}
+                src={
+                  process.env.NODE_ENV === "production"
+                    ? `${basePath}${thumbnailUrl}`
+                    : `${thumbnailUrl}`
+                }
                 alt={altText}
                 width={700}
                 height={420}
