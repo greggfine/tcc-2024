@@ -11,15 +11,14 @@ const Navigation = () => {
   let [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [hasScrolled] = useState(false);
   const handleClick = () => {
-    console.log("clic");
-    setIsOpen(() => (isOpen = !isOpen));
+    // console.log("clic");
     setIsSideMenuOpen(() => (isSideMenuOpen = !isSideMenuOpen));
+    setIsOpen(() => (isOpen = !isOpen));
   };
   return (
     <header
       className={hasScrolled ? styles.siteHeader : styles.siteHeader__init}
     >
-      {/* HAMBURGER MENU */}
       <div
         className={
           isOpen
@@ -70,11 +69,25 @@ const Navigation = () => {
                       : styles.siteHeader__brandNameInit
                   }
                 >
-                  <img
+                  {/* <img
                     src={
                       hasScrolled
                         ? `${basePath}/images/nav/logo/the-code-creative-logo-dark.svg`
                         : `${basePath}/images/nav/logo/the-code-creative-logo-light.svg`
+                    }
+                    alt="The Code Creative logo"
+                    width="200"
+                    height="100"
+                  /> */}
+                  <img
+                    src={
+                      hasScrolled && process.env.NODE_ENV === "production"
+                        ? `${basePath}/images/nav/logo/the-code-creative-logo-dark.svg`
+                        : !hasScrolled && process.env.NODE_ENV === "production"
+                        ? `${basePath}/images/nav/logo/the-code-creative-logo-light.svg`
+                        : hasScrolled
+                        ? `/images/nav/logo/the-code-creative-logo-dark.svg`
+                        : `/images/nav/logo/the-code-creative-logo-light.svg`
                     }
                     alt="The Code Creative logo"
                     width="200"

@@ -4,6 +4,7 @@ import Social from "components/Social";
 import socials from "data/socials.json";
 
 import ScrollToTop from "components/ScrollToTop";
+import { basePath } from "basePath";
 
 import {
   faYoutube,
@@ -15,7 +16,11 @@ export default () => (
   <footer className={styles.Footer}>
     <div className={styles.Footer__logoWrapper}>
       <img
-        src="/tcc-2024/images/footer/logo/the-code-creative_logo-dark_003.svg"
+        src={
+          process.env.NODE_ENV === "production"
+            ? `${basePath}/images/footer/logo/the-code-creative_logo-dark_003.svg`
+            : `/images/footer/logo/the-code-creative_logo-dark_003.svg`
+        }
         alt="The Code Creative Logo"
         width="200"
         height="100"
