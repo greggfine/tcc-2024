@@ -72,8 +72,8 @@ const Navigation = () => {
                   <img
                     src={
                       hasScrolled
-                        ? `./images/nav/logo/the-code-creative-logo-dark.svg`
-                        : `./images/nav/logo/the-code-creative-logo-light.svg`
+                        ? `/tcc-2024/images/nav/logo/the-code-creative-logo-dark.svg`
+                        : `/tcc-2024/images/nav/logo/the-code-creative-logo-light.svg`
                     }
                     alt="The Code Creative logo"
                     width="200"

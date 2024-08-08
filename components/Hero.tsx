@@ -10,10 +10,11 @@ import lottieAnimation from "@/images/lottie/63487-programming-computer.json";
 
 const style = {
   "@media (max-width: 960px)": {
-    backgroundImage: 'url("./images/hero/pixabay/hero-bg_comp_mobile.webp")',
+    backgroundImage:
+      'url("/tcc-2024/images/hero/pixabay/hero-bg_comp_mobile.webp")',
   },
   "@media (min-width: 960px)": {
-    backgroundImage: 'url("./images/hero/pixabay/hero-bg_comp.webp")',
+    backgroundImage: 'url("/tcc-2024/images/hero/pixabay/hero-bg_comp.webp")',
   },
 };
 
@@ -23,13 +24,13 @@ const Hero = () => {
       <Head>
         <link
           rel="preload"
-          href="./images/hero/pixabay/hero-bg_comp_mobile.webp"
+          href="/tcc-2024/images/hero/pixabay/hero-bg_comp_mobile.webp"
           as="image"
           media="{max-width: 960px}"
         />
         <link
           rel="preload"
-          href="./images/hero/pixabay/hero-bg_comp.webp"
+          href="/tcc-2024/images/hero/pixabay/hero-bg_comp.webp"
           as="image"
           media="{min-width: 960px}"
         />
