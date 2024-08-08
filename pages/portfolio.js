@@ -5,17 +5,29 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
 import Radium, { StyleRoot } from "radium";
+import { basePath } from "basePath";
 
-const style = {
-  "@media (max-width: 960px)": {
-    backgroundImage:
-      'url("./images/portfolio/unsplash/web-design-computer-setup_mobile.webp")',
-  },
-  "@media (min-width: 960px)": {
-    backgroundImage:
-      'url("./images/portfolio/unsplash/web-design-computer-setup.webp")',
-  },
-};
+// const style = {
+const style =
+  process.env.NODE_ENV === "production"
+    ? {
+        "@media (max-width: 960px)": {
+          backgroundImage: `url("${basePath}/images/portfolio/unsplash/web-design-computer-setup_mobile.webp")`,
+        },
+        "@media (min-width: 960px)": {
+          backgroundImage: `url("${basePath}/images/portfolio/unsplash/web-design-computer-setup.webp")`,
+        },
+      }
+    : {
+        "@media (max-width: 960px)": {
+          backgroundImage:
+            'url("/images/portfolio/unsplash/web-design-computer-setup_mobile.webp")',
+        },
+        "@media (min-width: 960px)": {
+          backgroundImage:
+            'url("/images/portfolio/unsplash/web-design-computer-setup.webp")',
+        },
+      };
 
 function Portfolio(props) {
   return (
@@ -27,13 +39,21 @@ function Portfolio(props) {
       <Head>
         <link
           rel="preload"
-          href="./images/portfolio/unsplash/web-design-computer-setup_mobile.webp"
+          href={
+            process.env.NODE_ENV === "production"
+              ? `${basePath}/images/portfolio/unsplash/web-design-computer-setup_mobile.webp`
+              : "/images/portfolio/unsplash/web-design-computer-setup_mobile.webp"
+          }
           as="image"
           media="{max-width: 960px}"
         />
         <link
           rel="preload"
-          href="./images/portfolio/unsplash/web-design-computer-setup.webp"
+          href={
+            process.env.NODE_ENV === "production"
+              ? `${basePath}/images/portfolio/unsplash/web-design-computer-setup.webp`
+              : "/images/portfolio/unsplash/web-design-computer-setup.webp"
+          }
           as="image"
           media="{min-width: 960px}"
         />

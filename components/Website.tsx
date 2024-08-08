@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import websiteStyles from "styles/website.module.scss";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { basePath } from "basePath";
 
 const Site = ({ website }) => (
   <>
@@ -21,7 +22,11 @@ const Site = ({ website }) => (
         >
           <div className={websiteStyles.Card__innerCard}>
             <Image
-              src={website.img}
+              src={
+                process.env.NODE_ENV === "production"
+                  ? `${basePath}${website.img}`
+                  : `${website.img}`
+              }
               width={320}
               height={280}
               className={websiteStyles.Card__cardImg}
