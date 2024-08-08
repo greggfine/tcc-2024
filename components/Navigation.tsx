@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { NavItem, SideNavItem } from "./NavItem";
 import navitems from "data/navitems.json";
+import { basePath } from "basePath";
 
 const Navigation = () => {
   let [isOpen, setIsOpen] = useState(true);
@@ -72,8 +73,8 @@ const Navigation = () => {
                   <img
                     src={
                       hasScrolled
-                        ? `/tcc-2024/images/nav/logo/the-code-creative-logo-dark.svg`
-                        : `/tcc-2024/images/nav/logo/the-code-creative-logo-light.svg`
+                        ? `${basePath}/images/nav/logo/the-code-creative-logo-dark.svg`
+                        : `${basePath}/images/nav/logo/the-code-creative-logo-light.svg`
                     }
                     alt="The Code Creative logo"
                     width="200"

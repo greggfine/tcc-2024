@@ -2,7 +2,7 @@ import styles from "styles/testimonials.module.scss";
 import testimonialData from "data/testimonials.json";
 import { motion } from "framer-motion";
 import Image from "next/image";
-const basePath = "/tcc-2024";
+import { basePath } from "basePath";
 
 const Testimonials = () => {
   return (

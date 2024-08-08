@@ -7,16 +7,27 @@ import gregg from "@/images/hero/the-code-creative-owner-gregg-fine.jpg";
 import Radium, { StyleRoot } from "radium";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import lottieAnimation from "@/images/lottie/63487-programming-computer.json";
+import { basePath } from "basePath";
 
-const style = {
-  "@media (max-width: 960px)": {
-    backgroundImage:
-      'url("/tcc-2024/images/hero/pixabay/hero-bg_comp_mobile.webp")',
-  },
-  "@media (min-width: 960px)": {
-    backgroundImage: 'url("/tcc-2024/images/hero/pixabay/hero-bg_comp.webp")',
-  },
-};
+const style =
+  process.env.NODE_ENV === "production"
+    ? {
+        "@media (max-width: 960px)": {
+          backgroundImage: `url("${basePath}/images/hero/pixabay/hero-bg_comp_mobile.webp")`,
+        },
+        "@media (min-width: 960px)": {
+          backgroundImage: `url("${basePath}/images/hero/pixabay/hero-bg_comp.webp")`,
+        },
+      }
+    : {
+        "@media (max-width: 960px)": {
+          backgroundImage:
+            'url("/images/hero/pixabay/hero-bg_comp_mobile.webp")',
+        },
+        "@media (min-width: 960px)": {
+          backgroundImage: 'url("/images/hero/pixabay/hero-bg_comp.webp")',
+        },
+      };
 
 const Hero = () => {
   return (

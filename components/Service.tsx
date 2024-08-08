@@ -1,6 +1,7 @@
 import styles from "styles/services.module.scss";
 import Image from "next/image";
-const basePath = "/tcc-2024";
+import { basePath } from "basePath";
+
 const Service = ({ src, alt, title, content }) => {
   return (
     <div className={styles.CardGrid__serviceCard}>
