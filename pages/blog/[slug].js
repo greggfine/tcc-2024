@@ -33,7 +33,7 @@ const ResponsiveImage = (props) => {
     src = `${basePath}${src}`;
   }
 
-  <Image alt={props.alt} layout="responsive" {...props} src={src} />;
+  return <Image alt={props.alt} {...props} src={src} />;
 };
 
 import "highlight.js/styles/atom-one-dark.css";
@@ -162,7 +162,7 @@ const PostPage = ({
             components={{
               Button,
               CodeBlock,
-              Image,
+              Image: ResponsiveImage,
               img: ResponsiveImage,
               YouTube,
               Ad,
